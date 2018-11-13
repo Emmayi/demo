@@ -1,0 +1,25 @@
+server:
+    port: 8100
+
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://10.112.17.185:3306/management?characterEncoding=UTF-8&useUnicode=true  #jdbc:mysql://localhost:3306/dbgirl_test?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      username: root
+      password: root
+      cachePrepStmts: true  # 开启二级缓存
+
+mybatis:
+  configuration:
+    cache-enabled: true
+    lazy-loading-enabled: false
+    aggressive-lazy-loading: false
+    multiple-result-sets-enabled: true
+    default-executor-type: reuse
+    default-statement-timeout: 25000
+  type-aliases-package: org.spring.springboot.domain

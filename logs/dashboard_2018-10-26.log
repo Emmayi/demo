@@ -1,0 +1,132 @@
+2018-10-26 20:30:30 [main] INFO  cn.edu.bupt.demo.DemoApplication - "Starting DemoApplication on EmmadeMacBook-Pro.local with PID 3360 (/Users/zy/IdeaProjects/demo/target/classes started by zy in /Users/zy/IdeaProjects/demo)"
+2018-10-26 20:30:30 [main] INFO  cn.edu.bupt.demo.DemoApplication - "No active profile set, falling back to default profiles: default"
+2018-10-26 20:30:30 [main] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - "Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@233795b6: startup date [Fri Oct 26 20:30:30 CST 2018]; root of context hierarchy"
+2018-10-26 20:30:31 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - "Tomcat initialized with port(s): 8100 (http)"
+2018-10-26 20:30:31 [main] INFO  o.a.coyote.http11.Http11NioProtocol - "Initializing ProtocolHandler ["http-nio-8100"]"
+2018-10-26 20:30:31 [main] INFO  o.a.catalina.core.StandardService - "Starting service [Tomcat]"
+2018-10-26 20:30:31 [main] INFO  o.a.catalina.core.StandardEngine - "Starting Servlet Engine: Apache Tomcat/8.5.34"
+2018-10-26 20:30:31 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener - "The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/zy/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]"
+2018-10-26 20:30:31 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - "Initializing Spring embedded WebApplicationContext"
+2018-10-26 20:30:31 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - "Root WebApplicationContext: initialization completed in 1315 ms"
+2018-10-26 20:30:31 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean - "Servlet dispatcherServlet mapped to [/]"
+2018-10-26 20:30:31 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - "Mapping filter: 'characterEncodingFilter' to: [/*]"
+2018-10-26 20:30:31 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - "Mapping filter: 'hiddenHttpMethodFilter' to: [/*]"
+2018-10-26 20:30:31 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - "Mapping filter: 'httpPutFormContentFilter' to: [/*]"
+2018-10-26 20:30:31 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - "Mapping filter: 'requestContextFilter' to: [/*]"
+2018-10-26 20:30:32 [main] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - "Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]"
+2018-10-26 20:30:32 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - "Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@233795b6: startup date [Fri Oct 26 20:30:30 CST 2018]; root of context hierarchy"
+2018-10-26 20:30:32 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/entranceWorkById],methods=[GET],params=[entranceId],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.getEntranceWorkById(java.lang.Integer) throws java.lang.Exception"
+2018-10-26 20:30:32 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/entranceWorkByDate],methods=[GET],params=[date],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.getEntranceWorkByDate(java.lang.Long) throws java.lang.Exception"
+2018-10-26 20:30:32 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/entranceWorkByDate],methods=[GET],produces=[text/html;charset=UTF-8]}" onto public java.lang.Integer cn.edu.bupt.demo.controller.EntranceWorkController.getEntranceWorkCount() throws java.lang.Exception"
+2018-10-26 20:30:32 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/entranceWork],methods=[POST],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.createEntranceWork(java.lang.String) throws java.lang.Exception"
+2018-10-26 20:30:32 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - "Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'entranceWorkController' method 
+public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.updateEntranceWork(java.lang.String) throws java.lang.Exception
+to {[/api/v1/demo/entranceWork],methods=[POST],produces=[text/html;charset=UTF-8]}: There is already 'entranceWorkController' bean method
+public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.createEntranceWork(java.lang.String) throws java.lang.Exception mapped."
+2018-10-26 20:30:32 [main] INFO  o.a.catalina.core.StandardService - "Stopping service [Tomcat]"
+2018-10-26 20:30:32 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - "
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled."
+2018-10-26 20:30:32 [main] ERROR o.s.boot.SpringApplication - "Application run failed"
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'entranceWorkController' method 
+public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.updateEntranceWork(java.lang.String) throws java.lang.Exception
+to {[/api/v1/demo/entranceWork],methods=[POST],produces=[text/html;charset=UTF-8]}: There is already 'entranceWorkController' bean method
+public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.createEntranceWork(java.lang.String) throws java.lang.Exception mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1699)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:573)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:759)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:869)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:780)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:412)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:333)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1277)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1265)
+	at cn.edu.bupt.demo.DemoApplication.main(DemoApplication.java:12)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'entranceWorkController' method 
+public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.updateEntranceWork(java.lang.String) throws java.lang.Exception
+to {[/api/v1/demo/entranceWork],methods=[POST],produces=[text/html;charset=UTF-8]}: There is already 'entranceWorkController' bean method
+public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.createEntranceWork(java.lang.String) throws java.lang.Exception mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:581)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:545)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:267)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lambda$detectHandlerMethods$1(AbstractHandlerMethodMapping.java:252)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:676)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:250)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:219)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:189)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:136)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1758)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1695)
+	... 16 common frames omitted
+2018-10-26 20:34:29 [main] INFO  cn.edu.bupt.demo.DemoApplication - "Starting DemoApplication on EmmadeMacBook-Pro.local with PID 3366 (/Users/zy/IdeaProjects/demo/target/classes started by zy in /Users/zy/IdeaProjects/demo)"
+2018-10-26 20:34:29 [main] INFO  cn.edu.bupt.demo.DemoApplication - "No active profile set, falling back to default profiles: default"
+2018-10-26 20:34:29 [main] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - "Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@65fb9ffc: startup date [Fri Oct 26 20:34:29 CST 2018]; root of context hierarchy"
+2018-10-26 20:34:30 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - "Tomcat initialized with port(s): 8100 (http)"
+2018-10-26 20:34:30 [main] INFO  o.a.coyote.http11.Http11NioProtocol - "Initializing ProtocolHandler ["http-nio-8100"]"
+2018-10-26 20:34:30 [main] INFO  o.a.catalina.core.StandardService - "Starting service [Tomcat]"
+2018-10-26 20:34:30 [main] INFO  o.a.catalina.core.StandardEngine - "Starting Servlet Engine: Apache Tomcat/8.5.34"
+2018-10-26 20:34:30 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener - "The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/zy/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]"
+2018-10-26 20:34:30 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - "Initializing Spring embedded WebApplicationContext"
+2018-10-26 20:34:30 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - "Root WebApplicationContext: initialization completed in 973 ms"
+2018-10-26 20:34:30 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean - "Servlet dispatcherServlet mapped to [/]"
+2018-10-26 20:34:30 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - "Mapping filter: 'characterEncodingFilter' to: [/*]"
+2018-10-26 20:34:30 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - "Mapping filter: 'hiddenHttpMethodFilter' to: [/*]"
+2018-10-26 20:34:30 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - "Mapping filter: 'httpPutFormContentFilter' to: [/*]"
+2018-10-26 20:34:30 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - "Mapping filter: 'requestContextFilter' to: [/*]"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - "Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - "Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@65fb9ffc: startup date [Fri Oct 26 20:34:29 CST 2018]; root of context hierarchy"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/entranceWorkById],methods=[GET],params=[entranceId],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.getEntranceWorkById(java.lang.Integer) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/entranceWorkByDate],methods=[GET],params=[date],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.getEntranceWorkByDate(java.lang.Long) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/entranceWorkByDate],methods=[GET],produces=[text/html;charset=UTF-8]}" onto public java.lang.Integer cn.edu.bupt.demo.controller.EntranceWorkController.getEntranceWorkCount() throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/entranceWork],methods=[POST],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.createEntranceWork(java.lang.String) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/entranceWork],methods=[PUT],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.updateEntranceWork(java.lang.String) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/entranceWork],methods=[DELETE],params=[WorkId]}" onto public void cn.edu.bupt.demo.controller.EntranceWorkController.deleteWorkById(java.lang.Integer)"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/allEntranceWork],methods=[DELETE],params=[date]}" onto public void cn.edu.bupt.demo.controller.EntranceWorkController.deleteWorkByDate(java.lang.Long)"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/entranceWork],methods=[GET],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.EntranceWorkController.getAllEntranceWork() throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/inspectionById],methods=[GET],params=[reportId],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.InspectionController.getInspectionById(java.lang.Integer) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/inspectionByDutyPerson],methods=[GET],params=[dutyPerson],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.InspectionController.getInspectionByDutyPerson(java.lang.String) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/inspectionByInspectionPerson],methods=[GET],params=[inspectionPerson],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.InspectionController.getInspectionByInspectionPerson(java.lang.String) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/inspectionByCondition],methods=[GET],params=[condition],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.InspectionController.getInspectionByCondition(java.lang.String) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/inspection],methods=[GET]}" onto public java.lang.Integer cn.edu.bupt.demo.controller.InspectionController.getAllCount() throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/inspection],methods=[POST],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.InspectionController.createInspectionReport(java.lang.String) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/inspection],methods=[PUT],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.InspectionController.updateInspectionReport(java.lang.String) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/inspectionId],methods=[DELETE],params=[inspectionId]}" onto public void cn.edu.bupt.demo.controller.InspectionController.deleteReportById(java.lang.Integer)"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/inspectionPerson],methods=[DELETE],params=[inspectionPerson]}" onto public void cn.edu.bupt.demo.controller.InspectionController.deleteReportByInspectionPerson(java.lang.String)"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/allReport],methods=[GET]}" onto public java.lang.String cn.edu.bupt.demo.controller.InspectionController.findAllReport() throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/staffById],methods=[GET],params=[staffId],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.StaffController.getStaffById(java.lang.Integer) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/staffByName],methods=[GET],params=[staffName],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.StaffController.getStaffByName(java.lang.String) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/staff],methods=[POST],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.StaffController.createStaff(java.lang.String) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/staff],methods=[PUT],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.StaffController.updateStaff(java.lang.String) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/staffCount],methods=[GET]}" onto public java.lang.Integer cn.edu.bupt.demo.controller.StaffController.staffCountById() throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/staffName],methods=[GET],params=[staffId],produces=[text/html;charset=UTF-8]}" onto public java.lang.String cn.edu.bupt.demo.controller.StaffController.findStaffName(java.lang.Integer) throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/staffId],methods=[DELETE],params=[staffId]}" onto public void cn.edu.bupt.demo.controller.StaffController.deleteStaffById(java.lang.Integer)"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/staffName],methods=[DELETE],params=[staffName]}" onto public void cn.edu.bupt.demo.controller.StaffController.deleteStaffById(java.lang.String)"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/api/v1/demo/allStaff],methods=[GET]}" onto public java.lang.String cn.edu.bupt.demo.controller.StaffController.findAllStaff() throws java.lang.Exception"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - "Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - "Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]"
+2018-10-26 20:34:30 [main] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - "Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]"
+2018-10-26 20:34:30 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter - "Registering beans for JMX exposure on startup"
+2018-10-26 20:34:30 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter - "Bean with name 'dataSource' has been autodetected for JMX exposure"
+2018-10-26 20:34:30 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter - "Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]"
+2018-10-26 20:34:30 [main] INFO  o.a.coyote.http11.Http11NioProtocol - "Starting ProtocolHandler ["http-nio-8100"]"
+2018-10-26 20:34:30 [main] INFO  o.a.tomcat.util.net.NioSelectorPool - "Using a shared selector for servlet write/read"
+2018-10-26 20:34:30 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - "Tomcat started on port(s): 8100 (http) with context path ''"
+2018-10-26 20:34:30 [main] INFO  cn.edu.bupt.demo.DemoApplication - "Started DemoApplication in 2.124 seconds (JVM running for 2.872)"
+2018-10-26 20:37:03 [http-nio-8100-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - "Initializing Spring FrameworkServlet 'dispatcherServlet'"
+2018-10-26 20:37:03 [http-nio-8100-exec-1] INFO  o.s.web.servlet.DispatcherServlet - "FrameworkServlet 'dispatcherServlet': initialization started"
+2018-10-26 20:37:03 [http-nio-8100-exec-1] INFO  o.s.web.servlet.DispatcherServlet - "FrameworkServlet 'dispatcherServlet': initialization completed in 13 ms"
+2018-10-26 20:37:03 [http-nio-8100-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - "HikariPool-1 - Starting..."
+2018-10-26 20:37:03 [http-nio-8100-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - "HikariPool-1 - Start completed."
+2018-10-26 20:45:31 [Thread-8] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - "Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@65fb9ffc: startup date [Fri Oct 26 20:34:29 CST 2018]; root of context hierarchy"
+2018-10-26 20:45:31 [Thread-8] INFO  o.s.j.e.a.AnnotationMBeanExporter - "Unregistering JMX-exposed beans on shutdown"
+2018-10-26 20:45:31 [Thread-8] INFO  o.s.j.e.a.AnnotationMBeanExporter - "Unregistering JMX-exposed beans"
+2018-10-26 20:45:31 [Thread-8] INFO  com.zaxxer.hikari.HikariDataSource - "HikariPool-1 - Shutdown initiated..."
+2018-10-26 20:45:31 [Thread-8] INFO  com.zaxxer.hikari.HikariDataSource - "HikariPool-1 - Shutdown completed."
