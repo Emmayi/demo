@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS `staff_number` (
 	PRIMARY KEY(`id`),
 );
 
-
 CREATE TABLE IF NOT EXISTS `entrance_work` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `duration` varchar(255),
@@ -17,12 +16,12 @@ CREATE TABLE IF NOT EXISTS `entrance_work` (
 	PRIMARY KEY(`id`),
 );
 
-
 CREATE TABLE IF NOT EXISTS `inspection_report` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `duty_person` varchar(255),
     `inspection_person` varchar(255),
-    `date` bigint DEFAULT NULL,
+    `create_date` bigint DEFAULT NULL,
+    `calendar_date` bigint DEFAULT NULL,
     `condition` varchar(255),
     `summary` varchar(255),
     `abnormal` varchar(255),

@@ -8,8 +8,9 @@ public class InspectionReport extends IdBased {
 
     private Integer id;
     private String duty_person;
-    private String inspeciton_person;
-    private Long date;
+    private String inspection_person;
+    private Long create_date;
+    private Long calendar_date;
     private String condition;
     private String summary;
     private String abnormal;
@@ -34,19 +35,27 @@ public class InspectionReport extends IdBased {
     }
 
     public String getInspeciton_person() {
-        return inspeciton_person;
+        return inspection_person;
     }
 
     public void setInspeciton_person(String inspeciton_person) {
-        this.inspeciton_person = inspeciton_person;
+        this.inspection_person = inspeciton_person;
     }
 
-    public Long getDate() {
-        return date;
+    public Long getCreate_date() {
+        return create_date;
     }
 
-    public void setDate(Long date) {
-        this.date = date;
+    public void setCreate_date(Long create_date) {
+        this.create_date = create_date;
+    }
+
+    public Long getCalendar_date() {
+        return calendar_date;
+    }
+
+    public void setCalendar_date(Long calendar_date) {
+        this.calendar_date = calendar_date;
     }
 
     public String getCondition() {
@@ -89,9 +98,11 @@ public class InspectionReport extends IdBased {
         sb.append(",\"duty_person\":")
                 .append(duty_person);
         sb.append(",\"inspeciton_person\":\"")
-                .append(inspeciton_person).append('\"');
-        sb.append(",\"date\":\"")
-                .append(date).append('\"');
+                .append(inspection_person).append('\"');
+        sb.append(",\"create_date\":\"")
+                .append(create_date).append('\"');
+        sb.append(",\"calendar_date\":\"")
+                .append(calendar_date).append('\"');
         sb.append(",\"condition\":\"")
                 .append(condition).append('\"');
         sb.append(",\"abnormal\":\"")

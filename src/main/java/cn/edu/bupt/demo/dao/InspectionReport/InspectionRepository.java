@@ -8,32 +8,32 @@ import java.util.List;
 @Mapper
 public interface InspectionRepository {
 
-    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,date as date," +
+    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,create_date as create_date,calendar_date as calendar_date," +
             "condition as condition,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where id = #{id}")
     InspectionReport findReportById(Integer id);
 
-    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,date as date," +
+    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,create_date as create_date,calendar_date as calendar_date," +
             "condition as condition,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where duty_person = #{duty_person}")
     List<InspectionReport> findReportByDutyPerson(String duty_person);
 
-    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,date as date," +
+    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,create_date as create_date,calendar_date as calendar_date," +
             "condition as condition,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where inspection_person = #{inspection_person}")
     List<InspectionReport> findReportByInspectionPerson(String inspection_person);
 
-    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,date as date," +
-            "condition as condition,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where condition = #{condition}")
-    List<InspectionReport> findReportByCondition(String condition);
+    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,create_date as create_date,calendar_date as calendar_date," +
+            "condition as condition,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where create_date = #{create_date}")
+    List<InspectionReport> findReportByCreateDate(Long create_date);
 
     @Select("select count(*) from inspection_report")
     Integer findAllCount();
 
-    @Insert("insert into inspection_report (duty_person,inspection_person,date,condition,summary,abnormal,maintenance) " +
-            "values (#{duty_person},#{inspection_person},#{date},#{condition},#{summary},#{summary},#{maintenance})")
+    @Insert("insert into inspection_report (duty_person,inspection_person,create_date,calendar_date,condition,summary,abnormal,maintenance) " +
+                                "values (#{duty_person},#{inspection_person},#{create_date},#{calendar_date},#{condition},#{summary},#{abnormal},#{maintenance})")
     @Options(useGeneratedKeys = true,keyProperty="id")
     void save(InspectionReport inspectionReport);
 
-    @Update("update inspection_report set duty_person = #{duty_person},inspection_person = #{inspection_person}," +
-            "date = #{date} condition = #{condition} summary = #{summary} abnormal = #{abnormal} maintenance = #{maintenance} where id=#{id}")
+    @Update("update inspection_report set duty_person = #{duty_person},inspection_person = #{inspection_person},create_date = #{create_date}," +
+            "calendar_date = #{calendar_date},condition = #{condition},summary = #{summary},abnormal = #{abnormal},maintenance = #{maintenance} where id=#{id}")
     void update(InspectionReport inspectionReport);
 
     @Delete("delete from inspection_report where id=#{id}")
@@ -42,7 +42,7 @@ public interface InspectionRepository {
     @Delete("delete from inspection_report where inspection_person=#{inspection_person}")
     void deleteByInspectionPerson(String inspection_person);
 
-    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,date as date," +
+    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,create_date as create_date,calendar_date as calendar_date," +
             "condition as condition,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where id > 0")
     List<InspectionReport> findAll();
 

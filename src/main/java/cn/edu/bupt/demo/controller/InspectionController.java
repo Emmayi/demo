@@ -53,14 +53,14 @@ public class InspectionController {
         }
     }
 
-    //通过异常项查找巡检报告信息
-    @RequestMapping(value = "/inspectionByCondition",params = {"condition"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    //通过创建日期查找巡检报告信息
+    @RequestMapping(value = "/inspectionByCreateDate",params = {"create_date"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getInspectionByCondition(@RequestParam String condition) throws Exception{
+    public String getInspectionByCreateDate(@RequestParam Long create_date) throws Exception{
         try {
-            return inspectionService.findReportByCondition(condition).toString();
+            return inspectionService.findReportByCreateDate(create_date).toString();
         }catch (Exception e){
-            throw new Exception("getInspectionByCondition error!");
+            throw new Exception("getInspectionByCreateDate error!");
         }
     }
 
@@ -90,7 +90,7 @@ public class InspectionController {
         }
     }
 
-    //更新staff信息
+    //更新巡检报告的信息
     @RequestMapping(value = "/inspection", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateInspectionReport(@RequestBody String reportInfo) throws Exception{
@@ -102,7 +102,8 @@ public class InspectionController {
         inspectionReport.setId(reportString.get("id").getAsInt());
         inspectionReport.setAbnormal(reportString.get("abnormal").getAsString());
         inspectionReport.setCondition(reportString.get("condition").getAsString());
-        inspectionReport.setDate(reportString.get("date").getAsLong());
+        inspectionReport.setCreate_date(reportString.get("create_date").getAsLong());
+        inspectionReport.setCalendar_date(reportString.get("calendar_date").getAsLong());
         inspectionReport.setDuty_person(reportString.get("duty_person").getAsString());
         inspectionReport.setInspeciton_person(reportString.get("inspection_person").getAsString());
         inspectionReport.setSummary(reportString.get("summary").getAsString());
@@ -152,7 +153,8 @@ public class InspectionController {
         InspectionReport inspectionReport = new InspectionReport();
         inspectionReport.setAbnormal(reportString.get("abnormal").getAsString());
         inspectionReport.setCondition(reportString.get("condition").getAsString());
-        inspectionReport.setDate(reportString.get("date").getAsLong());
+        inspectionReport.setCreate_date(reportString.get("create_date").getAsLong());
+        inspectionReport.setCalendar_date(reportString.get("calendar_date").getAsLong());
         inspectionReport.setDuty_person(reportString.get("duty_person").getAsString());
         inspectionReport.setInspeciton_person(reportString.get("inspection_person").getAsString());
         inspectionReport.setSummary(reportString.get("summary").getAsString());

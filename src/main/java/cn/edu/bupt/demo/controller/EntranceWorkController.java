@@ -21,6 +21,30 @@ public class EntranceWorkController {
     @Autowired
     EntranceService entranceService;
 
+    //配合分页设置，获取所有的入廊作业信息
+    @RequestMapping(value = "/entranceWorkByPage", params = {  "limit","page"  }, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getEntranceWorkByPage(@RequestParam int limit,
+                               @RequestParam int page) throws Exception {
+        try {
+            return entranceService.findALlByPage(page,limit).toString();
+        } catch (Exception e) {
+            throw new Exception("getEntranceWorkByPage error!");
+        }
+    }
+
+    //获取所有的入廊作业的页数
+    @RequestMapping(value = "/entranceWorkPages", params = {  "limit"  }, method = RequestMethod.GET)
+    @ResponseBody
+    public Integer getEntranceWorkPages(@RequestParam int limit) throws Exception {
+        try {
+            return entranceService.findEntranceWorkPageNum(limit);
+        } catch (Exception e) {
+            throw new Exception("getEntranceWorkPages error!");
+        }
+    }
+
+
     //根据入廊作业id获取入廊信息
     @RequestMapping(value = "/entranceWorkById",params = {"entranceId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -44,11 +68,12 @@ public class EntranceWorkController {
     }
 
     //统计有多少入廊作业
-    @RequestMapping(value = "/entranceWorkCount", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/entranceWorkCount", method = RequestMethod.GET)
     @ResponseBody
     public Integer getEntranceWorkCount() throws Exception{
         try {
-            return entranceService.allWorkCount();
+            Integer count = entranceService.allWorkCount();
+            return count;
         }catch (Exception e){
             throw new Exception("getEntranceWorkCount error!");
         }
@@ -82,7 +107,9 @@ public class EntranceWorkController {
         entranceWork.setDate(workString.get("date").getAsLong());
         entranceWork.setWork_number(workString.get("work_number").getAsInt());
         entranceWork.setActivity_range(workString.get("activity_range").getAsString());
-        entranceWork.setEvaluation(workString.get("evaluation").getAsString());
+        if (workString.get("evaluation") != null) {
+            entranceWork.setEvaluation(workString.get("evaluation").getAsString());
+        }
         try {
             entranceService.update(entranceWork);
             return entranceWork.toString();
@@ -92,7 +119,7 @@ public class EntranceWorkController {
     }
 
     //通过Id删除信息
-    @RequestMapping(value = "/entranceWork",params = {"WorkId"},method = RequestMethod.DELETE)
+    @RequestMapping(value = "/entranceWorkById",params = {"WorkId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteWorkById(@RequestParam Integer WorkId){
         try {
@@ -103,7 +130,7 @@ public class EntranceWorkController {
     }
 
     //通过Date删除信息
-    @RequestMapping(value = "/allEntranceWork",params = {"date"},method = RequestMethod.DELETE)
+    @RequestMapping(value = "/entranceWorkByDate",params = {"date"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteWorkByDate(@RequestParam Long date){
         try {

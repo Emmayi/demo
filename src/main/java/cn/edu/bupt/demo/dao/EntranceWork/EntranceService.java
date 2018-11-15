@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface EntranceService {
 
+    List<EntranceWork> findALlByPage(Integer page, Integer pageSize);
+
+    Integer findEntranceWorkPageNum(Integer size);
+
     EntranceWork findEntranceWorkById(Integer id);
 
     List<EntranceWork> findEntranceWorkByDate(Long date);

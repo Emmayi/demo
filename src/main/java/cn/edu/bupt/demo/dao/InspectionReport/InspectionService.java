@@ -16,7 +16,7 @@ public interface InspectionService {
 
     List<InspectionReport> findReportByInspectionPerson(String inspection_person);
 
-    List<InspectionReport> findReportByCondition(String condition);
+    List<InspectionReport> findReportByCreateDate(Long create_date);
 
     Integer getAllCount();
 

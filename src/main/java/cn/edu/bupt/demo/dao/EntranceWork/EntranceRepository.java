@@ -14,7 +14,10 @@ import java.util.List;
 @Mapper
 public interface EntranceRepository {
 
-    @Select("select id as id,duration as duration,date as date,work_number as work_number,activity_range as activity_range,evaluation as evaluation from entrance_work where id = #{id}")
+    @Select("select id as id,duration as duration,date as date,work_number as work_number, activity_range as activity_range,evaluation as evaluation from entrance_work where id>0 limit #{index},#{pageSize}")
+    List<EntranceWork> findAllByPage(@Param("index")Integer index,@Param("pageSize")Integer pageSize);
+
+    @Select("select id as id,duration as duration,date as date,work_number as work_number, activity_range as activity_range,evaluation as evaluation from entrance_work where id = #{id}")
     EntranceWork findEntranceWorkById(Integer id);
 
     @Select("select id as id,duration as duration,date as date,work_number as work_number,activity_range as activity_range,evaluation as evaluation from entrance_work where date = #{date}")
@@ -23,7 +26,7 @@ public interface EntranceRepository {
     @Select("select count(*) from entrance_work")
     Integer AllWorkCount();
 
-    @Insert("insert into entrance_work (duration,date,work_number,activity_range,evaluation) values (#{duration},#{date},#{work_number},#{activity_range}),#{evaluation}")
+    @Insert("insert into entrance_work (duration,date,work_number,activity_range,evaluation) values (#{duration},#{date},#{work_number},#{activity_range},#{evaluation})")
     @Options(useGeneratedKeys = true,keyProperty="id")
     void save(EntranceWork entranceWork);
 

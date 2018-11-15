@@ -38,9 +38,9 @@ public class InspectionServiceImpl implements InspectionService{
     }
 
     @Override
-    public List<InspectionReport> findReportByCondition(String condition) {
-        log.trace("Executing findReportByCondition [{}]", condition);
-        return inspectionRepository.findReportByCondition(condition);
+    public List<InspectionReport> findReportByCreateDate(Long create_date) {
+        log.trace("Executing findReportByCreateDate [{}]", create_date);
+        return inspectionRepository.findReportByCreateDate(create_date);
     }
 
     @Override

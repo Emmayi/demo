@@ -20,6 +20,19 @@ public class EntranceServiceImpl implements EntranceService{
     EntranceRepository entranceRepository;
 
     @Override
+    public List<EntranceWork> findALlByPage(Integer page, Integer pageSize) {
+        log.trace("Executing findALlByPage [{}]", page,pageSize);
+        return entranceRepository.findAllByPage(page,pageSize);
+    }
+
+    @Override
+    public Integer findEntranceWorkPageNum(Integer size) {
+        log.trace("Executing findEntranceWorkPageNum [{}]", size);
+        Integer num = (entranceRepository.AllWorkCount()+size-1)/size;
+        return num;
+    }
+
+    @Override
     public EntranceWork findEntranceWorkById(Integer id) {
         log.trace("Executing findEntranceWorkById [{}]", id);
         return entranceRepository.findEntranceWorkById(id);
@@ -34,7 +47,8 @@ public class EntranceServiceImpl implements EntranceService{
     @Override
     public Integer allWorkCount() {
         log.trace("Executing allWorkCount [{}]");
-        return entranceRepository.AllWorkCount();
+        Integer count = entranceRepository.AllWorkCount();
+        return count;
     }
 
     @Override
