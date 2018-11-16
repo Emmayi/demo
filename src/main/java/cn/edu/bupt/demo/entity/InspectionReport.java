@@ -11,7 +11,7 @@ public class InspectionReport extends IdBased {
     private String inspection_person;
     private Long create_date;
     private Long calendar_date;
-    private String condition;
+    private String state;
     private String summary;
     private String abnormal;
     private String maintenance;
@@ -34,12 +34,12 @@ public class InspectionReport extends IdBased {
         this.duty_person = duty_person;
     }
 
-    public String getInspeciton_person() {
+    public String getInspection_person() {
         return inspection_person;
     }
 
-    public void setInspeciton_person(String inspeciton_person) {
-        this.inspection_person = inspeciton_person;
+    public void setInspection_person(String inspection_person) {
+        this.inspection_person = inspection_person;
     }
 
     public Long getCreate_date() {
@@ -58,12 +58,12 @@ public class InspectionReport extends IdBased {
         this.calendar_date = calendar_date;
     }
 
-    public String getCondition() {
-        return condition;
+    public String getState() {
+        return state;
     }
 
-    public void setCondition(String condition) {
-        this.condition = condition;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getSummary() {
@@ -103,8 +103,8 @@ public class InspectionReport extends IdBased {
                 .append(create_date).append('\"');
         sb.append(",\"calendar_date\":\"")
                 .append(calendar_date).append('\"');
-        sb.append(",\"condition\":\"")
-                .append(condition).append('\"');
+        sb.append(",\"state\":\"")
+                .append(state).append('\"');
         sb.append(",\"abnormal\":\"")
                 .append(abnormal).append('\"');
         sb.append(",\"maintenance\":\"")

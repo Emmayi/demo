@@ -44,8 +44,8 @@ public class StaffNumber extends IdBased{
         final StringBuilder sb = new StringBuilder("{");
         sb.append("\"id\":")
                 .append(id);
-        sb.append(",\"gender\":")
-                .append(gender);
+        sb.append(",\"gender\":\"")
+                .append(gender).append('\"');
         sb.append(",\"phone\":\"")
                 .append(phone).append('\"');
         sb.append(",\"name\":\"")

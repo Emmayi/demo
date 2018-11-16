@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS `staff_number` (
     `gender` varchar(255),
     `phone` varchar(255),
     `name` varchar(255),
-	PRIMARY KEY(`id`),
+	PRIMARY KEY(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `entrance_work` (
@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS `entrance_work` (
     `date` bigint DEFAULT NULL,
     `work_number` INT,
     `activity_range` varchar(255),
-    `evaluation` VARCHAR (255) DEFAULT NULL
-	PRIMARY KEY(`id`),
+    `evaluation` VARCHAR (255) DEFAULT NULL,
+	PRIMARY KEY(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `inspection_report` (
@@ -22,9 +22,9 @@ CREATE TABLE IF NOT EXISTS `inspection_report` (
     `inspection_person` varchar(255),
     `create_date` bigint DEFAULT NULL,
     `calendar_date` bigint DEFAULT NULL,
-    `condition` varchar(255),
+    `state` varchar(255),
     `summary` varchar(255),
     `abnormal` varchar(255),
     `maintenance` varchar(255),
-	PRIMARY KEY(`id`),
-);
+	PRIMARY KEY(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
