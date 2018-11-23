@@ -29,6 +29,7 @@ public class EntranceWorkController {
                                @RequestParam int page) throws Exception {
         try {
             return entranceService.findALlByPage(page,limit).toString();
+            
         } catch (Exception e) {
             throw new Exception("getEntranceWorkByPage error!");
         }

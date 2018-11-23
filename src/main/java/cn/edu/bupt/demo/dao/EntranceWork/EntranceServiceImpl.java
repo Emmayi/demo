@@ -22,7 +22,8 @@ public class EntranceServiceImpl implements EntranceService{
     @Override
     public List<EntranceWork> findALlByPage(Integer page, Integer pageSize) {
         log.trace("Executing findALlByPage [{}]", page,pageSize);
-        return entranceRepository.findAllByPage(page,pageSize);
+        Integer index = page * pageSize;
+        return entranceRepository.findAllByPage(index,pageSize);
     }
 
     @Override

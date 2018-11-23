@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface EntranceRepository {
 
-    @Select("select id as id,duration as duration,date as date,work_number as work_number, activity_range as activity_range,evaluation as evaluation from entrance_work where id>0 limit #{index},#{pageSize}")
+    @Select("select id as id,duration as duration,date as date,work_number as work_number, activity_range as activity_range,evaluation as evaluation from entrance_work limit #{index},#{pageSize}")
     List<EntranceWork> findAllByPage(@Param("index")Integer index,@Param("pageSize")Integer pageSize);
 
     @Select("select id as id,duration as duration,date as date,work_number as work_number, activity_range as activity_range,evaluation as evaluation from entrance_work where id = #{id}")
