@@ -21,6 +21,8 @@ public interface EntranceService {
 
     void update(EntranceWork entranceWork);
 
+    void evaluation(String evaluation, Integer id);
+
     void deleteById(Integer id);
 
     void deleteByDate(Long date);

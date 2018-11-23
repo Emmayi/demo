@@ -33,6 +33,9 @@ public interface EntranceRepository {
     @Update("update entrance_work set duration = #{duration},date = #{date},work_number = #{work_number},activity_range = #{activity_range},evaluation = #{evaluation} where id=#{id}")
     void update(EntranceWork entranceWork);
 
+    @Update("update entrance_work set evaluation = #{evaluation} where id=#{id}")
+    void evaluation(@Param("evaluation")String evaluation, @Param("id")Integer id);
+
     @Delete("delete from entrance_work where id=#{id}")
     void deleteById(Integer id);
 

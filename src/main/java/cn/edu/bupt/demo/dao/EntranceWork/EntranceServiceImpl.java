@@ -64,6 +64,12 @@ public class EntranceServiceImpl implements EntranceService{
     }
 
     @Override
+    public void evaluation(String evaluation,Integer id ) {
+        log.trace("Executing evaluation [{}]");
+        entranceRepository.evaluation(evaluation,id);
+    }
+
+    @Override
     public void deleteById(Integer id) {
         log.trace("Executing deleteById [{}]",id);
         entranceRepository.deleteById(id);

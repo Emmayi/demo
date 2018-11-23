@@ -119,6 +119,24 @@ public class EntranceWorkController {
         }
     }
 
+    //添加评价
+    @RequestMapping(value = "/entranceWorkEvaluation", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String updateEvaluation(@RequestBody String evaluationString) throws Exception{
+        JsonObject evaluationStr = new JsonParser().parse(evaluationString).getAsJsonObject();
+        Integer id = evaluationStr.get("id").getAsInt();
+        String evaluation = evaluationStr.get("evaluation").getAsString();
+        if(id.equals("")||evaluation == null) {
+            throw new RuntimeException("没有Id或者内容为空，无法更新!");
+        }
+        try {
+            entranceService.evaluation( evaluation, id);
+            return "id = "+id+", "+"evaluation = "+evaluation;
+        } catch (Exception e) {
+            throw new Exception("createEntranceWork error!");
+        }
+    }
+
     //通过Id删除信息
     @RequestMapping(value = "/entranceWorkById",params = {"WorkId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
