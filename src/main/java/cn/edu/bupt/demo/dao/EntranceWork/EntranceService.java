@@ -13,7 +13,7 @@ public interface EntranceService {
 
     EntranceWork findEntranceWorkById(Integer id);
 
-    List<EntranceWork> findEntranceWorkByDate(Long date);
+    List<EntranceWork> findEntranceWorkByRange(String activity_range);
 
     Integer allWorkCount();
 

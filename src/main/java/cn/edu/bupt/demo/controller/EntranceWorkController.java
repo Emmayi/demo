@@ -57,12 +57,12 @@ public class EntranceWorkController {
         }
     }
 
-    //根据入廊作业date获取入廊信息
-    @RequestMapping(value = "/entranceWorkByDate",params = {"date"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    //根据入廊作业activity_range获取入廊信息
+    @RequestMapping(value = "/entranceWorkByRange",params = {"range"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getEntranceWorkByDate(@RequestParam Long date) throws Exception{
+    public String getEntranceWorkByDate(@RequestParam String range) throws Exception{
         try {
-            return entranceService.findEntranceWorkByDate(date).toString();
+            return entranceService.findEntranceWorkByRange(range).toString();
         }catch (Exception e){
             throw new Exception("getEntranceWorkByDate error!");
         }

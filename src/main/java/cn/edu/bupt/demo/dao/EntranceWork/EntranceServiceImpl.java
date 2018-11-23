@@ -39,9 +39,9 @@ public class EntranceServiceImpl implements EntranceService{
     }
 
     @Override
-    public List<EntranceWork> findEntranceWorkByDate(Long date) {
-        log.trace("Executing findEntranceWorkByDate [{}]", date);
-        return entranceRepository.findEntranceWorkByDate(date);
+    public List<EntranceWork> findEntranceWorkByRange(String  activity_range) {
+        log.trace("Executing findEntranceWorkByRange [{}]", activity_range);
+        return entranceRepository.findEntranceWorkByRange(activity_range);
     }
 
     @Override

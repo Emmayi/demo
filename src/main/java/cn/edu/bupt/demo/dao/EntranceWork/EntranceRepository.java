@@ -21,7 +21,7 @@ public interface EntranceRepository {
     EntranceWork findEntranceWorkById(Integer id);
 
     @Select("select id as id,duration as duration,date as date,work_number as work_number,activity_range as activity_range,evaluation as evaluation from entrance_work where date = #{date}")
-    List<EntranceWork> findEntranceWorkByDate(Long date);
+    List<EntranceWork> findEntranceWorkByRange(String activity_range);
 
     @Select("select count(*) from entrance_work")
     Integer AllWorkCount();
