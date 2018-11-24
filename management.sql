@@ -16,6 +16,22 @@ CREATE TABLE IF NOT EXISTS `entrance_work` (
 	PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `emergency_plan` (
+    `emergency_id` INT NOT NULL AUTO_INCREMENT,
+    `name` varchar(255),
+    `category` varchar(255),
+    `level` INT,
+    `associated_event_type` varchar(255),
+    `content` varchar(255),
+    `department` varchar(255),
+    `release_date` bigint,
+    `release_number` varchar(255),
+    `issued` varchar(255),
+    `signer` varchar(255),
+    `file` varchar(255),
+    PRIMARY KEY(`emergency_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `inspection_report` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `duty_person` varchar(255),
