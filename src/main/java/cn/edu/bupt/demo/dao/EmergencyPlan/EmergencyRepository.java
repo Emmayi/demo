@@ -38,10 +38,10 @@ public interface EmergencyRepository {
     void save(EmergencyPlan emergencyPlan);
 
     @Update("update emergency_plan set name = #{name},category = #{category},level = #{level},associated_event_type = #{associated_event_type},content = #{content}, " +
-            "department = #{department},release_date = #{release_date},release_number = #{release_number},issued = #{issued},signer = #{signer},file = #{file} where id=#{id}")
+            "department = #{department},release_date = #{release_date},release_number = #{release_number},issued = #{issued},signer = #{signer},file = #{file} where emergency_id=#{emergency_id}")
     void update(EmergencyPlan emergencyPlan);
 
-    @Delete("delete from entrance_work where emergency_id=#{emergency_id}")
+    @Delete("delete from emergency_plan where emergency_id=#{emergency_id}")
     void deleteById(Integer emergency_id);
 
     @Select("select * from emergency_plan where emergency_id > 0")

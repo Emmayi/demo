@@ -32,6 +32,23 @@ CREATE TABLE IF NOT EXISTS `emergency_plan` (
     PRIMARY KEY(`emergency_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `emergency_supplies` (
+    `supply_id` INT NOT NULL AUTO_INCREMENT,
+    `name` varchar(255),
+    `category` varchar(255),
+    `quantity` INT,
+    `model` varchar(255),
+    `purchase_date` bigint,
+    `manufacturer` varchar(255),
+    `manufacture_date` bigint,
+    `valid_until` bigint,
+    `use_description` varchar(255),
+    `performance_description` varchar(255),
+    `affiliation` varchar(255),
+    `location` varchar(255),
+    PRIMARY KEY(`supply_id`)1543161600
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `inspection_report` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `duty_person` varchar(255),

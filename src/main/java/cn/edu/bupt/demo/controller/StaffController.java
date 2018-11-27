@@ -5,15 +5,10 @@ import cn.edu.bupt.demo.entity.StaffNumber;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import sun.rmi.runtime.Log;
-
-import java.io.IOException;
-import java.util.List;
 
 /**
  * @author zy
