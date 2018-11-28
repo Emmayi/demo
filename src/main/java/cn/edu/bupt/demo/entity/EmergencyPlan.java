@@ -117,19 +117,34 @@ public class EmergencyPlan extends IdBased{
 
     @Override
     public String toString() {
-        return "EmergencyPlan{" +
-                "emergency_id=" + emergency_id +
-                ", name='" + name + '\'' +
-                ", category='" + category + '\'' +
-                ", level=" + level +
-                ", associated_event_type='" + associated_event_type + '\'' +
-                ", content='" + content + '\'' +
-                ", department='" + department + '\'' +
-                ", release_date=" + release_date +
-                ", release_number='" + release_number + '\'' +
-                ", issued='" + issued + '\'' +
-                ", signer='" + signer + '\'' +
-                ", file='" + file + '\'' +
-                '}';
+
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"emergency_id\":")
+                .append(emergency_id);
+        sb.append(",\"name\":\"")
+                .append(name).append('\"');
+        sb.append(",\"category\":\"")
+                .append(category).append('\"');
+        sb.append(",\"level\":\"")
+                .append(level).append('\"');
+        sb.append(",\"associated_event_type\":\"")
+                .append(associated_event_type).append('\"');
+        sb.append(",\"content\":\"")
+                .append(content).append('\"');
+        sb.append(",\"department\":\"")
+                .append(department).append('\"');
+        sb.append(",\"release_date\":\"")
+                .append(release_date).append('\"');
+        sb.append(",\"release_number\":\"")
+                .append(release_number).append('\"');
+        sb.append(",\"issued\":\"")
+                .append(issued).append('\"');
+        sb.append(",\"signer\":\"")
+                .append(signer).append('\"');
+        sb.append(",\"file\":\"")
+                .append(file).append('\"');
+        sb.append('}');
+        return sb.toString();
+
     }
 }

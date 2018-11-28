@@ -126,20 +126,37 @@ public class EmergencySupplies extends IdBased{
 
     @Override
     public String toString() {
-        return "EmergencySupplies{" +
-                "supplyId=" + supply_id +
-                ", name='" + name + '\'' +
-                ", category='" + category + '\'' +
-                ", quantity=" + quantity +
-                ", model='" + model + '\'' +
-                ", purchase_date=" + purchase_date +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", manufacture_date=" + manufacture_date +
-                ", valid_until=" + valid_until +
-                ", use_description='" + use_description + '\'' +
-                ", performance_description='" + performance_description + '\'' +
-                ", affiliation='" + affiliation + '\'' +
-                ", location='" + location + '\'' +
-                '}';
+
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"supply_id\":")
+                .append(supply_id);
+        sb.append(",\"name\":\"")
+                .append(name).append('\"');
+        sb.append(",\"category\":\"")
+                .append(category).append('\"');
+        sb.append(",\"quantity\":\"")
+                .append(quantity).append('\"');
+        sb.append(",\"model\":\"")
+                .append(model).append('\"');
+        sb.append(",\"purchase_date\":\"")
+                .append(purchase_date).append('\"');
+        sb.append(",\"manufacturer\":\"")
+                .append(manufacturer).append('\"');
+        sb.append(",\"manufacture_date\":\"")
+                .append(manufacture_date).append('\"');
+        sb.append(",\"valid_until\":\"")
+                .append(valid_until).append('\"');
+        sb.append(",\"use_description\":\"")
+                .append(use_description).append('\"');
+        sb.append(",\"performance_description\":\"")
+                .append(performance_description).append('\"');
+        sb.append(",\"affiliation\":\"")
+                .append(affiliation).append('\"');
+        sb.append(",\"location\":\"")
+                .append(location).append('\"');
+        sb.append('}');
+        return sb.toString();
+
     }
+
 }
