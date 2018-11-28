@@ -2,9 +2,16 @@ package cn.edu.bupt.demo.entity;
 
 public class StaffNumber extends IdBased{
 
+//    @ApiComment(value = "用户id", sample = "1")
     private Integer id;
+
+//    @ApiComment(value = "用户性别", sample = "女")
     private String gender;
+
+//    @ApiComment(value = "用户电话", sample = "18811653782")
     private String phone;
+
+//    @ApiComment(value = "用户姓名", sample = "李华")
     private String name;
 
     public Integer getId() {

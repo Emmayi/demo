@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
  * @author zy
  * @date 2018/10/18 下午4:48
  */
+
+//@Api2Doc(id = "demo1", name = "用户接口1")
+//@ApiComment(seeClass = StaffNumber.class)
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/info")
