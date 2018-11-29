@@ -143,6 +143,7 @@ public class SuppliesController {
         }
 
         EmergencySupplies emergencySupplies = new EmergencySupplies();
+        emergencySupplies.setSupply_id(supplyString.get("supply_id").getAsInt());
         emergencySupplies.setName(supplyString.get("name").getAsString());
         emergencySupplies.setCategory(supplyString.get("category").getAsString());
         emergencySupplies.setQuantity(supplyString.get("quantity").getAsInt());

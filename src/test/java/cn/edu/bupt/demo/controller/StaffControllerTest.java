@@ -1,8 +1,7 @@
 package cn.edu.bupt.demo.controller; 
 
-import org.junit.Test; 
-import org.junit.Before; 
-import org.junit.After; 
+import ch.qos.logback.core.net.SyslogOutputStream;
+import org.junit.*;
 
 /** 
 * StaffController Tester. 
@@ -14,12 +13,14 @@ import org.junit.After;
 public class StaffControllerTest { 
 
 @Before
-public void before() throws Exception { 
+public void before() throws Exception {
+    System.out.println("this is test before!");
 } 
 
 @After
-public void after() throws Exception { 
-} 
+public void after() throws Exception {
+    System.out.println("this is test after");
+}
 
 /** 
 * 
@@ -28,7 +29,8 @@ public void after() throws Exception {
 */ 
 @Test
 public void testGetStaffById() throws Exception { 
-//TODO: Test goes here... 
+//TODO: Test goes here...
+    System.out.println("this is testGetStaffById");
 } 
 
 /** 
@@ -88,7 +90,7 @@ public void testFindStaffName() throws Exception {
 */ 
 @Test
 public void testDeleteStaffByIdStaffId() throws Exception { 
-//TODO: Test goes here... 
+//TODO: Test goes here...
 } 
 
 /** 
