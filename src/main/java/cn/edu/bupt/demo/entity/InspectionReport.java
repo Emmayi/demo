@@ -96,7 +96,7 @@ public class InspectionReport extends IdBased {
         sb.append("\"id\":")
                 .append(id);
         sb.append(",\"duty_person\":")
-                .append(duty_person);
+                .append(duty_person).append('\"');
         sb.append(",\"inspeciton_person\":\"")
                 .append(inspection_person).append('\"');
         sb.append(",\"create_date\":\"")
