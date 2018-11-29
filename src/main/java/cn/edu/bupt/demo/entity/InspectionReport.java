@@ -95,7 +95,7 @@ public class InspectionReport extends IdBased {
         final StringBuilder sb = new StringBuilder("{");
         sb.append("\"id\":")
                 .append(id);
-        sb.append(",\"duty_person\":")
+        sb.append(",\"duty_person\":\"")
                 .append(duty_person).append('\"');
         sb.append(",\"inspeciton_person\":\"")
                 .append(inspection_person).append('\"');
