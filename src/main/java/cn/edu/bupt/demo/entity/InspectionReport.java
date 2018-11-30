@@ -97,7 +97,7 @@ public class InspectionReport extends IdBased {
                 .append(id);
         sb.append(",\"duty_person\":\"")
                 .append(duty_person).append('\"');
-        sb.append(",\"inspeciton_person\":\"")
+        sb.append(",\"inspection_person\":\"")
                 .append(inspection_person).append('\"');
         sb.append(",\"create_date\":\"")
                 .append(create_date).append('\"');
@@ -105,6 +105,8 @@ public class InspectionReport extends IdBased {
                 .append(calendar_date).append('\"');
         sb.append(",\"state\":\"")
                 .append(state).append('\"');
+        sb.append(",\"summary\":\"")
+                .append(summary).append('\"');
         sb.append(",\"abnormal\":\"")
                 .append(abnormal).append('\"');
         sb.append(",\"maintenance\":\"")
