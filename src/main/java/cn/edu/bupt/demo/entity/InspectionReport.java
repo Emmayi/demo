@@ -112,6 +112,7 @@ public class InspectionReport extends IdBased {
         sb.append(",\"maintenance\":\"")
                 .append(maintenance).append('\"');
         sb.append('}');
+
         return sb.toString();
     }
 }
