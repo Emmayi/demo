@@ -40,9 +40,10 @@ public class EntranceServiceImpl implements EntranceService{
     }
 
     @Override
-    public List<EntranceWork> findEntranceWorkByRange(String  activity_range) {
-        log.trace("Executing findEntranceWorkByRange [{}]", activity_range);
-        return entranceRepository.findEntranceWorkByRange(activity_range);
+    public List<EntranceWork> findEntranceWorkByRange(String  activity_range,Integer page, Integer pageSize) {
+        log.trace("Executing findEntranceWorkByRange [{}]", activity_range,page,pageSize);
+        Integer index = page * pageSize;
+        return entranceRepository.findEntranceWorkByRange(activity_range,index,pageSize);
     }
 
     @Override

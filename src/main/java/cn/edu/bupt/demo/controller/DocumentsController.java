@@ -21,8 +21,8 @@ import java.nio.charset.StandardCharsets;
 @CrossOrigin
 public class DocumentsController {
 
-//    String storePath= "/home/zy/file";//存放我们上传的文件路径
-    String storePath = "/Users/zy/Desktop/file";
+    String storePath= "/home/zy/file";//存放我们上传的文件路径
+//    String storePath = "/Users/zy/Desktop/file";
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String uploadFile(@RequestParam("file") MultipartFile file) throws Exception{

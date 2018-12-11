@@ -13,7 +13,7 @@ public interface EntranceService {
 
     EntranceWork findEntranceWorkById(Integer id);
 
-    List<EntranceWork> findEntranceWorkByRange(String activity_range);
+    List<EntranceWork> findEntranceWorkByRange(String activity_range,Integer page, Integer pageSize);
 
     Integer allWorkCount();
 
