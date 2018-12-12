@@ -23,6 +23,7 @@ public interface EntranceRepository {
     @Select("select id as id,duration as duration,date as date,work_number as work_number,activity_range as activity_range,evaluation as evaluation from entrance_work where activity_range = #{activity_range} limit #{index},#{pageSize}")
     List<EntranceWork> findEntranceWorkByRange(@Param("activity_range")String activity_range,@Param("index")Integer index,@Param("pageSize")Integer pageSize);
 
+
     @Select("select count(*) from entrance_work")
     Integer AllWorkCount();
 

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author zy
  * @date 2018/10/24 下午8:30
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/info")
 @CrossOrigin
 public class EntranceWorkController {
+
+    private Integer countByRange;
 
     @Autowired
     EntranceService entranceService;
@@ -61,15 +65,30 @@ public class EntranceWorkController {
     //根据入廊作业activity_range获取入廊信息
     @RequestMapping(value = "/entranceWorkByRange",params = {"range","limit","page"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getEntranceWorkByDate(@RequestParam String range,
+    public String getEntranceWorkByRange(@RequestParam String range,
                                         @RequestParam int limit,
                                         @RequestParam int page) throws Exception{
         try {
-            return entranceService.findEntranceWorkByRange(range,page,limit).toString();
+
+            List<EntranceWork> entranceWorks = entranceService.findEntranceWorkByRange(range,page,limit);
+             countByRange = entranceWorks.size();
+            return entranceWorks.toString();
         }catch (Exception e){
             throw new Exception("getEntranceWorkByDate error!");
         }
     }
+
+    //统计选择后的入廊作业
+    @RequestMapping(value = "/workCountByRange", method = RequestMethod.GET)
+    @ResponseBody
+    public Integer getWorkCountByRange() throws Exception{
+        try {
+            return countByRange;
+        }catch (Exception e){
+            throw new Exception("getEntranceWorkCount error!");
+        }
+    }
+
 
     //统计有多少入廊作业
     @RequestMapping(value = "/entranceWorkCount", method = RequestMethod.GET)
