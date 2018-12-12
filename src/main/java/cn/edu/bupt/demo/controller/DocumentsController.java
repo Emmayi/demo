@@ -31,7 +31,7 @@ public class DocumentsController {
     public String getAllFile() throws IOException {
         JsonObject jsonObject = new JsonObject();
         List<String> filenames = new LinkedList<>();
-        File filePath = new File("/home/zy/file");
+        File filePath = new File(storePath+"/");
         if(filePath.exists()){
             File[] files = filePath.listFiles();
             if(files!=null){
@@ -40,6 +40,8 @@ public class DocumentsController {
                     String encodeName = new String(file.getName().getBytes(), "utf-8");
                     filenames.add(encodeName);
                 }
+            }else{
+                System.out.println("文件夹为空");
             }
             jsonObject.addProperty("filenames",filenames.toString());
         }
