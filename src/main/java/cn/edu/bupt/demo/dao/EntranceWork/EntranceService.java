@@ -15,6 +15,8 @@ public interface EntranceService {
 
     List<EntranceWork> findEntranceWorkByRange(String activity_range,Integer page, Integer pageSize);
 
+    Integer workCountByRange(String activity_range);
+
     Integer allWorkCount();
 
     void save(EntranceWork entranceWork);

@@ -47,6 +47,13 @@ public class EntranceServiceImpl implements EntranceService{
     }
 
     @Override
+    public Integer workCountByRange(String activity_range) {
+        log.trace("Executing workCountByRange [{}]",activity_range);
+        Integer count = entranceRepository.WorkCountByRange(activity_range);
+        return count;
+    }
+
+    @Override
     public Integer allWorkCount() {
         log.trace("Executing allWorkCount [{}]");
         Integer count = entranceRepository.AllWorkCount();

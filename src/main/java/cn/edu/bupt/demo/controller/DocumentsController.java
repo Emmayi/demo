@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import com.google.gson.JsonObject;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,6 +11,8 @@ import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author zy
@@ -23,6 +26,25 @@ public class DocumentsController {
 
     String storePath= "/home/zy/file";//存放我们上传的文件路径
 //    String storePath = "/Users/zy/Desktop/file";
+
+    @RequestMapping(value = "/allFile", method = RequestMethod.GET)
+    public String getAllFile() throws IOException {
+        JsonObject jsonObject = new JsonObject();
+        List<String> filenames = new LinkedList<>();
+        File filePath = new File("/home/zy/file");
+        if(filePath.exists()){
+            File[] files = filePath.listFiles();
+            if(files!=null){
+                for(File file:files)
+                {
+                    String encodeName = new String(file.getName().getBytes(), "utf-8");
+                    filenames.add(encodeName);
+                }
+            }
+            jsonObject.addProperty("filenames",filenames.toString());
+        }
+        return jsonObject.toString();
+    }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String uploadFile(@RequestParam("file") MultipartFile file) throws Exception{

@@ -21,8 +21,6 @@ import java.util.List;
 @CrossOrigin
 public class EntranceWorkController {
 
-    private Integer countByRange;
-
     @Autowired
     EntranceService entranceService;
 
@@ -69,21 +67,19 @@ public class EntranceWorkController {
                                         @RequestParam int limit,
                                         @RequestParam int page) throws Exception{
         try {
-
-            List<EntranceWork> entranceWorks = entranceService.findEntranceWorkByRange(range,page,limit);
-             countByRange = entranceWorks.size();
-            return entranceWorks.toString();
+            return entranceService.findEntranceWorkByRange(range,page,limit).toString();
         }catch (Exception e){
             throw new Exception("getEntranceWorkByDate error!");
         }
     }
 
     //统计选择后的入廊作业
-    @RequestMapping(value = "/workCountByRange", method = RequestMethod.GET)
+    @RequestMapping(value = "/workCountByRange",params = {"range"}, method = RequestMethod.GET)
     @ResponseBody
-    public Integer getWorkCountByRange() throws Exception{
+    public Integer getWorkCountByRange(@RequestParam String range) throws Exception{
         try {
-            return countByRange;
+            Integer count = entranceService.workCountByRange(range);
+            return count;
         }catch (Exception e){
             throw new Exception("getEntranceWorkCount error!");
         }
