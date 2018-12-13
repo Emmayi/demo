@@ -27,11 +27,12 @@ public class DocumentsController {
     String storePath= "/home/zy/file";//存放我们上传的文件路径
 //    String storePath = "/Users/zy/Desktop/file";
 
-    @RequestMapping(value = "/allFile", method = RequestMethod.GET)
-    public String getAllFile() throws IOException {
+    @RequestMapping(value = "/showFile/{id}/{type}", method = RequestMethod.GET)
+    public String getAllFile(@PathVariable("id") Integer id,
+                             @PathVariable("type") Integer type) throws IOException {
         JsonObject jsonObject = new JsonObject();
         List<String> filenames = new LinkedList<>();
-        File filePath = new File(storePath+"/");
+        File filePath = new File(storePath+"/"+id+"/"+type+"/");
         if(filePath.exists()){
             File[] files = filePath.listFiles();
             if(files!=null){
@@ -48,8 +49,10 @@ public class DocumentsController {
         return jsonObject.toString();
     }
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String uploadFile(@RequestParam("file") MultipartFile file) throws Exception{
+    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    public String uploadFile(@RequestParam("file") MultipartFile file,
+                             @RequestParam("id") Integer id,
+                             @RequestParam("type") Integer type) throws Exception{
         try {
             if (file.isEmpty()) {
                 return "文件为空";
@@ -59,15 +62,15 @@ public class DocumentsController {
             String fileName = file.getOriginalFilename();
             fileName = URLDecoder.decode(fileName,"UTF-8");
             String suffixName = fileName.substring(fileName.lastIndexOf("."));
-
-            File filePath = new File(storePath, fileName);
+            String newPath = storePath+"/"+id+"/"+type;
+            File filePath = new File(newPath, fileName);
             if (!filePath.getParentFile().exists()) {
 
                 filePath.getParentFile().mkdirs();//如果目录不存在，创建目录
 
             }
 
-            String path = storePath+File.separator+fileName;
+            String path = newPath+File.separator+fileName;
             File dest = new File(path);
             file.transferTo(dest);// 文件写入
             return "上传成功";
@@ -80,8 +83,10 @@ public class DocumentsController {
     }
 
 
-    @RequestMapping(value = "/download/{filename}/{fileType}", method = RequestMethod.GET)
-    public void downloadFile(@PathVariable("filename") String filename,
+    @RequestMapping(value = "/download/{id}/{type}/{fileName}/{fileType}", method = RequestMethod.GET)
+    public void downloadFile(@PathVariable("id") Integer id,
+                             @PathVariable("type") Integer type,
+                             @PathVariable("fileName") String filename,
                              @PathVariable("fileType") String fileType,
                              HttpServletResponse response,
                              HttpServletRequest request) throws IOException {
@@ -90,7 +95,7 @@ public class DocumentsController {
         filename = URLDecoder.decode(filename,"UTF-8");
         FileInputStream fis = null;
         try {
-            File file = new File(storePath+"/"+filename+"."+fileType);
+            File file = new File(storePath+"/"+id+"/"+type+"/"+filename+"."+fileType);
             fis = new FileInputStream(file);
             response.setHeader("charset", "utf-8");
             String encodeName = URLEncoder.encode(file.getName(), StandardCharsets.UTF_8.toString());
@@ -113,14 +118,16 @@ public class DocumentsController {
 
     }
 
-    @RequestMapping(value = "/delete/{fileName}/{fileType}", method = RequestMethod.DELETE)
-    public void deleteFile(@PathVariable("fileName") String fileName,
+    @RequestMapping(value = "/delete/{id}/{type}/{fileName}/{fileType}", method = RequestMethod.DELETE)
+    public void deleteFile(@PathVariable("id") Integer id,
+                           @PathVariable("type") Integer type,
+                           @PathVariable("fileName") String fileName,
                            @PathVariable("fileType") String fileType) throws UnsupportedEncodingException {
 
         System.out.println("name1"+fileName);
 //        fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.toString());
 //        fileName=new String(fileName.getBytes("iso8859-1"),"UTF-8");
-        File file = new File(storePath+"/"+fileName+"."+fileType);
+        File file = new File(storePath+"/"+id+"/"+fileName+"/"+fileType);
         System.out.println(file.getName()+"|"+file.exists());
         if(file.exists()){
             System.out.println(file.delete());
