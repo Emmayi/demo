@@ -21,8 +21,8 @@ public interface InspectionRepository {
     List<InspectionReport> findReportByInspectionPerson(String inspection_person);
 
     @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,create_date as create_date,calendar_date as calendar_date," +
-            "state as state,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where calendar_date = #{calendar_date}")
-    List<InspectionReport> findReportByCreateDate(Long calendar_date);
+            "state as state,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where calendar_date = #{calendar_date} limit #{index},#{pageSize}")
+    List<InspectionReport> findReportByCreateDate(@Param("calendar_date") Long calendar_date,@Param("index")Integer index,@Param("pageSize")Integer pageSize);
 
     @Select("select count(*) from inspection_report")
     Integer findAllCount();

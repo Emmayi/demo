@@ -16,7 +16,7 @@ public interface InspectionService {
 
     List<InspectionReport> findReportByInspectionPerson(String inspection_person);
 
-    List<InspectionReport> findReportByCalendarDate(Long calendar_date);
+    List<InspectionReport> findReportByCalendarDate(Long calendar_date,Integer page, Integer pageSize);
 
     Integer getAllCount();
 

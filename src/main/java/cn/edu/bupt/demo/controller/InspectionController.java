@@ -55,11 +55,13 @@ public class InspectionController {
     }
 
     //通过创建日期查找巡检报告信息
-    @RequestMapping(value = "/inspectionByCalendarDate",params = {"calendar_date"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/inspectionByCalendarDate",params = {"calendar_date","limit","page"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getInspectionByCalendarDate(@RequestParam Long calendar_date) throws Exception{
+    public String getInspectionByCalendarDate(@RequestParam Long calendar_date,
+                                              @RequestParam int limit,
+                                              @RequestParam int page) throws Exception{
         try {
-            return inspectionService.findReportByCalendarDate(calendar_date).toString();
+            return inspectionService.findReportByCalendarDate(calendar_date,page,limit).toString();
         }catch (Exception e){
             throw new Exception("getInspectionByCalendarDate error!");
         }
