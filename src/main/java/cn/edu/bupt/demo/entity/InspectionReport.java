@@ -16,6 +16,9 @@ public class InspectionReport extends IdBased {
     private String abnormal;
     private String maintenance;
 
+    private String image;
+    private String video;
+
     @Override
     public Integer getId() {
         return id;
@@ -90,6 +93,22 @@ public class InspectionReport extends IdBased {
         this.maintenance = maintenance;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
@@ -111,6 +130,10 @@ public class InspectionReport extends IdBased {
                 .append(abnormal).append('\"');
         sb.append(",\"maintenance\":\"")
                 .append(maintenance).append('\"');
+        sb.append(",\"image\":\"")
+                .append(image).append('\"');
+        sb.append(",\"video\":\"")
+                .append(video).append('\"');
         sb.append('}');
 
         return sb.toString();

@@ -27,6 +27,8 @@ public class DocumentsController {
     String storePath= "/home/zy/file";//存放我们上传的文件路径
 //    String storePath = "/Users/zy/Desktop/file";
 
+
+    //获取所有文件接口
     @RequestMapping(value = "/showFile/{id}/{type}", method = RequestMethod.GET)
     public String getAllFile(@PathVariable("id") Integer id,
                              @PathVariable("type") Integer type) throws IOException {
@@ -49,6 +51,7 @@ public class DocumentsController {
         return jsonObject.toString();
     }
 
+    //上传文件接口
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFile(@RequestParam("file") MultipartFile file,
                              @RequestParam("id") Integer id,
@@ -83,6 +86,7 @@ public class DocumentsController {
     }
 
 
+    //下载文件接口
     @RequestMapping(value = "/download/{id}/{type}/{fileName}/{fileType}", method = RequestMethod.GET)
     public void downloadFile(@PathVariable("id") Integer id,
                              @PathVariable("type") Integer type,
@@ -118,6 +122,7 @@ public class DocumentsController {
 
     }
 
+    //删除文件接口
     @RequestMapping(value = "/delete/{id}/{type}/{fileName}/{fileType}", method = RequestMethod.DELETE)
     public void deleteFile(@PathVariable("id") Integer id,
                            @PathVariable("type") Integer type,
@@ -127,7 +132,7 @@ public class DocumentsController {
         System.out.println("name1"+fileName);
 //        fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.toString());
 //        fileName=new String(fileName.getBytes("iso8859-1"),"UTF-8");
-        File file = new File(storePath+"/"+id+"/"+fileName+"/"+fileType);
+        File file = new File(storePath+"/"+id+"/"+type+"/"+fileName+"."+fileType);
         System.out.println(file.getName()+"|"+file.exists());
         if(file.exists()){
             System.out.println(file.delete());

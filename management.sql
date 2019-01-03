@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `emergency_supplies` (
     `performance_description` varchar(255),
     `affiliation` varchar(255),
     `location` varchar(255),
-    PRIMARY KEY(`supply_id`)1543161600
+    PRIMARY KEY(`supply_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `inspection_report` (
@@ -59,5 +59,7 @@ CREATE TABLE IF NOT EXISTS `inspection_report` (
     `summary` varchar(255),
     `abnormal` varchar(255),
     `maintenance` varchar(255),
+    `image` varchar(255),
+    `video` varchar(255),
 	PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

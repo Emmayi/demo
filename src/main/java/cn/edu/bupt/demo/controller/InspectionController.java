@@ -7,6 +7,14 @@ import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author zy
@@ -20,6 +28,10 @@ public class InspectionController {
 
     @Autowired
     private InspectionService inspectionService;
+
+
+    private String storePath= "/home/zy/inspection";//存放我们上传的文件路径
+//    private String storePath= "/Users/zy/Desktop/file";//存放我们上传的文件路径
 
     //通过Id查找巡检报告的信息
     @RequestMapping(value = "/inspectionById",params = {"reportId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
@@ -151,6 +163,55 @@ public class InspectionController {
             throw new Exception("findAllReport error!");
         }
     }
+
+
+    //上传图片、视频，使用type区分
+    @RequestMapping(value = "/inspection/upload", method = RequestMethod.POST)
+    public String uploadFile(@RequestParam("file") MultipartFile file,
+                             @RequestParam("type") String type,
+                             @RequestParam("id") Integer id) throws Exception{
+
+        try {
+            if (file.isEmpty()) {
+                return "文件为空";
+            }
+            String fileName = file.getOriginalFilename();
+            fileName = URLDecoder.decode(fileName,"UTF-8");
+            String newPath = storePath+"/"+id+"/"+type;
+            File filePath = new File(newPath, fileName);
+            if (!filePath.getParentFile().exists()) {
+                filePath.getParentFile().mkdirs();//如果目录不存在，创建目录
+            }
+
+            String path = newPath+File.separator+fileName;
+            File dest = new File(path);
+            file.transferTo(dest);// 文件写入
+            return "上传成功";
+
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "上传失败";
+    }
+
+    //删除文件接口
+    @RequestMapping(value = "/inspection/delete/{id}/{type}/{fileName}/{fileType}", method = RequestMethod.DELETE)
+    public void deleteFile(@PathVariable("id") Integer id,
+                           @PathVariable("type") String type,
+                           @PathVariable("fileName") String fileName,
+                           @PathVariable("fileType") String fileType) throws UnsupportedEncodingException {
+
+        System.out.println("name1: "+fileName);
+        File file = new File(storePath+"/"+id+"/"+type+"/"+fileName+"."+fileType);
+        System.out.println(file.getName()+"|"+file.exists());
+        if(file.exists()){
+            System.out.println(file.delete());
+        }
+
+    }
+
 
     private InspectionReport Json2Report(JsonObject reportString) {
         InspectionReport inspectionReport = new InspectionReport();

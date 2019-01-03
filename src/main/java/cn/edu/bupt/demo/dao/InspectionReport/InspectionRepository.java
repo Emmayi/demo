@@ -8,27 +8,23 @@ import java.util.List;
 @Mapper
 public interface InspectionRepository {
 
-    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,create_date as create_date,calendar_date as calendar_date," +
-            "state as state,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where id = #{id}")
+    @Select("select * from inspection_report where id = #{id}")
     InspectionReport findReportById(Integer id);
 
-    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,create_date as create_date,calendar_date as calendar_date," +
-            "state as state,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where duty_person = #{duty_person}")
+    @Select("select * from inspection_report where duty_person = #{duty_person}")
     List<InspectionReport> findReportByDutyPerson(String duty_person);
 
-    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,create_date as create_date,calendar_date as calendar_date," +
-            "state as state,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where inspection_person = #{inspection_person}")
+    @Select("select * from inspection_report where inspection_person = #{inspection_person}")
     List<InspectionReport> findReportByInspectionPerson(String inspection_person);
 
-    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,create_date as create_date,calendar_date as calendar_date," +
-            "state as state,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where calendar_date = #{calendar_date} limit #{index},#{pageSize}")
+    @Select("select * from inspection_report where calendar_date = #{calendar_date} limit #{index},#{pageSize}")
     List<InspectionReport> findReportByCreateDate(@Param("calendar_date") Long calendar_date,@Param("index")Integer index,@Param("pageSize")Integer pageSize);
 
     @Select("select count(*) from inspection_report")
     Integer findAllCount();
 
-    @Insert("insert into inspection_report (duty_person,inspection_person,create_date,calendar_date,state,summary,abnormal,maintenance) " +
-                                "values (#{duty_person},#{inspection_person},#{create_date},#{calendar_date},#{state},#{summary},#{abnormal},#{maintenance})")
+    @Insert("insert into inspection_report (duty_person,inspection_person,create_date,calendar_date,state,summary,abnormal,maintenance,image,video) " +
+                                "values (#{duty_person},#{inspection_person},#{create_date},#{calendar_date},#{state},#{summary},#{abnormal},#{maintenance},#{image},#{video})")
     @Options(useGeneratedKeys = true,keyProperty="id")
     void save(InspectionReport inspectionReport);
 
@@ -42,8 +38,9 @@ public interface InspectionRepository {
     @Delete("delete from inspection_report where inspection_person=#{inspection_person}")
     void deleteByInspectionPerson(String inspection_person);
 
-    @Select("select id as id,duty_person as duty_person,inspection_person as inspection_person,create_date as create_date,calendar_date as calendar_date," +
-            "state as state,summary as summary,abnormal as abnormal,maintenance as maintenance from inspection_report where id > 0")
+    @Select("select * from inspection_report where id > 0")
     List<InspectionReport> findAll();
+
+
 
 }
