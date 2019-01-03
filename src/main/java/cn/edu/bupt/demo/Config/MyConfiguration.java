@@ -1,4 +1,4 @@
-package cn.edu.bupt.demo;
+package cn.edu.bupt.demo.Config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
