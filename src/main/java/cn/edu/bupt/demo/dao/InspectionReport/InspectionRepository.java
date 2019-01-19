@@ -23,6 +23,9 @@ public interface InspectionRepository {
     @Select("select count(*) from inspection_report")
     Integer findAllCount();
 
+    @Select("select count(*) from inspection_report where calendar_date = #{calendar_date}")
+    Integer findDayCount(Long calendar_date);
+
     @Insert("insert into inspection_report (duty_person,inspection_person,create_date,calendar_date,state,summary,abnormal,maintenance,image,video) " +
                                 "values (#{duty_person},#{inspection_person},#{create_date},#{calendar_date},#{state},#{summary},#{abnormal},#{maintenance},#{image},#{video})")
     @Options(useGeneratedKeys = true,keyProperty="id")

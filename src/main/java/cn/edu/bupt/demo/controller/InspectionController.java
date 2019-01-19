@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.dao.InspectionReport.InspectionRepository;
 import cn.edu.bupt.demo.dao.InspectionReport.InspectionService;
 import cn.edu.bupt.demo.entity.InspectionReport;
 import com.google.gson.JsonObject;
@@ -28,6 +29,9 @@ public class InspectionController {
 
     @Autowired
     private InspectionService inspectionService;
+
+    @Autowired
+    private InspectionRepository inspectionRepository;
 
 
     private String storePath= "/home/zy/inspection";//存放我们上传的文件路径
@@ -88,6 +92,18 @@ public class InspectionController {
             return count;
         } catch (Exception e) {
             throw new Exception("getAllCount error!");
+        }
+    }
+
+    //统计每天有多少报告
+    @RequestMapping(value = "/inspectionOfDay",params = {"date"},  method = RequestMethod.GET)
+    @ResponseBody
+    public Integer getDayCount(Long date) throws Exception{
+        try {
+            Integer count = inspectionRepository.findDayCount(date);
+            return count;
+        } catch (Exception e) {
+            throw new Exception("getDayCount error!");
         }
     }
 
