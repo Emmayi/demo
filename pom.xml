@@ -103,12 +103,6 @@
 			<version>3.9.0</version>
 		</dependency>
 
-		<!--配置中心-->
-		<dependency>
-			<groupId>com.baidu.disconf</groupId>
-			<artifactId>disconf-client</artifactId>
-			<version>2.6.36</version>
-		</dependency>
 
     </dependencies>
 
