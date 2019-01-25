@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `entrance_work` (
 
 CREATE TABLE IF NOT EXISTS `emergency_plan` (
     `emergency_id` INT NOT NULL AUTO_INCREMENT,
-    `name` varchar(255),
+    `name` varchar(255) NOT NULL,
     `category` varchar(255),
     `level` INT,
     `associated_event_type` varchar(255),

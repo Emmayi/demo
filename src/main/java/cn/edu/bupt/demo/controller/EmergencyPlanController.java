@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+
 /**
  * @author zy
  * @date 2018/11/24 下午11:04
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/info")
 @CrossOrigin
 public class EmergencyPlanController {
+
+    private String storePath= "/home/zy/file";//存放上传的文件路径
 
     @Autowired
     EmergencyService emergencyService;
@@ -149,6 +153,12 @@ public class EmergencyPlanController {
     public void deletePlanById(@RequestParam Integer id){
         try {
             emergencyService.deleteById(id);
+            File file = new File(storePath+"/"+id);
+            if(file.exists()){
+                System.out.println(file.delete());
+            }else {
+                System.out.println("文件夹不存在！");
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
