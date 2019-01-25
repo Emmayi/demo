@@ -128,6 +128,7 @@ public class EmergencyPlanController {
             throw new RuntimeException("没有Id，无法更新!");
         }
         EmergencyPlan emergencyPlan = new EmergencyPlan();
+        emergencyPlan.setEmergency_id(planString.get("emergency_id").getAsInt());
         emergencyPlan.setName(planString.get("name").getAsString());
         emergencyPlan.setCategory(planString.get("category").getAsString());
         emergencyPlan.setLevel(planString.get("level").getAsInt());
