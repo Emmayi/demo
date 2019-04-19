@@ -110,6 +110,13 @@
 			<version>2.6.36</version>
 		</dependency>
 
+		<!--json快速转换-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.47</version>
+		</dependency>
+
     </dependencies>
 
 	<build>

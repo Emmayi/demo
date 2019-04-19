@@ -63,3 +63,11 @@ CREATE TABLE IF NOT EXISTS `inspection_report` (
     `video` varchar(255),
 	PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `inspection_plan` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `inspection_person` varchar(255),
+    `create_date` bigint DEFAULT NULL,
+    `inspection_date` bigint DEFAULT NULL,
+    PRIMARY KEY(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
