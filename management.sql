@@ -71,3 +71,12 @@ CREATE TABLE IF NOT EXISTS `inspection_plan` (
     `inspection_date` bigint DEFAULT NULL,
     PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `inspection_daily` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `inspection_person` varchar(255),
+    `time` bigint DEFAULT NULL,
+    `work` varchar(255) DEFAULT NULL,
+    `path` VARCHAR(255) DEFAULT NULL,
+    PRIMARY KEY(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
