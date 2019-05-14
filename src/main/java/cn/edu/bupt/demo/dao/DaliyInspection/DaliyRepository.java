@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+@Mapper
 public interface DaliyRepository {
     @Select("select * from inspection_daily where id = #{id}")
     DailyInspection findTableById(Integer id);

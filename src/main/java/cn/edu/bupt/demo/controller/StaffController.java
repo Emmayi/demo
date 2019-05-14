@@ -99,7 +99,7 @@ public class StaffController {
     @RequestMapping(value = "/staffName",params = {"staffId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     public String findStaffName(@RequestParam Integer staffId) throws Exception{
         try {
-            return staffService.findStaffName(staffId);
+            return staffService.findAllStaffName(staffId).toString();
         } catch (Exception e) {
             throw new Exception("findStaffName error!");
         }

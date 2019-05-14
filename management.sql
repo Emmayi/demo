@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS `staff_number` (
     `gender` varchar(255),
     `phone` varchar(255),
     `name` varchar(255),
+    `email` VARCHAR(20),
 	PRIMARY KEY(`id`)
 );
 
@@ -78,5 +79,14 @@ CREATE TABLE IF NOT EXISTS `inspection_daily` (
     `time` bigint DEFAULT NULL,
     `work` varchar(255) DEFAULT NULL,
     `path` VARCHAR(255) DEFAULT NULL,
+    PRIMARY KEY(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `inspection_equip` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL,
+    `last_time` bigint DEFAULT NULL,
+    `content` VARCHAR(255) DEFAULT NULL,
+    `period` VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

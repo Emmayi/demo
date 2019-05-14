@@ -18,7 +18,9 @@ public interface StaffService {
 
     List<StaffNumber> findStaffByName(String name);
 
-    String findStaffName(Integer id);
+    List<String> findAllStaffName(Integer id);
+
+    String findEmailByName(String name);
 
     Integer StaffCount();
 

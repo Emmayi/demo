@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.entity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,8 @@ import lombok.Setter;
  * @author zy
  * @date 2019/4/19 上午9:35
  */
+
+@Data
 public class InspectionPlan {
 
     @Getter @Setter

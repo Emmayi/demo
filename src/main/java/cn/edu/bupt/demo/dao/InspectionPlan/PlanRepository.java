@@ -4,7 +4,7 @@ import cn.edu.bupt.demo.entity.InspectionPlan;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-
+@Mapper
 public interface PlanRepository {
     @Select("select * from inspection_plan where id = #{id}")
     InspectionPlan findPlanById(Integer id);
