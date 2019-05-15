@@ -3,6 +3,7 @@ package cn.edu.bupt.demo.controller;
 import cn.edu.bupt.demo.dao.EntranceWork.EntranceService;
 import cn.edu.bupt.demo.entity.EntranceWork;
 import cn.edu.bupt.demo.entity.StaffNumber;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,12 @@ public class EntranceWorkController {
                                         @RequestParam int limit,
                                         @RequestParam int page) throws Exception{
         try {
-            return entranceService.findEntranceWorkByRange(range,page,limit).toString();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("range",range);
+            jsonObject.put("limit",limit);
+            jsonObject.put("page",page);
+            jsonObject.put("data",entranceService.findEntranceWorkByRange(range,page,limit));
+            return jsonObject.toString();
         }catch (Exception e){
             throw new Exception("getEntranceWorkByDate error!");
         }

@@ -3,7 +3,6 @@ package cn.edu.bupt.demo.controller;
 import cn.edu.bupt.demo.dao.DaliyInspection.DaliyService;
 import cn.edu.bupt.demo.entity.DailyInspection;
 import com.alibaba.fastjson.JSONObject;
-import com.sun.xml.internal.rngom.digested.DInterleavePattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
