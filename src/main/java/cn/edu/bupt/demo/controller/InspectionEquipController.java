@@ -77,7 +77,6 @@ public class InspectionEquipController {
     public String updateInspectionEquip(@RequestBody String equipInfo) throws Exception{
 
         InspectionEquip inspectionPlan = JSONObject.parseObject(equipInfo, InspectionEquip.class);
-
         if(inspectionPlan.getId().equals("")) {
             throw new RuntimeException("没有Id，无法更新!");
         }
