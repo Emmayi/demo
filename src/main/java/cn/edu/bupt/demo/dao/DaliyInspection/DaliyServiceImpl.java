@@ -26,21 +26,29 @@ public class DaliyServiceImpl implements DaliyService{
     }
 
     @Override
-    public List<DailyInspection> findTableByInspectionPerson(String inspection_person) {
-        log.trace("Executing findTableByInspectionPerson [{}]", inspection_person);
-        return daliyRepository.findTableByInspectionPerson(inspection_person);
+    public List<DailyInspection> findTableByInspectionPerson(String inspection_person, Integer page, Integer pageSize) {
+        log.trace("Executing findTableByInspectionPerson [{}]", inspection_person,page,pageSize);
+        Integer index = page * pageSize;
+        return daliyRepository.findTableByInspectionPerson(inspection_person,index,pageSize);
     }
 
     @Override
-    public List<DailyInspection> findTableByInspectionDate(Long time) {
-        log.trace("Executing findTableByInspectionDate [{}]", time);
-        return daliyRepository.findTableByInspectionDate(time);
+    public List<DailyInspection> findAllByPage(Integer page, Integer pageSize) {
+        log.trace("Executing findAllByPage [{}]",page,pageSize);
+        Integer index = page * pageSize;
+        return daliyRepository.findAllByPage(index,pageSize);
     }
 
     @Override
     public Integer getAllCount() {
         log.trace("Executing getAllCount [{}]");
         return daliyRepository.findAllCount();
+    }
+
+    @Override
+    public Integer findCountByPerson(String inspection_person) {
+        log.trace("Executing findCountByPerson [{}]");
+        return daliyRepository.findCountByPerson(inspection_person);
     }
 
     @Override

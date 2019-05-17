@@ -27,6 +27,12 @@ public class SuppliesServiceImpl implements SuppliesService{
     }
 
     @Override
+    public List<EmergencySupplies> findSuppliesByCategoryAndPage(String category, Integer page, Integer pageSize) {
+        Integer index = page * pageSize;
+        return suppliesRespository.findSuppliesByCategoryAndPage(category,index,pageSize);
+    }
+
+    @Override
     public Integer findSuppliesPageNum(Integer size) {
         log.trace("Executing findSuppliesPageNum [{}]", size);
         Integer num = (suppliesRespository.AllSuppliesCount()+size-1)/size;
@@ -39,28 +45,18 @@ public class SuppliesServiceImpl implements SuppliesService{
         return suppliesRespository.findEmergencySuppliesById(supply_id);
     }
 
-    @Override
-    public List<EmergencySupplies> findSuppliesByName(String name) {
-        log.trace("Executing findSuppliesByName [{}]", name);
-        return suppliesRespository.findEmergencySupliesByName(name);
-    }
-
-    @Override
-    public List<EmergencySupplies> findSuppliesByAffiliation(String affiliation) {
-        log.trace("Executing findSuppliesByAffiliation [{}]", affiliation);
-        return suppliesRespository.findEmergencySupliesByAffiliation(affiliation);
-    }
-
-    @Override
-    public List<EmergencySupplies> findSuppliesByLocation(String location) {
-        log.trace("Executing findSuppliesByLocation [{}]", location);
-        return suppliesRespository.findEmergencySupliesByLocation(location);
-    }
 
     @Override
     public Integer getSuppliesCount() {
         log.trace("Executing getSuppliesCount [{}]");
         Integer count = suppliesRespository.AllSuppliesCount();
+        return count;
+    }
+
+    @Override
+    public Integer SuppliesCountOfCategory(String category) {
+        log.trace("Executing SuppliesCountOfCategory [{}]");
+        Integer count = suppliesRespository.SuppliesCountOfCategory(category);
         return count;
     }
 

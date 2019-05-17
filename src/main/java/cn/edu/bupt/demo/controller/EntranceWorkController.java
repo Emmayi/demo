@@ -53,19 +53,6 @@ public class EntranceWorkController {
     }
 
 
-//    //获取所有的入廊作业的页数
-//    @RequestMapping(value = "/count", params = {  "range"  }, method = RequestMethod.GET)
-//    @ResponseBody
-//    public Integer getEntranceWorkPages(@RequestParam String range) throws Exception {
-//        try {
-//            Integer count = entranceService.workCountByRange(range);
-//            return count;
-//        } catch (Exception e) {
-//            throw new Exception("getEntranceWorkPages error!");
-//        }
-//    }
-
-
     //根据入廊作业id获取入廊信息
     @RequestMapping(value = "/entranceWorkById",params = {"entranceId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody

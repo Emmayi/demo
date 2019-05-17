@@ -20,6 +20,25 @@ public class InspectionEquipController {
     @Autowired
     private EquipService equipService;
 
+    //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @RequestMapping(value = "/inspectionEquipByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getInspectionEquipByPage(@RequestParam (name="limit") int limit,
+                                        @RequestParam (name="page") int page)throws Exception {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("limit",limit);
+            jsonObject.put("page",page);
+
+            Integer count = equipService.getAllCount();
+            jsonObject.put("allCount",count);
+            jsonObject.put("data",equipService.findEquipInspectionPlanByPage(page,limit));
+            return jsonObject.toString();
+        } catch (Exception e) {
+            throw new Exception("getInspectionEquipByPage error!");
+        }
+    }
+
     //通过Id查找信息
     @RequestMapping(value = "/equipPlanById",params = {"id"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody

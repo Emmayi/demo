@@ -17,6 +17,9 @@ public interface EmergencyRepository {
     @Select("select * from emergency_plan limit #{index},#{pageSize}")
     List<EmergencyPlan> findAllByPage(@Param("index")Integer index, @Param("pageSize")Integer pageSize);
 
+    @Select("select * from emergency_plan where level = #{level} limit #{index},#{pageSize}")
+    List<EmergencyPlan> findPlanByLevelPage(@Param("level")Integer level, @Param("index")Integer index, @Param("pageSize")Integer pageSize);
+
     @Select("select * from emergency_plan where emergency_id = #{emergency_id}")
     EmergencyPlan findEmergencyPlanById(Integer emergency_id);
 
@@ -31,6 +34,9 @@ public interface EmergencyRepository {
 
     @Select("select count(*) from emergency_plan")
     Integer AllPlanCount();
+
+    @Select("select count(*) from emergency_plan where leve = #{level}")
+    Integer AllPlanPageCount(Integer level);
 
     @Insert("insert into emergency_plan (name,category,level,associated_event_type,content,department,release_date,release_number,issued,signer,file)" +
             " values (#{name},#{category},#{level},#{associated_event_type},#{content},#{department},#{release_date},#{release_number},#{issued},#{signer},#{file})")

@@ -20,6 +20,13 @@ public class EquipServiceImpl  implements EquipService{
     EquipRepository equipRepository;
 
     @Override
+    public List<InspectionEquip> findEquipInspectionPlanByPage(Integer page, Integer pageSize) {
+        log.trace("Executing findReportByPage [{}]", page,pageSize);
+        Integer index = page * pageSize;
+        return equipRepository.findEquipInspectionPlanByPage(index, pageSize);
+    }
+
+    @Override
     public InspectionEquip findPlanById(Integer id) {
         log.trace("Executing findPlanById [{}]", id);
         return equipRepository.findPlanById(id);

@@ -3,6 +3,7 @@ package cn.edu.bupt.demo.controller;
 import cn.edu.bupt.demo.dao.InspectionReport.InspectionRepository;
 import cn.edu.bupt.demo.dao.InspectionReport.InspectionService;
 import cn.edu.bupt.demo.entity.InspectionReport;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,33 @@ public class InspectionController {
     private String storePath= "/home/zy/inspection";//存放我们上传的文件路径
 //    private String storePath= "/Users/zy/Desktop/file";//存放我们上传的文件路径
 
+    //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @RequestMapping(value = "/inspectionReportByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getInspectionReportByPage(@RequestParam (name="limit") int limit,
+                                        @RequestParam (name="page") int page,
+                                        @RequestParam(value="date",required=false,defaultValue = "1") Long date )throws Exception {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("limit",limit);
+            jsonObject.put("page",page);
+            if(date==1){
+                Integer count = inspectionService.getAllCount();
+                jsonObject.put("allCount",count);
+                jsonObject.put("data",inspectionService.findReportByPage(page,limit));
+                return jsonObject.toString();
+            }else {
+                Integer count = inspectionRepository.findDayCount(date);
+                jsonObject.put("data",inspectionService.findReportByCalendarDate(date,page,limit));
+                jsonObject.put("allCount",count);
+                return jsonObject.toString();
+            }
+
+        } catch (Exception e) {
+            throw new Exception("getInspectionReportByPage error!");
+        }
+    }
+
     //通过Id查找巡检报告的信息
     @RequestMapping(value = "/inspectionById",params = {"reportId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -70,49 +98,11 @@ public class InspectionController {
         }
     }
 
-    //通过创建日期查找巡检报告信息
-    @RequestMapping(value = "/inspectionByCalendarDate",params = {"calendar_date","limit","page"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public String getInspectionByCalendarDate(@RequestParam Long calendar_date,
-                                              @RequestParam int limit,
-                                              @RequestParam int page) throws Exception{
-        try {
-            return inspectionService.findReportByCalendarDate(calendar_date,page,limit).toString();
-        }catch (Exception e){
-            throw new Exception("getInspectionByCalendarDate error!");
-        }
-    }
-
-    //统计一共有多少报告
-    @RequestMapping(value = "/inspection", method = RequestMethod.GET)
-    @ResponseBody
-    public Integer getAllCount() throws Exception{
-        try {
-            Integer count = inspectionService.getAllCount();
-            return count;
-        } catch (Exception e) {
-            throw new Exception("getAllCount error!");
-        }
-    }
-
-    //统计每天有多少报告
-    @RequestMapping(value = "/inspectionOfDay",params = {"date"},  method = RequestMethod.GET)
-    @ResponseBody
-    public Integer getDayCount(Long date) throws Exception{
-        try {
-            Integer count = inspectionRepository.findDayCount(date);
-            return count;
-        } catch (Exception e) {
-            throw new Exception("getDayCount error!");
-        }
-    }
-
     //创建巡检报告，填写信息
     @RequestMapping(value = "/inspection", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createInspectionReport(@RequestBody String reportInfo) throws Exception{
-        JsonObject reportString = new JsonParser().parse(reportInfo).getAsJsonObject();
-        InspectionReport inspectionReport = Json2Report(reportString);
+        InspectionReport inspectionReport = JSONObject.parseObject(reportInfo, InspectionReport.class);
         try {
             inspectionService.save(inspectionReport);
             return inspectionReport.toString();
@@ -125,20 +115,11 @@ public class InspectionController {
     @RequestMapping(value = "/inspection", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateInspectionReport(@RequestBody String reportInfo) throws Exception{
-        JsonObject reportString = new JsonParser().parse(reportInfo).getAsJsonObject();
-        if(reportString.get("id").getAsString().equals("")) {
+        InspectionReport inspectionReport = JSONObject.parseObject(reportInfo, InspectionReport.class);
+
+        if(inspectionReport.getId().equals("")) {
             throw new RuntimeException("没有Id，无法更新!");
         }
-        InspectionReport inspectionReport = new InspectionReport();
-        inspectionReport.setId(reportString.get("id").getAsInt());
-        inspectionReport.setAbnormal(reportString.get("abnormal").getAsString());
-        inspectionReport.setState(reportString.get("state").getAsString());
-        inspectionReport.setCreate_date(reportString.get("create_date").getAsLong());
-        inspectionReport.setCalendar_date(reportString.get("calendar_date").getAsLong());
-        inspectionReport.setDuty_person(reportString.get("duty_person").getAsString());
-        inspectionReport.setInspection_person(reportString.get("inspection_person").getAsString());
-        inspectionReport.setSummary(reportString.get("summary").getAsString());
-        inspectionReport.setMaintenance(reportString.get("maintenance").getAsString());
         try {
             inspectionService.update(inspectionReport);
             return inspectionReport.toString();
@@ -226,20 +207,6 @@ public class InspectionController {
             System.out.println(file.delete());
         }
 
-    }
-
-
-    private InspectionReport Json2Report(JsonObject reportString) {
-        InspectionReport inspectionReport = new InspectionReport();
-        inspectionReport.setAbnormal(reportString.get("abnormal").getAsString());
-        inspectionReport.setState(reportString.get("state").getAsString());
-        inspectionReport.setCreate_date(reportString.get("create_date").getAsLong());
-        inspectionReport.setCalendar_date(reportString.get("calendar_date").getAsLong());
-        inspectionReport.setDuty_person(reportString.get("duty_person").getAsString());
-        inspectionReport.setInspection_person(reportString.get("inspection_person").getAsString());
-        inspectionReport.setSummary(reportString.get("summary").getAsString());
-        inspectionReport.setMaintenance(reportString.get("maintenance").getAsString());
-        return inspectionReport;
     }
 
 }

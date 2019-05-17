@@ -7,6 +7,9 @@ import java.util.List;
 @Mapper
 public interface EquipRepository {
 
+    @Select("select * from inspection_report limit #{index},#{pageSize}")
+    List<InspectionEquip> findEquipInspectionPlanByPage(@Param("index")Integer index,@Param("pageSize")Integer pageSize);
+
     @Select("select * from inspection_equip where id = #{id}")
     InspectionEquip findPlanById(Integer id);
 

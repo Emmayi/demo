@@ -45,6 +45,13 @@ public class InspectionServiceImpl implements InspectionService{
     }
 
     @Override
+    public List<InspectionReport> findReportByPage(Integer page, Integer pageSize) {
+        log.trace("Executing findReportByPage [{}]", page,pageSize);
+        Integer index = page * pageSize;
+        return inspectionRepository.findReportByPage(index, pageSize);
+    }
+
+    @Override
     public Integer getAllCount() {
         log.trace("Executing getAllCount [{}]");
         return inspectionRepository.findAllCount();

@@ -10,14 +10,18 @@ public interface DaliyRepository {
     @Select("select * from inspection_daily where id = #{id}")
     DailyInspection findTableById(Integer id);
 
-    @Select("select * from inspection_daily where inspection_person = #{inspection_person}")
-    List<DailyInspection> findTableByInspectionPerson(String inspection_person);
+    @Select("select * from inspection_daily where inspection_person = #{inspection_person} limit #{index},#{pageSize}")
+    List<DailyInspection> findTableByInspectionPerson(@Param("inspection_person")String inspection_person, @Param("index")Integer index, @Param("pageSize")Integer pageSize);
 
-    @Select("select * from inspection_daily where time = #{time}")
-    List<DailyInspection> findTableByInspectionDate(Long time);
+    @Select("select * from inspection_daily limit #{index},#{pageSize}")
+    List<DailyInspection> findAllByPage(@Param("index")Integer index, @Param("pageSize")Integer pageSize);
+
 
     @Select("select count(*) from inspection_daily")
     Integer findAllCount();
+
+    @Select("select count(*) from inspection_daily where inspection_person=#{inspection_person}")
+    Integer findCountByPerson(String inspection_person);
 
     @Insert("insert into inspection_daily (time,inspection_person,path,work) " +
             "values (#{time},#{inspection_person},#{path},#{work})")
