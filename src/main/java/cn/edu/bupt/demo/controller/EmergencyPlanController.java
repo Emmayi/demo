@@ -34,12 +34,12 @@ public class EmergencyPlanController {
     @ResponseBody
     public String getEmergencyPlanByPage(@RequestParam (name="limit") int limit,
                                         @RequestParam (name="page") int page,
-                                        @RequestParam(value="level",required=false,defaultValue = "1") Integer level )throws Exception {
+                                        @RequestParam(value="level",required=false,defaultValue = "0") Integer level )throws Exception {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("limit",limit);
             jsonObject.put("page",page);
-            if(level==1){
+            if(level==0){
                 Integer count = emergencyService.getPlanCount();
                 jsonObject.put("allCount",count);
                 jsonObject.put("data",emergencyService.findPlanByPage(page,limit));
