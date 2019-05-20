@@ -2,6 +2,7 @@ package cn.edu.bupt.demo.controller;
 
 import cn.edu.bupt.demo.dao.StaffNumber.StaffService;
 import cn.edu.bupt.demo.entity.StaffNumber;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
@@ -52,8 +53,7 @@ public class StaffController {
     @RequestMapping(value = "/staff", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createStaff(@RequestBody String staffInfo) throws Exception{
-        JsonObject staffString = new JsonParser().parse(staffInfo).getAsJsonObject();
-        StaffNumber staffNumber = Json2Staff(staffString);
+        StaffNumber staffNumber = JSONObject.parseObject(staffInfo, StaffNumber.class);
         try {
             staffService.save(staffNumber);
             return staffNumber.toString();
@@ -66,15 +66,10 @@ public class StaffController {
     @RequestMapping(value = "/staff", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateStaff(@RequestBody String staffInfo) throws Exception{
-        JsonObject staffString = new JsonParser().parse(staffInfo).getAsJsonObject();
-        if(staffString.get("id").getAsString().equals("")) {
+        StaffNumber staffNumber = JSONObject.parseObject(staffInfo, StaffNumber.class);
+        if(staffNumber.getId().equals("")) {
             throw new RuntimeException("没有Id，无法更新!");
         }
-        StaffNumber staffNumber = new StaffNumber();
-        staffNumber.setId(staffString.get("id").getAsInt());
-        staffNumber.setName(staffString.get("name").getAsString());
-        staffNumber.setGender(staffString.get("gender").getAsString());
-        staffNumber.setPhone(staffString.get("phone").getAsString());
         try {
             staffService.updateStaff(staffNumber);
             return staffNumber.toString();
@@ -138,12 +133,5 @@ public class StaffController {
         }
     }
 
-    private StaffNumber Json2Staff(JsonObject staffString){
-        StaffNumber staffNumber = new StaffNumber();
-        staffNumber.setGender(staffString.get("gender").getAsString());
-        staffNumber.setName(staffString.get("name").getAsString());
-        staffNumber.setPhone(staffString.get("phone").getAsString());
-        return staffNumber;
-    }
 
 }
