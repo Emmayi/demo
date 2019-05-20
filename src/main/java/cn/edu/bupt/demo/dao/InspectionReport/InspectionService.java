@@ -18,6 +18,8 @@ public interface InspectionService {
 
     List<InspectionReport> findReportByCalendarDate(Long calendar_date,Integer page, Integer pageSize);
 
+    List<InspectionReport> findReportByPage(Integer page, Integer pageSize);
+
     Integer getAllCount();
 
     void save(InspectionReport inspectionReport);

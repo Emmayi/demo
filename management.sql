@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS `staff_number` (
     `gender` varchar(255),
     `phone` varchar(255),
     `name` varchar(255),
+    `email` VARCHAR(20),
 	PRIMARY KEY(`id`)
 );
 
@@ -49,23 +50,6 @@ CREATE TABLE IF NOT EXISTS `emergency_supplies` (
     PRIMARY KEY(`supply_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `emergency_equis` (
-    `equis_id` INT NOT NULL AUTO_INCREMENT,
-    `name` varchar(255),
-    `category` varchar(255),
-    `quantity` INT,
-    `model` varchar(255),
-    `purchase_date` bigint,
-    `manufacturer` varchar(255),
-    `manufacture_date` bigint,
-    `valid_until` bigint,
-    `use_description` varchar(255),
-    `performance_description` varchar(255),
-    `affiliation` varchar(255),
-    `location` varchar(255),
-    PRIMARY KEY(`equis_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE IF NOT EXISTS `inspection_report` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `duty_person` varchar(255),
@@ -81,55 +65,28 @@ CREATE TABLE IF NOT EXISTS `inspection_report` (
 	PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `emergency_team` (
-    `team_id` INT NOT NULL AUTO_INCREMENT,
-    `name` varchar(255),
-    `category` varchar(255),
-    `level` INT,
-    `specialty` varchar(255),
-    `introduction` varchar(255),
-    `affiliation` varchar(255),
-    `principal` varchar(255),
-    `phone` varchar(255),
-    `location` varchar(255),
-    PRIMARY KEY(`team_id`)
+CREATE TABLE IF NOT EXISTS `inspection_plan` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `inspection_person` varchar(255),
+    `create_date` bigint DEFAULT NULL,
+    `inspection_date` bigint DEFAULT NULL,
+    PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `emergency_place` (
-    `place_id` INT NOT NULL AUTO_INCREMENT,
-    `name` varchar(255),
-    `category` varchar(255),
-    `location` varchar(255),
-    `area` INT,
-    `capacity` INT,
-    `introduction` varchar(255),
-    `affiliation` varchar(255),
-    `principal` varchar(255),
-    `telephone` varchar(255),
-    `cellphone` varchar(255),
-    PRIMARY KEY(`place_id`)
+CREATE TABLE IF NOT EXISTS `inspection_daily` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `inspection_person` varchar(255),
+    `time` bigint DEFAULT NULL,
+    `work` varchar(255) DEFAULT NULL,
+    `path` VARCHAR(255) DEFAULT NULL,
+    PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `project_cinformation` (
-    `project_id` INT NOT NULL AUTO_INCREMENT,
-    `location` varchar(255) default NULL,
-    `area` INT default NULL,
-    `drawpoint` varchar(255) default NULL,
-    `mainequipments` varchar(255) default NULL,
-    `proequipments` varchar(255) default NULL,
-    `department` varchar(255) default NULL,
-    `mainusage` varchar(255) default NULL,
-    PRIMARY KEY(`project_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `project_m` (
-    `project_id` INT NOT NULL AUTO_INCREMENT,
-    `location` varchar(255) default NULL,
-    `area` INT default NULL,
-    `drawpoint` varchar(255) default NULL,
-    `mainequipments` varchar(255) default NULL,
-    `proequipments` varchar(255) default NULL,
-    `department` varchar(255) default NULL,
-    `mainusage` varchar(255) default NULL,
-    PRIMARY KEY(`project_id`)
+CREATE TABLE IF NOT EXISTS `inspection_equip` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL,
+    `last_time` bigint DEFAULT NULL,
+    `content` VARCHAR(255) DEFAULT NULL,
+    `period` VARCHAR(255) DEFAULT NULL,
+    PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -8,17 +8,15 @@ public interface SuppliesService {
 
     List<EmergencySupplies> findAllByPage(Integer page, Integer pageSize);
 
+    List<EmergencySupplies> findSuppliesByCategoryAndPage(String category,Integer page, Integer pageSize);
+
     Integer findSuppliesPageNum(Integer size);
 
     EmergencySupplies findSuppliesById(Integer supply_id);
 
-    List<EmergencySupplies> findSuppliesByName(String name);
-
-    List<EmergencySupplies> findSuppliesByAffiliation(String affiliation);
-
-    List<EmergencySupplies> findSuppliesByLocation(String location);
-
     Integer getSuppliesCount();
+
+    Integer SuppliesCountOfCategory(String category);
 
     void save(EmergencySupplies emergencySupplies);
 

@@ -1,7 +1,9 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.dao.EmergencyPlan.EmergencyRepository;
 import cn.edu.bupt.demo.dao.EmergencyPlan.EmergencyService;
 import cn.edu.bupt.demo.entity.EmergencyPlan;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +26,36 @@ public class EmergencyPlanController {
 
     @Autowired
     EmergencyService emergencyService;
+    @Autowired
+    EmergencyRepository emergencyRepository;
 
-    //配合分页设置，获取所有的应急预案信息
-    @RequestMapping(value = "/emergencyByPage", params = {  "limit","page"  }, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @RequestMapping(value = "/emergencyPlanByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getPlanByPage(@RequestParam int limit,
-                                        @RequestParam int page) throws Exception {
+    public String getEmergencyPlanByPage(@RequestParam (name="limit") int limit,
+                                        @RequestParam (name="page") int page,
+                                        @RequestParam(value="level",required=false,defaultValue = "1") Integer level )throws Exception {
         try {
-            return emergencyService.findPlanByPage(page,limit).toString();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("limit",limit);
+            jsonObject.put("page",page);
+            if(level==1){
+                Integer count = emergencyService.getPlanCount();
+                jsonObject.put("allCount",count);
+                jsonObject.put("data",emergencyService.findPlanByPage(page,limit));
+                return jsonObject.toString();
+            }else {
+                Integer count = emergencyRepository.AllPlanPageCount(level);
+                jsonObject.put("data",emergencyRepository.findPlanByLevelPage(level,page,limit));
+                jsonObject.put("allCount",count);
+                return jsonObject.toString();
+            }
 
         } catch (Exception e) {
-            throw new Exception("getPlanByPage error!");
+            throw new Exception("getEmergencyPlanByPage error!");
         }
     }
+
 
     //获取所有应急预案的页数
     @RequestMapping(value = "/emergencyPages", params = {  "limit"  }, method = RequestMethod.GET)
@@ -93,24 +112,11 @@ public class EmergencyPlanController {
         }
     }
 
-    //统计有多少预案
-    @RequestMapping(value = "/emergencyCount", method = RequestMethod.GET)
-    @ResponseBody
-    public Integer getEPlanCount() throws Exception{
-        try {
-            Integer count = emergencyService.getPlanCount();
-            return count;
-        }catch (Exception e){
-            throw new Exception("getEPlanCount error!");
-        }
-    }
-
     //增加应急预案的信息
     @RequestMapping(value = "/emergency", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createEmergencyPlan(@RequestBody String emergencyInfo) throws Exception{
-        JsonObject planString = new JsonParser().parse(emergencyInfo).getAsJsonObject();
-        EmergencyPlan emergencyPlan = Json2Plan(planString);
+        EmergencyPlan emergencyPlan = JSONObject.parseObject(emergencyInfo, EmergencyPlan.class);
         try {
             emergencyService.save(emergencyPlan);
             return emergencyPlan.toString();
@@ -123,23 +129,11 @@ public class EmergencyPlanController {
     @RequestMapping(value = "/emergency", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateEmergencyPlan(@RequestBody String emergencyInfo) throws Exception{
-        JsonObject planString = new JsonParser().parse(emergencyInfo).getAsJsonObject();
-        if(planString.get("emergency_id").getAsString().equals("")) {
+        EmergencyPlan emergencyPlan = JSONObject.parseObject(emergencyInfo, EmergencyPlan.class);
+
+        if(emergencyPlan.getEmergency_id().equals("")) {
             throw new RuntimeException("没有Id，无法更新!");
         }
-        EmergencyPlan emergencyPlan = new EmergencyPlan();
-        emergencyPlan.setEmergency_id(planString.get("emergency_id").getAsInt());
-        emergencyPlan.setName(planString.get("name").getAsString());
-        emergencyPlan.setCategory(planString.get("category").getAsString());
-        emergencyPlan.setLevel(planString.get("level").getAsInt());
-        emergencyPlan.setAssociated_event_type(planString.get("associated_event_type").getAsString());
-        emergencyPlan.setContent(planString.get("content").getAsString());
-        emergencyPlan.setDepartment(planString.get("department").getAsString());
-        emergencyPlan.setRelease_date(planString.get("release_date").getAsLong());
-        emergencyPlan.setDepartment(planString.get("department").getAsString());
-        emergencyPlan.setIssued(planString.get("issued").getAsString());
-        emergencyPlan.setSigner(planString.get("signer").getAsString());
-        emergencyPlan.setFile(planString.get("file").getAsString());
         try {
             emergencyService.update(emergencyPlan);
             return emergencyPlan.toString();
@@ -175,23 +169,5 @@ public class EmergencyPlanController {
             throw new Exception("getAllPlan error!");
         }
     }
-
-    private EmergencyPlan Json2Plan(JsonObject planString) {
-        EmergencyPlan emergencyPlan = new EmergencyPlan();
-        emergencyPlan.setName(planString.get("name").getAsString());
-        emergencyPlan.setCategory(planString.get("category").getAsString());
-        emergencyPlan.setLevel(planString.get("level").getAsInt());
-        emergencyPlan.setAssociated_event_type(planString.get("associated_event_type").getAsString());
-        emergencyPlan.setContent(planString.get("content").getAsString());
-        emergencyPlan.setDepartment(planString.get("department").getAsString());
-        emergencyPlan.setRelease_date(planString.get("release_date").getAsLong());
-        emergencyPlan.setDepartment(planString.get("department").getAsString());
-        emergencyPlan.setIssued(planString.get("issued").getAsString());
-        emergencyPlan.setSigner(planString.get("signer").getAsString());
-        emergencyPlan.setFile(planString.get("file").getAsString());
-
-        return emergencyPlan;
-    }
-
 
 }

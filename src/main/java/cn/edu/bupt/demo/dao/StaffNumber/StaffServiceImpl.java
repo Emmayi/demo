@@ -37,9 +37,15 @@ public class StaffServiceImpl implements StaffService{
     }
 
     @Override
-    public String findStaffName(Integer id) {
+    public List<String> findAllStaffName(Integer id) {
         log.trace("Executing findStaffName [{}]", id);
-        return staffRepository.findStaffName(id);
+        return staffRepository.findAllStaffName(id);
+    }
+
+    @Override
+    public String findEmailByName(String name) {
+        log.trace("Executing findEmailByName [{}]", name);
+        return staffRepository.findEmailByName(name);
     }
 
     @Override

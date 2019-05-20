@@ -15,20 +15,17 @@ public interface SuppliesRespository {
     @Select("select * from emergency_supplies limit #{index},#{pageSize}")
     List<EmergencySupplies> findAllByPage(@Param("index")Integer index, @Param("pageSize")Integer pageSize);
 
+    @Select("select * from emergency_supplies where category = #{category} limit #{index},#{pageSize}")
+    List<EmergencySupplies> findSuppliesByCategoryAndPage(@Param("category")String category,@Param("index")Integer index, @Param("pageSize")Integer pageSize);
+
     @Select("select * from emergency_supplies where supply_id = #{supply_id}")
     EmergencySupplies findEmergencySuppliesById(Integer supply_id);
 
-    @Select("select * from emergency_supplies where name = #{name}")
-    List<EmergencySupplies> findEmergencySupliesByName(String name);
-
-    @Select("select * from emergency_supplies where affiliation = #{affiliation}")
-    List<EmergencySupplies> findEmergencySupliesByAffiliation(String affiliation);
-
-    @Select("select * from emergency_supplies where location = #{location}")
-    List<EmergencySupplies> findEmergencySupliesByLocation(String location);
-
     @Select("select count(*) from emergency_supplies")
     Integer AllSuppliesCount();
+
+    @Select("select count(*) from emergency_supplies where category = #{category}")
+    Integer SuppliesCountOfCategory(String category);
 
     @Insert("insert into emergency_supplies (name,category,quantity,model,purchase_date,manufacturer,manufacture_date,valid_until,use_description,performance_description,affiliation,location)" +
             " values (#{name},#{category},#{quantity},#{model},#{purchase_date},#{manufacturer},#{manufacture_date},#{valid_until},#{use_description},#{performance_description},#{affiliation},#{location})")

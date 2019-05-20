@@ -3,6 +3,7 @@ package cn.edu.bupt.demo.controller;
 import cn.edu.bupt.demo.dao.EntranceWork.EntranceService;
 import cn.edu.bupt.demo.entity.EntranceWork;
 import cn.edu.bupt.demo.entity.StaffNumber;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,27 +25,30 @@ public class EntranceWorkController {
     @Autowired
     EntranceService entranceService;
 
-    //配合分页设置，获取所有的入廊作业信息
-    @RequestMapping(value = "/entranceWorkByPage", params = {  "limit","page"  }, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @RequestMapping(value = "/entranceWorkByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getEntranceWorkByPage(@RequestParam int limit,
-                               @RequestParam int page) throws Exception {
+    public String getEntranceWorkByPage(@RequestParam (name="limit") int limit,
+                                        @RequestParam (name="page") int page,
+                                        @RequestParam(value="range",required=false,defaultValue = "1") String range )throws Exception {
         try {
-            return entranceService.findALlByPage(page,limit).toString();
-            
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("limit",limit);
+            jsonObject.put("page",page);
+            if(range.equals("1")){
+                Integer count = entranceService.allWorkCount();
+                jsonObject.put("data",entranceService.findALlByPage(page,limit));
+                jsonObject.put("allCount",count);
+                return jsonObject.toString();
+            }else {
+                Integer count = entranceService.workCountByRange(range);
+                jsonObject.put("data",entranceService.findEntranceWorkByRange(range,page,limit));
+                jsonObject.put("allCount",count);
+                return jsonObject.toString();
+            }
+
         } catch (Exception e) {
             throw new Exception("getEntranceWorkByPage error!");
-        }
-    }
-
-    //获取所有的入廊作业的页数
-    @RequestMapping(value = "/entranceWorkPages", params = {  "limit"  }, method = RequestMethod.GET)
-    @ResponseBody
-    public Integer getEntranceWorkPages(@RequestParam int limit) throws Exception {
-        try {
-            return entranceService.findEntranceWorkPageNum(limit);
-        } catch (Exception e) {
-            throw new Exception("getEntranceWorkPages error!");
         }
     }
 
@@ -60,50 +64,15 @@ public class EntranceWorkController {
         }
     }
 
-    //根据入廊作业activity_range获取入廊信息
-    @RequestMapping(value = "/entranceWorkByRange",params = {"range","limit","page"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public String getEntranceWorkByRange(@RequestParam String range,
-                                        @RequestParam int limit,
-                                        @RequestParam int page) throws Exception{
-        try {
-            return entranceService.findEntranceWorkByRange(range,page,limit).toString();
-        }catch (Exception e){
-            throw new Exception("getEntranceWorkByDate error!");
-        }
-    }
 
-    //统计选择后的入廊作业
-    @RequestMapping(value = "/workCountByRange",params = {"range"}, method = RequestMethod.GET)
-    @ResponseBody
-    public Integer getWorkCountByRange(@RequestParam String range) throws Exception{
-        try {
-            Integer count = entranceService.workCountByRange(range);
-            return count;
-        }catch (Exception e){
-            throw new Exception("getEntranceWorkCount error!");
-        }
-    }
-
-
-    //统计有多少入廊作业
-    @RequestMapping(value = "/entranceWorkCount", method = RequestMethod.GET)
-    @ResponseBody
-    public Integer getEntranceWorkCount() throws Exception{
-        try {
-            Integer count = entranceService.allWorkCount();
-            return count;
-        }catch (Exception e){
-            throw new Exception("getEntranceWorkCount error!");
-        }
-    }
 
     //增加入廊作业的信息
     @RequestMapping(value = "/entranceWork", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createEntranceWork(@RequestBody String workInfo) throws Exception{
-        JsonObject workString = new JsonParser().parse(workInfo).getAsJsonObject();
-        EntranceWork entranceWork = Json2Work(workString);
+
+        EntranceWork entranceWork = JSONObject.parseObject(workInfo, EntranceWork.class);
+
         try {
             entranceService.save(entranceWork);
             return entranceWork.toString();
@@ -116,18 +85,14 @@ public class EntranceWorkController {
     @RequestMapping(value = "/entranceWork", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateEntranceWork(@RequestBody String workInfo) throws Exception{
-        JsonObject workString = new JsonParser().parse(workInfo).getAsJsonObject();
-        if(workString.get("id").getAsString().equals("")) {
+        EntranceWork entranceWork = JSONObject.parseObject(workInfo, EntranceWork.class);
+
+        if(entranceWork.getId().equals("")) {
             throw new RuntimeException("没有Id，无法更新!");
         }
-        EntranceWork entranceWork = new EntranceWork();
-        entranceWork.setId(workString.get("id").getAsInt());
-        entranceWork.setDuration(workString.get("duration").getAsString());
-        entranceWork.setDate(workString.get("date").getAsLong());
-        entranceWork.setWork_number(workString.get("work_number").getAsInt());
-        entranceWork.setActivity_range(workString.get("activity_range").getAsString());
-        if (workString.get("evaluation") != null) {
-            entranceWork.setEvaluation(workString.get("evaluation").getAsString());
+
+        if (entranceWork.getEvaluation() != null) {
+            entranceWork.setEvaluation(entranceWork.getEvaluation());
         }
         try {
             entranceService.update(entranceWork);
@@ -188,17 +153,4 @@ public class EntranceWorkController {
         }
     }
 
-    private EntranceWork Json2Work(JsonObject workString) {
-        EntranceWork entranceWork = new EntranceWork();
-        entranceWork.setDuration(workString.get("duration").getAsString());
-        entranceWork.setDate(workString.get("date").getAsLong());
-        entranceWork.setWork_number(workString.get("work_number").getAsInt());
-        entranceWork.setActivity_range(workString.get("activity_range").getAsString());
-
-        if (workString.get("evaluation") != null) {
-            entranceWork.setEvaluation(workString.get("evaluation").getAsString());
-        }
-
-        return entranceWork;
-    }
 }
