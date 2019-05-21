@@ -22,6 +22,13 @@ public class EquisServiceImpl implements EquisService {
     }
 
     @Override
+    public  List<EmergencyEquis> findEquisByCategoryAndPage(String category,Integer page, Integer pageSize){
+        log.trace("Executing findEquisByCategoryAndPage[{}]",category,page,pageSize);
+        Integer index = page*pageSize;
+        return equisRespository.findEquisByCategoryAndPage(category,page,pageSize);
+    }
+
+    @Override
     public Integer findEquisPageNum(Integer size) {
         log.trace("Executing findEquisPageNum [{}]", size);
         Integer num = (equisRespository.AllEquisCount()+size-1)/size;
@@ -34,7 +41,7 @@ public class EquisServiceImpl implements EquisService {
         return equisRespository.findEmergencyEquisById(equis_id);
     }
 
-    @Override
+/*    @Override
     public List<EmergencyEquis> findEquisByName(String name) {
         log.trace("Executing findEquisByName [{}]", name);
         return equisRespository.findEmergencyEquisByName(name);
@@ -50,12 +57,19 @@ public class EquisServiceImpl implements EquisService {
     public List<EmergencyEquis> findEquisByLocation(String location) {
         log.trace("Executing findEquisByLocation [{}]", location);
         return equisRespository.findEmergencyEquisByLocation(location);
-    }
+    }*/
 
     @Override
     public Integer getEquisCount() {
         log.trace("Executing getEquisCount [{}]");
         Integer count = equisRespository.AllEquisCount();
+        return count;
+    }
+
+    @Override
+    public Integer EquisCountOfCategory(String category){
+        log.trace("Executing EquisCountOfCategory[{}]");
+        Integer count = equisRespository.EquisCountOfCategory(category);
         return count;
     }
 

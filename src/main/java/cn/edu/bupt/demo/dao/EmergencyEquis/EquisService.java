@@ -8,17 +8,21 @@ public interface EquisService {
 
     List<EmergencyEquis> findAllByPage(Integer page, Integer pageSize);
 
+    List<EmergencyEquis> findEquisByCategoryAndPage(String category,Integer page, Integer pageSize);
+
     Integer findEquisPageNum(Integer size);
 
     EmergencyEquis findEquisById(Integer equis_id);
 
-    List<EmergencyEquis> findEquisByName(String name);
+/*    List<EmergencyEquis> findEquisByName(String name);
 
     List<EmergencyEquis> findEquisByAffiliation(String affiliation);
 
-    List<EmergencyEquis> findEquisByLocation(String location);
+    List<EmergencyEquis> findEquisByLocation(String location);*/
 
     Integer getEquisCount();
+
+    Integer EquisCountOfCategory(String category);
 
     void save(EmergencyEquis emergencyEquis);
 

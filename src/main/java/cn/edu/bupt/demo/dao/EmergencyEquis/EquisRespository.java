@@ -12,20 +12,26 @@ public interface EquisRespository {
     @Select("select * from emergency_equis limit #{index},#{pageSize}")
     List<EmergencyEquis> findAllByPage(@Param("index")Integer index, @Param("pageSize")Integer pageSize);
 
+    @Select("select*from emergency_equis where category = #{category} limit #{index},#{pageSize}")
+    List<EmergencyEquis> findEquisByCategoryAndPage(@Param("category")String category,@Param("index")Integer index,@Param("pageSize")Integer pageSize);
+
     @Select("select * from emergency_equis where equis_id = #{equis_id}")
     EmergencyEquis findEmergencyEquisById(Integer equis_id);
 
-    @Select("select * from emergency_equis where name = #{name}")
+/*    @Select("select * from emergency_equis where name = #{name}")
     List<EmergencyEquis> findEmergencyEquisByName(String name);
 
     @Select("select * from emergency_equis where affiliation = #{affiliation}")
     List<EmergencyEquis> findEmergencyEquisByAffiliation(String affiliation);
 
     @Select("select * from emergency_equis where location = #{location}")
-    List<EmergencyEquis> findEmergencyEquisByLocation(String location);
+    List<EmergencyEquis> findEmergencyEquisByLocation(String location);*/
 
     @Select("select count(*) from emergency_equis")
     Integer AllEquisCount();
+
+    @Select("select count(*) from emergency_equis where category = #{category}")
+    Integer EquisCountOfCategory(String category);
 
     @Insert("insert into emergency_equis (name,category,quantity,model,purchase_date,manufacturer,manufacture_date,valid_until,use_description,performance_description,affiliation,location)" +
             " values (#{name},#{category},#{quantity},#{model},#{purchase_date},#{manufacturer},#{manufacture_date},#{valid_until},#{use_description},#{performance_description},#{affiliation},#{location})")
