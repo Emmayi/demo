@@ -25,9 +25,17 @@ public class PlanServiceImpl implements PlanService{
     }
 
     @Override
-    public List<InspectionPlan> findPlanByInspectionPerson(String inspection_person) {
-        log.trace("Executing findPlanByInspectionPerson [{}]", inspection_person);
-        return planRepository.findPlanByInspectionPerson(inspection_person);
+    public List<InspectionPlan> findAllPlanByPage(Integer page, Integer pageSize) {
+        log.trace("Executing findAllPlanByPage [{}]", page, pageSize);
+        Integer index = page * pageSize;
+        return planRepository.findAllPlanByPage(index,pageSize);
+    }
+
+    @Override
+    public List<InspectionPlan> findPlanByInspectionPerson(String inspection_person, Integer page, Integer pageSize) {
+        log.trace("Executing findPlanByInspectionPerson [{}]",inspection_person, page, pageSize);
+        Integer index = page * pageSize;
+        return planRepository.findPlanByInspectionPerson(inspection_person,index,pageSize);
     }
 
     @Override
@@ -39,7 +47,15 @@ public class PlanServiceImpl implements PlanService{
     @Override
     public Integer getAllCount() {
         log.trace("Executing getAllCount [{}]");
-        return planRepository.findAllCount();
+        Integer count = planRepository.findAllCount();
+        return count;
+    }
+
+    @Override
+    public Integer findCountOfPerson(String inspection_person) {
+        log.trace("Executing findCountOfPerson [{}]",inspection_person);
+        Integer count = planRepository.findCountOfPerson(inspection_person);
+        return count;
     }
 
     @Override
@@ -55,9 +71,9 @@ public class PlanServiceImpl implements PlanService{
     }
 
     @Override
-    public void deleteByInspectionPerson(String inspection_person) {
-        log.trace("Executing deleteByInspectionPerson [{}]", inspection_person);
-        planRepository.deleteByInspectionPerson(inspection_person);
+    public void deleteById(Integer id) {
+        log.trace("Executing deleteByInspectionPerson [{}]", id);
+        planRepository.deleteById(id);
     }
 
     @Override
