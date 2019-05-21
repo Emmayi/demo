@@ -115,7 +115,7 @@ public class SuppliesController {
     }
 
     //获取所有的物资
-    @RequestMapping(value = "/suppliesALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+/*    @RequestMapping(value = "/suppliesALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllSupplies() throws Exception{
         try {
@@ -123,7 +123,7 @@ public class SuppliesController {
         }catch (Exception e){
             throw new Exception("getAllSupplies error!");
         }
-    }
+    }*/
 
 
 }

@@ -9,7 +9,7 @@ import lombok.Setter;
  * @date 2019/5/8 上午11:25
  */
 @Data
-public class InspectionEquip {
+public class InspectionEquip extends IdBased {
 
     @Getter@Setter
     private Integer id;

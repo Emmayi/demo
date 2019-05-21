@@ -7,7 +7,7 @@ import lombok.Setter;
  * @author zy
  * @date 2019/4/26 上午10:18
  */
-public class DailyInspection {
+public class DailyInspection extends IdBased {
 
     @Getter@Setter
     private Integer id;
