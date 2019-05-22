@@ -3,7 +3,6 @@ package cn.edu.bupt.demo.entity;
 public class EmergencyPlace {
     private Integer place_id;
     private String name;
-
     private String category;
     private String location;
     private Integer area;
