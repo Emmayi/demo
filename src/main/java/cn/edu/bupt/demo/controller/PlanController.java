@@ -21,6 +21,33 @@ public class PlanController {
     @Autowired
     private PlanService planService;
 
+    //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @RequestMapping(value = "/inspectionPlanByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getInspectionReportByPage(@RequestParam (name="limit") int limit,
+                                            @RequestParam (name="page") int page,
+                                            @RequestParam(value="inspection_person",required=false,defaultValue = "1") String inspection_person )throws Exception {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("limit",limit);
+            jsonObject.put("page",page);
+            if(inspection_person.equals("1")){
+                Integer count = planService.getAllCount();
+                jsonObject.put("allCount",count);
+                jsonObject.put("data",planService.findAllPlanByPage(page,limit));
+                return jsonObject.toString();
+            }else {
+                Integer count = planService.findCountOfPerson(inspection_person);
+                jsonObject.put("data",planService.findPlanByInspectionPerson(inspection_person,page,limit));
+                jsonObject.put("allCount",count);
+                return jsonObject.toString();
+            }
+
+        } catch (Exception e) {
+            throw new Exception("getInspectionReportByPage error!");
+        }
+    }
+
     //通过Id查找巡检计划的信息
     @RequestMapping(value = "/planById",params = {"id"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -29,17 +56,6 @@ public class PlanController {
             return planService.findPlanById(id).toString();
         }catch (Exception e){
             throw new Exception("getPlanById error!");
-        }
-    }
-
-    //通过巡检人查找巡检计划的信息
-    @RequestMapping(value = "/planByPerson",params = {"person"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public String getPlanByInspectionPerson(@RequestParam String person) throws Exception{
-        try {
-            return planService.findPlanByInspectionPerson(person).toString();
-        }catch (Exception e){
-            throw new Exception("getPlanByInspectionPerson error!");
         }
     }
 
@@ -103,11 +119,11 @@ public class PlanController {
     }
 
     //根据巡检人员Name删除巡检计划
-    @RequestMapping(value = "/plan",params = {"inspectionPerson"},method = RequestMethod.DELETE)
+    @RequestMapping(value = "/plan",params = {"id"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deleteReportByInspectionPerson(@RequestParam String inspectionPerson){
+    public void deleteReportByInspectionPerson(@RequestParam Integer id){
         try {
-            planService.deleteByInspectionPerson(inspectionPerson);
+            planService.deleteById(id);
         }catch (Exception e){
             e.printStackTrace();
         }

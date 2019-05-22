@@ -24,6 +24,9 @@ public class InspectionPlan {
     @Getter @Setter
     private Long inspection_date;
 
+    @Getter @Setter
+    private String content;
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
@@ -35,6 +38,8 @@ public class InspectionPlan {
                 .append(create_date).append('\"');
         sb.append(",\"inspection_date\":\"")
                 .append(inspection_date).append('\"');
+        sb.append(",\"content\":\"")
+                .append(content).append('\"');
         sb.append('}');
 
         return sb.toString();

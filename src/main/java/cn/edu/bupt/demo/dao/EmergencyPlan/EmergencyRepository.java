@@ -35,7 +35,7 @@ public interface EmergencyRepository {
     @Select("select count(*) from emergency_plan")
     Integer AllPlanCount();
 
-    @Select("select count(*) from emergency_plan where leve = #{level}")
+    @Select("select count(*) from emergency_plan where level = #{level}")
     Integer AllPlanPageCount(Integer level);
 
     @Insert("insert into emergency_plan (name,category,level,associated_event_type,content,department,release_date,release_number,issued,signer,file)" +
