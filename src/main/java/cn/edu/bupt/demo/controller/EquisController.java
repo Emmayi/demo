@@ -155,14 +155,14 @@ public class EquisController {
         } catch (Exception e) {
             throw new Exception("updateEquis error!");
         }
-    }
+ }
 
     //通过Id删除信息
-    @RequestMapping(value = "/equis",params = {"id"},method = RequestMethod.DELETE)
+    @RequestMapping(value = "/equis",params = {"equisId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deleteEquisById(@RequestParam Integer id){
+    public void deleteEquisById(@RequestParam Integer equisId){
         try {
-            equisService.deleteById(id);
+            equisService.deleteById(equisId);
         }catch (Exception e){
             e.printStackTrace();
         }
