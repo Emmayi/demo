@@ -1,5 +1,9 @@
 package cn.edu.bupt.demo.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.ibatis.annotations.Select;
+
 /**
  * @author zy
  * @date 2018/10/25 上午10:18
@@ -15,9 +19,11 @@ public class InspectionReport extends IdBased {
     private String summary;
     private String abnormal;
     private String maintenance;
-
     private String image;
     private String video;
+
+    @Getter@Setter
+    private Integer plan_id;
 
     @Override
     public Integer getId() {
@@ -114,6 +120,8 @@ public class InspectionReport extends IdBased {
         final StringBuilder sb = new StringBuilder("{");
         sb.append("\"id\":")
                 .append(id);
+        sb.append(",\"plan_id\":")
+                .append(plan_id);
         sb.append(",\"duty_person\":\"")
                 .append(duty_person).append('\"');
         sb.append(",\"inspection_person\":\"")

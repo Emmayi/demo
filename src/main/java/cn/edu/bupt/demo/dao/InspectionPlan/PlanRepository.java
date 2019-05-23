@@ -27,7 +27,7 @@ public interface PlanRepository {
     @Select("select count(*) from inspection_plan where inspection_person = #{inspection_person}")
     Integer findCountOfPerson(String inspection_person);
 
-    @Insert("insert into inspection_plan (inspection_person,create_date,inspection_date,content,status) " +
+    @Insert("insert into inspection_plan (inspection_person,create_date,inspection_date,content,status,plan_id) " +
             "values (#{inspection_person},#{create_date},#{inspection_date},#{content}),#{status})")
     @Options(useGeneratedKeys = true,keyProperty="id")
     void save(InspectionPlan inspectionPlan);
