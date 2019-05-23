@@ -17,7 +17,7 @@ public class TeamController {
     @Autowired
     TeamService teamService;
 
-   /* //配合分页设置，获取所有的物资信息
+   /* //配合分页设置，获取所有的队伍信息
     @RequestMapping(value = "/teamByPage", params = {  "limit","page"  }, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getTeamByPage(@RequestParam int limit,
@@ -58,7 +58,7 @@ public class TeamController {
         }
     }
 
-    //获取所有物资的页数
+    //获取所有队伍的页数
     @RequestMapping(value = "/teamPage", params = {  "limit"  }, method = RequestMethod.GET)
     @ResponseBody
     public Integer getTeamPages(@RequestParam int limit) throws Exception {
@@ -69,7 +69,7 @@ public class TeamController {
         }
     }
 
-    //根据id获取物资信息
+    //根据id获取队伍信息
     @RequestMapping(value = "/team",params = {"teamId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getTeamById(@RequestParam Integer teamId) throws Exception{
@@ -80,7 +80,7 @@ public class TeamController {
         }
     }
 
-  /*  //根据Name获取物资信息
+  /*  //根据Name获取队伍信息
     @RequestMapping(value = "/team",params = {"teamName"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getTeamByName(@RequestParam String teamName) throws Exception{
@@ -91,7 +91,7 @@ public class TeamController {
         }
     }
 
-    //根据Affiliation获取物资信息
+    //根据Affiliation获取队伍信息
     @RequestMapping(value = "/team",params = {"affiliation"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getTeamByAffiliation(@RequestParam String affiliation) throws Exception{
@@ -102,7 +102,7 @@ public class TeamController {
         }
     }
 
-    //根据Location获取物资信息
+    //根据Location获取队伍信息
     @RequestMapping(value = "/team",params = {"location"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getTeamByLocation(@RequestParam String location) throws Exception{
@@ -125,7 +125,7 @@ public class TeamController {
         }
     }*/
 
-    //增加物资的信息
+    //增加队伍的信息
     @RequestMapping(value = "/team", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createTeam(@RequestBody String teamInfo) throws Exception{
@@ -195,7 +195,7 @@ public class TeamController {
         }
     }
 
-/*    //获取所有的物资
+/*    //获取所有的队伍
     @RequestMapping(value = "/teamALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllTeam() throws Exception{
