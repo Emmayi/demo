@@ -114,8 +114,8 @@ public class EquisController {
         }
     }*/
 
-    //统计有多少
-/*    @RequestMapping(value = "/equisCount", method = RequestMethod.GET)
+/*    //统计有多少
+    @RequestMapping(value = "/equisCount", method = RequestMethod.GET)
     @ResponseBody
     public Integer getEquisCount() throws Exception{
         try {

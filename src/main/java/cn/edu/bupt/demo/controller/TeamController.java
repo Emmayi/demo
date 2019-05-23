@@ -2,6 +2,7 @@ package cn.edu.bupt.demo.controller;
 
 import cn.edu.bupt.demo.dao.EmergencyTeam.TeamService;
 import cn.edu.bupt.demo.entity.EmergencyTeam;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class TeamController {
     @Autowired
     TeamService teamService;
 
-    //配合分页设置，获取所有的物资信息
+   /* //配合分页设置，获取所有的队伍信息
     @RequestMapping(value = "/teamByPage", params = {  "limit","page"  }, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getTeamByPage(@RequestParam int limit,
@@ -27,9 +28,37 @@ public class TeamController {
         } catch (Exception e) {
             throw new Exception("getTeamByPage error!");
         }
+    }*/
+
+    //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @RequestMapping(value = "/emergencyTeamByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getInspectionTeamByPage(@RequestParam (name="limit") int limit,
+                                           @RequestParam (name="page") int page,
+                                           @RequestParam(value="category",required=false,defaultValue = "1") String category )throws Exception {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("limit",limit);
+            jsonObject.put("page",page);
+
+            if(category.equals("1")){
+                Integer count = teamService.getTeamCount();
+                jsonObject.put("allCount",count);
+                jsonObject.put("data",teamService.findAllByPage(page,limit));
+                return jsonObject.toString();
+            }else {
+                Integer count = teamService.TeamCountOfCategory(category);
+                jsonObject.put("data",teamService.findTeamByCategoryAndPage(category,page,limit));
+                jsonObject.put("allCount",count);
+                return jsonObject.toString();
+            }
+
+        } catch (Exception e) {
+            throw new Exception("getInspectionTeamByPage error!");
+        }
     }
 
-    //获取所有物资的页数
+    //获取所有队伍的页数
     @RequestMapping(value = "/teamPage", params = {  "limit"  }, method = RequestMethod.GET)
     @ResponseBody
     public Integer getTeamPages(@RequestParam int limit) throws Exception {
@@ -40,7 +69,7 @@ public class TeamController {
         }
     }
 
-    //根据id获取物资信息
+    //根据id获取队伍信息
     @RequestMapping(value = "/team",params = {"teamId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getTeamById(@RequestParam Integer teamId) throws Exception{
@@ -51,7 +80,7 @@ public class TeamController {
         }
     }
 
-    //根据Name获取物资信息
+  /*  //根据Name获取队伍信息
     @RequestMapping(value = "/team",params = {"teamName"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getTeamByName(@RequestParam String teamName) throws Exception{
@@ -62,7 +91,7 @@ public class TeamController {
         }
     }
 
-    //根据Affiliation获取物资信息
+    //根据Affiliation获取队伍信息
     @RequestMapping(value = "/team",params = {"affiliation"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getTeamByAffiliation(@RequestParam String affiliation) throws Exception{
@@ -73,7 +102,7 @@ public class TeamController {
         }
     }
 
-    //根据Location获取物资信息
+    //根据Location获取队伍信息
     @RequestMapping(value = "/team",params = {"location"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getTeamByLocation(@RequestParam String location) throws Exception{
@@ -82,9 +111,9 @@ public class TeamController {
         }catch (Exception e){
             throw new Exception("getTeamByLocation error!");
         }
-    }
+    }*/
 
-    //统计有多少
+/*    //统计有多少
     @RequestMapping(value = "/teamCount", method = RequestMethod.GET)
     @ResponseBody
     public Integer getTeamCount() throws Exception{
@@ -94,9 +123,9 @@ public class TeamController {
         }catch (Exception e){
             throw new Exception("getTeamCount error!");
         }
-    }
+    }*/
 
-    //增加物资的信息
+    //增加队伍的信息
     @RequestMapping(value = "/team", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createTeam(@RequestBody String teamInfo) throws Exception{
@@ -156,7 +185,7 @@ public class TeamController {
     }
 
     //通过Id删除信息
-    @RequestMapping(value = "/team",params = {"id"},method = RequestMethod.DELETE)
+    @RequestMapping(value = "/team",params = {"teamId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deletePlanById(@RequestParam Integer id){
         try {
@@ -166,7 +195,7 @@ public class TeamController {
         }
     }
 
-    //获取所有的物资
+/*    //获取所有的队伍
     @RequestMapping(value = "/teamALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllTeam() throws Exception{
@@ -175,6 +204,6 @@ public class TeamController {
         }catch (Exception e){
             throw new Exception("getAllTeam error!");
         }
-    }
+    }*/
 
 }

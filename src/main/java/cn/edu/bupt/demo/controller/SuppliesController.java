@@ -104,11 +104,11 @@ public class SuppliesController {
     }
 
     //通过Id删除信息
-    @RequestMapping(value = "/supplies",params = {"id"},method = RequestMethod.DELETE)
+    @RequestMapping(value = "/supplies",params = {"supplyId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deletePlanById(@RequestParam Integer id){
+    public void deletePlanById(@RequestParam Integer supplyId){
         try {
-            suppliesService.deleteById(id);
+            suppliesService.deleteById(supplyId);
         }catch (Exception e){
             e.printStackTrace();
         }
