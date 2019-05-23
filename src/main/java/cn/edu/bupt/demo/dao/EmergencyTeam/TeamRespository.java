@@ -10,20 +10,27 @@ public interface TeamRespository {
     @Select("select * from emergency_team limit #{index},#{pageSize}")
     List<EmergencyTeam> findAllByPage(@Param("index")Integer index, @Param("pageSize")Integer pageSize);
 
+    @Select("select * from emergency_team where category = #{category} limit #{index},#{pageSize}")
+    List<EmergencyTeam> findTeamByCategoryAndPage(@Param("category")String category,@Param("index")Integer index, @Param("pageSize")Integer pageSize);
+
+
     @Select("select * from emergency_team where team_id = #{team_id}")
     EmergencyTeam findEmergencyTeamById(Integer team_id);
 
-    @Select("select * from emergency_team where name = #{name}")
+/*    @Select("select * from emergency_team where name = #{name}")
     List<EmergencyTeam> findEmergencyTeamByName(String name);
 
     @Select("select * from emergency_team where affiliation = #{affiliation}")
     List<EmergencyTeam> findEmergencyTeamByAffiliation(String affiliation);
 
     @Select("select * from emergency_team where location = #{location}")
-    List<EmergencyTeam> findEmergencyTeamByLocation(String location);
+    List<EmergencyTeam> findEmergencyTeamByLocation(String location);*/
 
     @Select("select count(*) from emergency_team")
     Integer AllTeamCount();
+
+    @Select("select count(*) from emergency_team where category = #{category}")
+    Integer TeamCountOfCategory(String category);
 
     @Insert("insert into emergency_team (name,category,level,specialty,introduction,affiliation,principal,phone,location)" +
             " values (#{name},#{category},#{level},#{specialty},#{introduction},#{affiliation},#{principal},#{phone},#{location})")
