@@ -71,10 +71,18 @@ public class PlanServiceImpl implements PlanService{
     }
 
     @Override
+    public void updateStatus(Integer id) {
+        log.trace("Executing updateStatus [{}]", id);
+        planRepository.updateStatus(id);
+    }
+
+    @Override
     public void deleteById(Integer id) {
         log.trace("Executing deleteByInspectionPerson [{}]", id);
         planRepository.deleteById(id);
     }
+
+
 
     @Override
     public List<InspectionPlan> findAll() {

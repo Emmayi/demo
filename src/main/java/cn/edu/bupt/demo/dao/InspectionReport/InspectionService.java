@@ -14,7 +14,7 @@ public interface InspectionService {
 
     List<InspectionReport> findReportByDutyPerson(String duty_person);
 
-    List<InspectionReport> findReportByInspectionPerson(String inspection_person);
+    List<InspectionReport> findReportByPlanId(Integer plan_id);
 
     List<InspectionReport> findReportByCalendarDate(Long calendar_date,Integer page, Integer pageSize);
 

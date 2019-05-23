@@ -23,6 +23,8 @@ public interface PlanService {
 
     void update(InspectionPlan inspectionPlan);
 
+    void updateStatus(Integer id);
+
     void deleteById(Integer id);
 
     List<InspectionPlan> findAll();

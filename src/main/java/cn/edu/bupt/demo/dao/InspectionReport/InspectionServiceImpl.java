@@ -32,10 +32,11 @@ public class InspectionServiceImpl implements InspectionService{
     }
 
     @Override
-    public List<InspectionReport> findReportByInspectionPerson(String inspection_person) {
-        log.trace("Executing findReportByInspectionPerson [{}]", inspection_person);
-        return inspectionRepository.findReportByInspectionPerson(inspection_person);
+    public List<InspectionReport> findReportByPlanId(Integer plan_id) {
+        log.trace("Executing findReportByPlanId [{}]", plan_id);
+        return inspectionRepository.findReportByPlanId(plan_id);
     }
+
 
     @Override
     public List<InspectionReport> findReportByCalendarDate(Long calendar_date, Integer page, Integer pageSize) {

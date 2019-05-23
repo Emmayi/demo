@@ -21,6 +21,7 @@ import java.util.List;
 /**
  * @author zy
  * @date 2018/10/26 上午10:12
+ * 巡检报告
  */
 
 @RestController
@@ -35,7 +36,7 @@ public class InspectionController {
     private InspectionRepository inspectionRepository;
 
 
-    private String storePath= "/home/zy/inspection";//存放我们上传的文件路径
+    private String storePath= "/home/zy/EmergencyPlanFile";//存放我们上传的文件路径
 //    private String storePath= "/Users/zy/Desktop/file";//存放我们上传的文件路径
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
@@ -88,11 +89,11 @@ public class InspectionController {
     }
 
     //通过巡检人查找巡检报告信息
-    @RequestMapping(value = "/inspectionByInspectionPerson",params = {"inspectionPerson"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/inspectionByPlanId",params = {"id"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getInspectionByInspectionPerson(@RequestParam String inspectionPerson) throws Exception{
+    public String getInspectionByInspectionPerson(@RequestParam Integer id) throws Exception{
         try {
-            return inspectionService.findReportByInspectionPerson(inspectionPerson).toString();
+            return inspectionService.findReportByPlanId(id).toString();
         }catch (Exception e){
             throw new Exception("getInspectionByInspectionPerson error!");
         }
