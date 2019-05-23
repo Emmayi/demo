@@ -187,9 +187,9 @@ public class TeamController {
     //通过Id删除信息
     @RequestMapping(value = "/team",params = {"teamId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deletePlanById(@RequestParam Integer id){
+    public void deletePlanById(@RequestParam Integer teamId){
         try {
-            teamService.deleteById(id);
+            teamService.deleteById(teamId);
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -6,17 +6,21 @@ import java.util.List;
 public interface PlaceService {
     List<EmergencyPlace> findAllByPage(Integer page, Integer pageSize);
 
+    List<EmergencyPlace> findPlaceByCategoryAndPage(String category,Integer page, Integer pageSize);
+
     Integer findPlacePageNum(Integer size);
 
     EmergencyPlace findPlaceById(Integer place_id);
 
-    List<EmergencyPlace> findPlaceByName(String name);
+   /* List<EmergencyPlace> findPlaceByName(String name);
 
     List<EmergencyPlace> findPlaceByAffiliation(String affiliation);
 
-    List<EmergencyPlace> findPlaceByLocation(String location);
+    List<EmergencyPlace> findPlaceByLocation(String location);*/
 
     Integer getPlaceCount();
+
+    Integer PlaceCountOfCategory(String category);
 
     void save(EmergencyPlace emergencyPlace);
 

@@ -10,20 +10,26 @@ public interface PlaceRespository {
     @Select("select * from emergency_place limit #{index},#{pageSize}")
     List<EmergencyPlace> findAllByPage(@Param("index")Integer index, @Param("pageSize")Integer pageSize);
 
+    @Select("select*from emergency_place where category = #{category} limit #{index},#{pageSize}")
+    List<EmergencyPlace> findPlaceByCategoryAndPage(@Param("category")String category,@Param("index")Integer index,@Param("pageSize")Integer pageSize);
+
     @Select("select * from emergency_place where place_id = #{place_id}")
     EmergencyPlace findEmergencyPlaceById(Integer place_id);
 
-    @Select("select * from emergency_place where name = #{name}")
+/*    @Select("select * from emergency_place where name = #{name}")
     List<EmergencyPlace> findEmergencyPlaceByName(String name);
 
     @Select("select * from emergency_place where affiliation = #{affiliation}")
     List<EmergencyPlace> findEmergencyPlaceByAffiliation(String affiliation);
 
     @Select("select * from emergency_place where location = #{location}")
-    List<EmergencyPlace> findEmergencyPlaceByLocation(String location);
+    List<EmergencyPlace> findEmergencyPlaceByLocation(String location);*/
 
     @Select("select count(*) from emergency_place")
     Integer AllPlaceCount();
+
+    @Select("select count(*) from emergency_place where category = #{category}")
+    Integer PlaceCountOfCategory(String category);
 
     @Insert("insert into emergency_place (name,category,location,area,capacity,introduction,affiliation,principal,telephone,cellphone)" +
             " values (#{name},#{category},#{location},#{area},#{capacity},#{introduction},#{affiliation},#{principal},#{telephone},#{cellphone})")
