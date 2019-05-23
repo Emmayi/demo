@@ -27,19 +27,22 @@ public interface PlanRepository {
     @Select("select count(*) from inspection_plan where inspection_person = #{inspection_person}")
     Integer findCountOfPerson(String inspection_person);
 
-    @Insert("insert into inspection_plan (inspection_person,create_date,inspection_date,content) " +
-            "values (#{inspection_person},#{create_date},#{inspection_date},#{content})")
+    @Insert("insert into inspection_plan (inspection_person,create_date,inspection_date,content,status) " +
+            "values (#{inspection_person},#{create_date},#{inspection_date},#{content}),#{status})")
     @Options(useGeneratedKeys = true,keyProperty="id")
     void save(InspectionPlan inspectionPlan);
 
     @Update("update inspection_plan set inspection_person = #{inspection_person},create_date = #{create_date}," +
-            "inspection_date = #{inspection_date},content = #{content}")
+            "inspection_date = #{inspection_date},content = #{content},status = #{status}")
     void update(InspectionPlan inspectionPlan);
+
+    @Update("update inspection_plan set status = '已完成' where id = #{id}")
+    void updateStatus(Integer id);
 
     @Delete("delete from inspection_plan where id=#{id}")
     void deleteById(Integer id);
 
-    @Select("select * from inspection_report where id > 0")
+    @Select("select * from inspection_plan where id > 0")
     List<InspectionPlan> findAll();
 
 }

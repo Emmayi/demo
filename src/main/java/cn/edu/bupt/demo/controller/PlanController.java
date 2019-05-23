@@ -118,7 +118,19 @@ public class PlanController {
         }
     }
 
-    //根据巡检人员Name删除巡检计划
+    //更新状态
+    @RequestMapping(value = "/planStatus", params = {"id"},method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public void updateInspectionPlan(@RequestParam Integer id) throws Exception{
+
+        try {
+            planService.updateStatus(id);
+        } catch (Exception e) {
+            throw new Exception("updateInspectionPlan error!");
+        }
+    }
+
+    //根据巡检人员id删除巡检计划
     @RequestMapping(value = "/plan",params = {"id"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteReportByInspectionPerson(@RequestParam Integer id){
