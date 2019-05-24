@@ -5,7 +5,7 @@
     <title>消息通知</title>
     <script>
         function timestampToTime(timestamp) {
-            var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+            var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
             var Y = date.getFullYear() + '-';
             var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
             var D = date.getDate() + ' ';
@@ -48,7 +48,7 @@
     <table id="inspectionPlan" border="1" cellspacing="0">
         <tr><td>巡检计划Id</td><td>${(params.id)}</td></tr>
         <tr><td>巡检人</td><td>${(params.inspection_person)}</td></tr>
-        <tr><td>巡检日期</td><td>${(params.inspection_date)?string("yyyy-MM-dd HH:mm:ss")}</td></tr>
+        <tr><td>巡检日期</td><td>${(params.inspection_date)}</td></tr>
         <tr><td>巡检内容</td><td>${(params.content)}</td></tr>
     </table>
     <p>请按时完成巡检，祝一切顺利！</p>

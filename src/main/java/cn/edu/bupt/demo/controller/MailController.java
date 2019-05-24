@@ -35,7 +35,7 @@ public class MailController {
 
         InspectionPlan inspectionPlan = JSONObject.parseObject(info, InspectionPlan.class);
 
-        String to = staffService.findEmailByName(inspectionPlan.getInspection_person());
+        String to = staffService.findEmailByName(inspectionPlan.getId());
 
         try {
             mailService.sendMessageMail(inspectionPlan, to,"巡检计划表通知", "message1.ftl");
@@ -50,7 +50,7 @@ public class MailController {
     public void sendEquipMailMessage(@RequestBody String info) throws Exception{
 
         InspectionEquip inspectionEquip = JSONObject.parseObject(info, InspectionEquip.class);
-        String to = staffService.findEmailByName(inspectionEquip.getName());
+        String to = staffService.findEmailByName(inspectionEquip.getId());
         try {
             mailService.sendMessageMail(inspectionEquip, to,"设备定期检测通知", "message2.ftl");
 

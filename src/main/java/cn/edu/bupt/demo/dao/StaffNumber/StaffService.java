@@ -20,7 +20,7 @@ public interface StaffService {
 
     List<String> findAllStaffName(Integer id);
 
-    String findEmailByName(String name);
+    String findEmailByName(Integer planId);
 
     Integer StaffCount();
 

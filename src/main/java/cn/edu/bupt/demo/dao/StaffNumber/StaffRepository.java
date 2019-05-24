@@ -21,9 +21,8 @@ public interface StaffRepository {
     @Select("select name as name from staff_number where id > #{id}")
     List<String> findAllStaffName(Integer id);
 
-    @Select("select staff_number.email from staff_number left join inspection_plan on " +
-            "(inspection_plan.inspection_person = staff_number.name) where staff_number.name = #{name}")
-    String findEmailByName(String name);
+    @Select("select s.email from inspection_plan as i, staff_number as s where i.inspection_person = s. name and i.id = #{id}")
+    String findEmailByName(Integer id);
 
     @Select("select count(*) from staff_number")
     Integer findAllCount();
