@@ -114,8 +114,8 @@ public class EquisController {
         }
     }*/
 
-    //统计有多少
-/*    @RequestMapping(value = "/equisCount", method = RequestMethod.GET)
+/*    //统计有多少
+    @RequestMapping(value = "/equisCount", method = RequestMethod.GET)
     @ResponseBody
     public Integer getEquisCount() throws Exception{
         try {
@@ -155,14 +155,14 @@ public class EquisController {
         } catch (Exception e) {
             throw new Exception("updateEquis error!");
         }
-    }
+ }
 
     //通过Id删除信息
-    @RequestMapping(value = "/equis",params = {"id"},method = RequestMethod.DELETE)
+    @RequestMapping(value = "/equis",params = {"equisId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deleteEquisById(@RequestParam Integer id){
+    public void deleteEquisById(@RequestParam Integer equisId){
         try {
-            equisService.deleteById(id);
+            equisService.deleteById(equisId);
         }catch (Exception e){
             e.printStackTrace();
         }

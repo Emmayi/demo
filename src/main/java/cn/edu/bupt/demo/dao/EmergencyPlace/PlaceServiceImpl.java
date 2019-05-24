@@ -21,6 +21,13 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
+    public  List<EmergencyPlace> findPlaceByCategoryAndPage(String category,Integer page, Integer pageSize){
+        log.trace("Executing findPlaceByCategoryAndPage[{}]",category,page,pageSize);
+        Integer index = page*pageSize;
+        return placeRespository.findPlaceByCategoryAndPage(category,page,pageSize);
+    }
+
+    @Override
     public Integer findPlacePageNum(Integer size) {
         log.trace("Executing findPlacePageNum [{}]", size);
         Integer num = (placeRespository.AllPlaceCount()+size-1)/size;
@@ -33,7 +40,7 @@ public class PlaceServiceImpl implements PlaceService {
         return placeRespository.findEmergencyPlaceById(place_id);
     }
 
-    @Override
+   /* @Override
     public List<EmergencyPlace> findPlaceByName(String name) {
         log.trace("Executing findPlaceByName [{}]", name);
         return placeRespository.findEmergencyPlaceByName(name);
@@ -49,12 +56,19 @@ public class PlaceServiceImpl implements PlaceService {
     public List<EmergencyPlace> findPlaceByLocation(String location) {
         log.trace("Executing findPlaceByLocation [{}]", location);
         return placeRespository.findEmergencyPlaceByLocation(location);
-    }
+    }*/
 
     @Override
     public Integer getPlaceCount() {
         log.trace("Executing getPlaceCount [{}]");
         Integer count = placeRespository.AllPlaceCount();
+        return count;
+    }
+
+    @Override
+    public Integer PlaceCountOfCategory(String category){
+        log.trace("Executing PlaceCountOfCategory[{}]");
+        Integer count = placeRespository.PlaceCountOfCategory(category);
         return count;
     }
 

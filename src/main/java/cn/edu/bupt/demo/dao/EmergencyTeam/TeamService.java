@@ -7,17 +7,21 @@ import java.util.List;
 public interface TeamService {
     List<EmergencyTeam> findAllByPage(Integer page, Integer pageSize);
 
+    List<EmergencyTeam> findTeamByCategoryAndPage(String category,Integer page, Integer pageSize);
+
     Integer findTeamPageNum(Integer size);
 
     EmergencyTeam findTeamById(Integer team_id);
 
-    List<EmergencyTeam> findTeamByName(String name);
+/*    List<EmergencyTeam> findTeamByName(String name);
 
     List<EmergencyTeam> findTeamByAffiliation(String affiliation);
 
-    List<EmergencyTeam> findTeamByLocation(String location);
+    List<EmergencyTeam> findTeamByLocation(String location);*/
 
     Integer getTeamCount();
+
+    Integer TeamCountOfCategory(String category);
 
     void save(EmergencyTeam emergencyTeam);
 
