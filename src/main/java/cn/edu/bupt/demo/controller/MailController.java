@@ -30,18 +30,18 @@ public class MailController {
     /**
      *
      */
-    @RequestMapping(value = "/sendDailyMessage", method = RequestMethod.POST)
-    public void sendDailyMailMessage(@RequestBody String info) throws Exception{
+    @RequestMapping(value = "/sendGeneralMessage", method = RequestMethod.POST)
+    public void sendGeneralMailMessage(@RequestBody String info) throws Exception{
 
         InspectionPlan inspectionPlan = JSONObject.parseObject(info, InspectionPlan.class);
 
         String to = staffService.findEmailByName(inspectionPlan.getInspection_person());
 
         try {
-            mailService.sendMessageMail(inspectionPlan, to,"日常巡检计划表通知", "message1.ftl");
+            mailService.sendMessageMail(inspectionPlan, to,"巡检计划表通知", "message1.ftl");
 
         }catch (Exception e){
-            throw new Exception("sendDailyMailMessage error!");
+            throw new Exception("sendGeneralMailMessage error!");
         }
 
     }
