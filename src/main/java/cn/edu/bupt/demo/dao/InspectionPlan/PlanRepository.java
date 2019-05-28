@@ -27,12 +27,12 @@ public interface PlanRepository {
     @Select("select count(*) from inspection_plan where inspection_person = #{inspection_person}")
     Integer findCountOfPerson(String inspection_person);
 
-    @Insert("insert into inspection_plan (inspection_person,create_date,inspection_date,content,status) " +
-            "values (#{inspection_person},#{create_date},#{inspection_date},#{content},#{status})")
+    @Insert("insert into inspection_plan (number,path,inspection_person,create_date,inspection_date,content,status) " +
+            "values (#{number},#{path}#{inspection_person},#{create_date},#{inspection_date},#{content},#{status})")
     @Options(useGeneratedKeys = true,keyProperty="id")
     void save(InspectionPlan inspectionPlan);
 
-    @Update("update inspection_plan set inspection_person = #{inspection_person},create_date = #{create_date}," +
+    @Update("update inspection_plan set number = #{number},path = #{path},inspection_person = #{inspection_person},create_date = #{create_date}," +
             "inspection_date = #{inspection_date},content = #{content},status = #{status}")
     void update(InspectionPlan inspectionPlan);
 
