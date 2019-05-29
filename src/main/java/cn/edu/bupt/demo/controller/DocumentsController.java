@@ -24,7 +24,7 @@ import java.util.List;
 @CrossOrigin
 public class DocumentsController {
 
-    String storePath= "/home/zy/EmergencyPlanFile";//存放上传的文件路径
+    String storePath= "/home/zy/info/EmergencyPlanFile";//存放上传的文件路径
 //    String storePath = "/Users/zy/Desktop/file";
 
 

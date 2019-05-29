@@ -36,7 +36,7 @@ public class InspectionController {
     private InspectionRepository inspectionRepository;
 
 
-    private String storePath= "/home/zy/EmergencyPlanFile";//存放我们上传的文件路径
+    private String storePath= "/home/zy/info/InspectionReport";//存放我们上传的文件路径
 //    private String storePath= "/Users/zy/Desktop/file";//存放我们上传的文件路径
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
