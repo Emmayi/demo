@@ -21,7 +21,7 @@ public class SuppliesServiceImpl implements SuppliesService{
 
     @Override
     public List<EmergencySupplies> findAllByPage(Integer page, Integer pageSize) {
-        log.trace("Executing findPlanByPage [{}]", page,pageSize);
+        log.trace("Executing findSuppliesByPage [{}]", page,pageSize);
         Integer index = page * pageSize;
         return suppliesRespository.findAllByPage(index,pageSize);
     }

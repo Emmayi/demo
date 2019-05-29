@@ -198,7 +198,7 @@ public class PlaceController {
         }
     }
 
-/*    //获取所有的物资
+    //获取所有的物资
     @RequestMapping(value = "/placeALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllPlace() throws Exception{
@@ -207,5 +207,5 @@ public class PlaceController {
         }catch (Exception e){
             throw new Exception("getAllPlace error!");
         }
-    }*/
+    }
 }
