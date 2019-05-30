@@ -18,7 +18,9 @@ public interface InspectionRepository {
     List<InspectionReport> findReportByPlanId(Integer plan_id);
 
     @Select("select * from inspection_report where calendar_date = #{calendar_date} limit #{index},#{pageSize}")
-    List<InspectionReport> findReportByCreateDate(@Param("calendar_date") Long calendar_date,@Param("index")Integer index,@Param("pageSize")Integer pageSize);
+    List<InspectionReport> findReportByCreateDate(@Param("calendar_date") Long calendar_date,
+                                                  @Param("index")Integer index,
+                                                  @Param("pageSize")Integer pageSize);
 
     @Select("select * from inspection_report limit #{index},#{pageSize}")
     List<InspectionReport> findReportByPage(@Param("index")Integer index,@Param("pageSize")Integer pageSize);

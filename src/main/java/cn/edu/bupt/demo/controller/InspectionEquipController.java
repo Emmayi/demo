@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.InspectionEquip.EquipService;
 import cn.edu.bupt.demo.entity.InspectionEquip;
 import com.alibaba.fastjson.JSONObject;
@@ -76,6 +77,7 @@ public class InspectionEquipController {
 
 
     //创建巡检报告，填写信息
+    @MyLog(value = "添加新的年度设备巡检计划")
     @RequestMapping(value = "/equipPlan", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createInspectionEquip(@RequestBody String equipInfo) throws Exception{
@@ -91,6 +93,7 @@ public class InspectionEquipController {
     }
 
     //更新巡检报告的信息
+    @MyLog(value = "更新年度设备巡检计划")
     @RequestMapping(value = "/equipPlan", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateInspectionEquip(@RequestBody String equipInfo) throws Exception{
@@ -109,6 +112,7 @@ public class InspectionEquipController {
     }
 
     //根据Id删除巡检计划
+    @MyLog(value = "删除年度设备巡检计划")
     @RequestMapping(value = "/equipPlan",params = {"id"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteReportByInspectionPerson(@RequestParam Integer id){

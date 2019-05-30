@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.InspectionReport.InspectionRepository;
 import cn.edu.bupt.demo.dao.InspectionReport.InspectionService;
 import cn.edu.bupt.demo.entity.InspectionReport;
@@ -100,6 +101,7 @@ public class InspectionController {
     }
 
     //创建巡检报告，填写信息
+    @MyLog(value = "添加新的巡检报告")
     @RequestMapping(value = "/inspection", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createInspectionReport(@RequestBody String reportInfo) throws Exception{
@@ -113,6 +115,7 @@ public class InspectionController {
     }
 
     //更新巡检报告的信息
+    @MyLog(value = "更新巡检报告内容")
     @RequestMapping(value = "/inspection", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateInspectionReport(@RequestBody String reportInfo) throws Exception{

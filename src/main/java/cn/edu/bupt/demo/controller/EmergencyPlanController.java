@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.EmergencyPlan.EmergencyRepository;
 import cn.edu.bupt.demo.dao.EmergencyPlan.EmergencyService;
 import cn.edu.bupt.demo.entity.EmergencyPlan;
@@ -79,17 +80,6 @@ public class EmergencyPlanController {
         }
     }
 
-    //根据应急预案name获取应急预案
-    @RequestMapping(value = "/emergencyByName",params = {"name"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public String getPlanByName(@RequestParam String name) throws Exception{
-        try {
-            return emergencyService.findPlanByName(name).toString();
-        }catch (Exception e){
-            throw new Exception("getPlanByName error!");
-        }
-    }
-
     //根据level获取应急预案
     @RequestMapping(value = "/emergencyByLevel",params = {"level"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -101,18 +91,8 @@ public class EmergencyPlanController {
         }
     }
 
-    //根据signer获取应急预案
-    @RequestMapping(value = "/emergencyBySigner",params = {"signer"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public String getPlanBySigner(@RequestParam String signer) throws Exception{
-        try {
-            return emergencyService.findPlanBySigner(signer).toString();
-        }catch (Exception e){
-            throw new Exception("getPlanBySigner error!");
-        }
-    }
-
     //增加应急预案的信息
+    @MyLog(value = "添加新的应急预案")
     @RequestMapping(value = "/emergency", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createEmergencyPlan(@RequestBody String emergencyInfo) throws Exception{
@@ -126,6 +106,7 @@ public class EmergencyPlanController {
     }
 
     //更新应急预案
+    @MyLog(value = "更新应急预案")
     @RequestMapping(value = "/emergency", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateEmergencyPlan(@RequestBody String emergencyInfo) throws Exception{
@@ -143,6 +124,7 @@ public class EmergencyPlanController {
     }
 
     //通过Id删除信息
+    @MyLog(value = "删除应急预案")
     @RequestMapping(value = "/emergency",params = {"id"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deletePlanById(@RequestParam Integer id){

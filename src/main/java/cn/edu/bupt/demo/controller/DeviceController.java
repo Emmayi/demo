@@ -1,7 +1,11 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.aop.MyLog;
+import cn.edu.bupt.demo.dao.SysLog.SysLogService;
+import cn.edu.bupt.demo.entity.SysLog;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
@@ -18,6 +22,7 @@ import java.util.Set;
 public class DeviceController {
 
     HttpLogin httpLogin = new HttpLogin();
+
 
     @RequestMapping(value = "/allDevice",method = RequestMethod.GET)
     @ResponseBody
@@ -52,6 +57,5 @@ public class DeviceController {
             throw new Exception("findAllDevice error!");
         }
     }
-
 
 }

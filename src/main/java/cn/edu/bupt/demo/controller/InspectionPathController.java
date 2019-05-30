@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.InspectionPath.PathService;
 import cn.edu.bupt.demo.entity.InspectionPath;
 import com.alibaba.fastjson.JSONObject;
@@ -58,6 +59,7 @@ public class InspectionPathController {
     }
 
     //创建巡检路径，填写信息
+    @MyLog(value = "添加新的巡检路径")
     @RequestMapping(value = "/inspectionPath", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createInspectionPath(@RequestBody String pathInfo) throws Exception{
@@ -70,7 +72,8 @@ public class InspectionPathController {
         }
     }
 
-    //更新巡检报告的信息
+    //更新巡检路径的信息
+    @MyLog(value = "更新巡检路径内容")
     @RequestMapping(value = "/inspectionPath", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateInspectionPath(@RequestBody String pathInfo) throws Exception{
@@ -88,7 +91,8 @@ public class InspectionPathController {
     }
 
 
-    //根据Id删除巡检报告信息
+    //根据Id删除巡检路径信息
+    @MyLog(value = "删除巡检路径")
     @RequestMapping(value = "/inspection",params = {"id"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deletePathById(@RequestParam Integer id){
@@ -99,7 +103,7 @@ public class InspectionPathController {
         }
     }
 
-    //获取所有巡检报告信息
+    //获取所有巡检路径信息
     @RequestMapping(value = "/allPath",method = RequestMethod.GET)
     @ResponseBody
     public String findAllPath() throws Exception{

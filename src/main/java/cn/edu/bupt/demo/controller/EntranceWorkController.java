@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.EntranceWork.EntranceService;
 import cn.edu.bupt.demo.entity.EntranceWork;
 import cn.edu.bupt.demo.entity.StaffNumber;
@@ -67,6 +68,7 @@ public class EntranceWorkController {
 
 
     //增加入廊作业的信息
+    @MyLog(value = "添加新的入廊作业")
     @RequestMapping(value = "/entranceWork", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createEntranceWork(@RequestBody String workInfo) throws Exception{
@@ -82,6 +84,7 @@ public class EntranceWorkController {
     }
 
     //更新入廊信息
+    @MyLog(value = "更新入廊作业")
     @RequestMapping(value = "/entranceWork", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateEntranceWork(@RequestBody String workInfo) throws Exception{
@@ -103,6 +106,7 @@ public class EntranceWorkController {
     }
 
     //添加评价
+    @MyLog(value = "为入廊作业添加评价")
     @RequestMapping(value = "/entranceWorkEvaluation", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateEvaluation(@RequestBody String evaluationString) throws Exception{
@@ -121,6 +125,7 @@ public class EntranceWorkController {
     }
 
     //通过Id删除信息
+    @MyLog(value = "删除入廊作业")
     @RequestMapping(value = "/entranceWorkById",params = {"WorkId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteWorkById(@RequestParam Integer WorkId){

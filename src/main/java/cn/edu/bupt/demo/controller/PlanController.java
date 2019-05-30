@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.InspectionPlan.PlanService;
 import cn.edu.bupt.demo.entity.InspectionPlan;
 import com.alibaba.fastjson.JSONObject;
@@ -59,17 +60,6 @@ public class PlanController {
         }
     }
 
-    //通过巡检area查找巡检计划信息
-    @RequestMapping(value = "/planByInspectionDate",params = {"date"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public String getPlanByInspectionDate(@RequestParam Long date) throws Exception{
-        try {
-            return planService.findPlanByInspectionDate(date).toString();
-        }catch (Exception e){
-            throw new Exception("getPlanByInspectionDate error!");
-        }
-    }
-
 
     //统计一共有多少计划
     @RequestMapping(value = "/plan", method = RequestMethod.GET)
@@ -85,6 +75,7 @@ public class PlanController {
 
 
     //创建巡检计划，填写信息
+    @MyLog(value = "创建巡检计划")
     @RequestMapping(value = "/plan", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createInspectionPlan(@RequestBody String reportInfo) throws Exception{
@@ -131,6 +122,7 @@ public class PlanController {
     }
 
     //根据巡检人员id删除巡检计划
+    @MyLog(value = "删除巡检计划")
     @RequestMapping(value = "/plan",params = {"id"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteReportByInspectionPerson(@RequestParam Integer id){
