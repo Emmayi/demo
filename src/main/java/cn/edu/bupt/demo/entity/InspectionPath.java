@@ -14,6 +14,8 @@ public class InspectionPath {
     @Getter@Setter
     private String number;
     @Getter@Setter
+    private String name;
+    @Getter@Setter
     private String area_belong;
     @Getter@Setter
     private String pipe_belong;
@@ -33,6 +35,8 @@ public class InspectionPath {
                 .append(id);
         sb.append(",\"number\":\"")
                 .append(number).append('\"');
+        sb.append(",\"name\":\"")
+                .append(name).append('\"');
         sb.append(",\"area_belong\":\"")
                 .append(area_belong).append('\"');
         sb.append(",\"pipe_belong\":\"")
