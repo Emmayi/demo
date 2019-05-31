@@ -33,7 +33,7 @@ public interface InspectionRepository {
 
     @Insert("insert into inspection_report (duty_person,inspection_person,create_date,calendar_date,state,summary,abnormal,maintenance,image,video,plan_id) " +
                                 "values (#{duty_person},#{inspection_person},#{create_date},#{calendar_date},#{state},#{summary},#{abnormal},#{maintenance},#{image},#{video},#{plan_id})")
-    @Options(useGeneratedKeys = true,keyProperty="id")
+    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(InspectionReport inspectionReport);
 
     @Update("update inspection_report set duty_person = #{duty_person},inspection_person = #{inspection_person},create_date = #{create_date}," +

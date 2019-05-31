@@ -29,7 +29,7 @@ public interface SuppliesRespository {
 
     @Insert("insert into emergency_supplies (name,category,quantity,model,purchase_date,manufacturer,manufacture_date,valid_until,use_description,performance_description,affiliation,location)" +
             " values (#{name},#{category},#{quantity},#{model},#{purchase_date},#{manufacturer},#{manufacture_date},#{valid_until},#{use_description},#{performance_description},#{affiliation},#{location})")
-    @Options(useGeneratedKeys = true,keyProperty="id")
+    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(EmergencySupplies emergencySupplies);
 
     @Update("update emergency_supplies set name = #{name},category = #{category},quantity = #{quantity},model = #{model},purchase_date = #{purchase_date},manufacturer = #{manufacturer}, " +

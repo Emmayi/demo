@@ -30,7 +30,7 @@ public interface EntranceRepository {
     Integer AllWorkCount();
 
     @Insert("insert into entrance_work (duration,date,work_number,activity_range,evaluation) values (#{duration},#{date},#{work_number},#{activity_range},#{evaluation})")
-    @Options(useGeneratedKeys = true,keyProperty="id")
+    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(EntranceWork entranceWork);
 
     @Update("update entrance_work set duration = #{duration},date = #{date},work_number = #{work_number},activity_range = #{activity_range},evaluation = #{evaluation} where id=#{id}")

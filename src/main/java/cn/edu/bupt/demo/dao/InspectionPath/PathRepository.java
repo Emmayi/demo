@@ -28,7 +28,7 @@ public interface PathRepository {
 
     @Insert("insert into inspection_path (number,area_belong,pipe_belong,startpoint,endpoint,create_date,description,name) " +
             "values (#{number},#{area_belong},#{pipe_belong},#{startpoint},#{endpoint},#{create_date},#{description},#{name})")
-    @Options(useGeneratedKeys = true,keyProperty="id")
+    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(InspectionPath inspectionPath);
 
     @Update("update inspection_path set number = #{number},area_belong = #{area_belong},pipe_belong = #{pipe_belong},startpoint = #{startpoint}," +

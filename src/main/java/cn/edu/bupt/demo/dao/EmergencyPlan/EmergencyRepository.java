@@ -40,7 +40,7 @@ public interface EmergencyRepository {
 
     @Insert("insert into emergency_plan (name,category,level,associated_event_type,content,department,release_date,release_number,issued,signer,file)" +
             " values (#{name},#{category},#{level},#{associated_event_type},#{content},#{department},#{release_date},#{release_number},#{issued},#{signer},#{file})")
-    @Options(useGeneratedKeys = true,keyProperty="id")
+    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(EmergencyPlan emergencyPlan);
 
     @Update("update emergency_plan set name = #{name},category = #{category},level = #{level},associated_event_type = #{associated_event_type},content = #{content}, " +
