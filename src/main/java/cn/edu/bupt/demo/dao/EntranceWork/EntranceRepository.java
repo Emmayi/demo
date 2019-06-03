@@ -14,13 +14,13 @@ import java.util.List;
 @Mapper
 public interface EntranceRepository {
 
-    @Select("select id as id,duration as duration,date as date,work_number as work_number, activity_range as activity_range,evaluation as evaluation from entrance_work limit #{index},#{pageSize}")
+    @Select("select * from entrance_work limit #{index},#{pageSize}")
     List<EntranceWork> findAllByPage(@Param("index")Integer index,@Param("pageSize")Integer pageSize);
 
-    @Select("select id as id,duration as duration,date as date,work_number as work_number, activity_range as activity_range,evaluation as evaluation from entrance_work where id = #{id}")
+    @Select("select * from entrance_work where id = #{id}")
     EntranceWork findEntranceWorkById(Integer id);
 
-    @Select("select id as id,duration as duration,date as date,work_number as work_number,activity_range as activity_range,evaluation as evaluation from entrance_work where activity_range = #{activity_range} limit #{index},#{pageSize}")
+    @Select("select * from entrance_work where activity_range = #{activity_range} limit #{index},#{pageSize}")
     List<EntranceWork> findEntranceWorkByRange(@Param("activity_range")String activity_range,@Param("index")Integer index,@Param("pageSize")Integer pageSize);
 
     @Select("select count(*) from entrance_work where activity_range = #{activity_range}")
@@ -29,11 +29,13 @@ public interface EntranceRepository {
     @Select("select count(*) from entrance_work")
     Integer AllWorkCount();
 
-    @Insert("insert into entrance_work (duration,date,work_number,activity_range,evaluation) values (#{duration},#{date},#{work_number},#{activity_range},#{evaluation})")
+    @Insert("insert into entrance_work (duration,date,work_number,activity_range,evaluation,contact,contact_number) " +
+            "values (#{duration},#{date},#{work_number},#{activity_range},#{evaluation},#{contact},#{contact_number})")
     @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(EntranceWork entranceWork);
 
-    @Update("update entrance_work set duration = #{duration},date = #{date},work_number = #{work_number},activity_range = #{activity_range},evaluation = #{evaluation} where id=#{id}")
+    @Update("update entrance_work set duration = #{duration},date = #{date},work_number = #{work_number},activity_range = #{activity_range}," +
+            "evaluation = #{evaluation} contact = #{contact} contact_number = #{contact_number}where id=#{id}")
     void update(EntranceWork entranceWork);
 
     @Update("update entrance_work set evaluation = #{evaluation} where id=#{id}")
@@ -45,7 +47,7 @@ public interface EntranceRepository {
     @Delete("delete from entrance_work where date=#{date}")
     void deleteByDate(Long date);
 
-    @Select("select id as id,duration as duration,date as date,work_number as work_number,activity_range as activity_range,evaluation as evaluation from entrance_work where id > 0")
+    @Select("select * from entrance_work where id > 0")
     List<EntranceWork> findAll();
 
 

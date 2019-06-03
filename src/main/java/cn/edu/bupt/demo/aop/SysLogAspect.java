@@ -69,8 +69,8 @@ public class SysLogAspect {
         String args = Arrays.toString(point.getArgs());
 
         //从session中获取当前登陆人id
-//		Long userid = (Long)SecurityUtils.getSubject().getSession().getAttribute("userid");
-//		String username = (Long)SecurityUtils.getSubject().getSession().getAttribute("username");
+//		Long userid = (String)SecurityUtils.getSubject().getSession().getAttribute("userid");
+//		String username = (String)SecurityUtils.getSubject().getSession().getAttribute("username");
 
         String userid = "RY110380";//应该从session中获取当前登录人的id，这里简单模拟下
         String username = "Emma";//应该从session中获取当前登录人name
