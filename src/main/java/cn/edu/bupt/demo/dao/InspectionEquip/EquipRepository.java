@@ -21,7 +21,7 @@ public interface EquipRepository {
 
     @Insert("insert into inspection_equip (name,content,period,last_time) " +
             "values (#{name},#{content},#{period}),#{last_time}")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+    @Options(useGeneratedKeys = true,keyProperty="id")
     void save(InspectionEquip inspectionEquip);
 
     @Update("update inspection_equip set name = #{name},content = #{content}," +

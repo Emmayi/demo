@@ -26,13 +26,13 @@ public interface PathRepository {
     @Select("select count(*) from inspection_path where area_belong = #{area_belong}")
     Integer findCountOfArea(String area_belong);
 
-    @Insert("insert into inspection_path (number,area_belong,pipe_belong,startpoint,endpoint,create_date,description,name) " +
-            "values (#{number},#{area_belong},#{pipe_belong},#{startpoint},#{endpoint},#{create_date},#{description},#{name})")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+    @Insert("insert into inspection_path (number,area_belong,pipe_belong,startpoint,endpoint,create_date,description) " +
+            "values (#{number},#{area_belong}#{pipe_belong},#{startpoint},#{endpoint},#{create_date},#{description})")
+    @Options(useGeneratedKeys = true,keyProperty="id")
     void save(InspectionPath inspectionPath);
 
     @Update("update inspection_path set number = #{number},area_belong = #{area_belong},pipe_belong = #{pipe_belong},startpoint = #{startpoint}," +
-            "endpoint = #{endpoint},create_date = #{create_date},description = #{description},name = #{name}")
+            "endpoint = #{endpoint},create_date = #{create_date},description = #{description}")
     void update(InspectionPath inspectionPath);
 
     @Delete("delete from inspection_path where id=#{id}")

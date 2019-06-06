@@ -93,7 +93,7 @@ public class InspectionPathController {
 
     //根据Id删除巡检路径信息
     @MyLog(value = "删除巡检路径")
-    @RequestMapping(value = "/inspectionPath",params = {"id"},method = RequestMethod.DELETE)
+    @RequestMapping(value = "/inspection",params = {"id"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deletePathById(@RequestParam Integer id){
         try {

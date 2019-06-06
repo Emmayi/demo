@@ -1,29 +1,63 @@
 package cn.edu.bupt.demo.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Date;
 
 public class EntranceWork extends IdBased{
 
-    @Setter@Getter
     private Integer id;
-    @Setter@Getter
     private String duration;
-    @Setter@Getter
     private Long date;
-    @Setter@Getter
     private Integer work_number;
-    @Setter@Getter
     private String activity_range;
-    @Setter@Getter
     private String evaluation;
-    @Setter@Getter
-    private String contact;
-    @Setter@Getter
-    private String contact_number;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public Long getDate() {
+        return date;
+    }
+
+    public void setDate(Long date) {
+        this.date = date;
+    }
+
+    public Integer getWork_number() {
+        return work_number;
+    }
+
+    public void setWork_number(Integer work_number) {
+        this.work_number = work_number;
+    }
+
+    public String getActivity_range() {
+        return activity_range;
+    }
+
+    public void setActivity_range(String activity_range) {
+        this.activity_range = activity_range;
+    }
+
+    public String getEvaluation() {
+        return evaluation;
+    }
+
+    public void setEvaluation(String evaluation) {
+        this.evaluation = evaluation;
+    }
 
     @Override
     public String toString() {

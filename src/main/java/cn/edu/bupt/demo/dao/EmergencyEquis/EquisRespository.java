@@ -35,7 +35,7 @@ public interface EquisRespository {
 
     @Insert("insert into emergency_equis (name,category,quantity,model,purchase_date,manufacturer,manufacture_date,valid_until,use_description,performance_description,affiliation,location)" +
             " values (#{name},#{category},#{quantity},#{model},#{purchase_date},#{manufacturer},#{manufacture_date},#{valid_until},#{use_description},#{performance_description},#{affiliation},#{location})")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+    @Options(useGeneratedKeys = true,keyProperty="id")
     void save(EmergencyEquis emergencyEquis);
 
     @Update("update emergency_equis set name = #{name},category = #{category},quantity = #{quantity},model = #{model},purchase_date = #{purchase_date},manufacturer = #{manufacturer}, " +
