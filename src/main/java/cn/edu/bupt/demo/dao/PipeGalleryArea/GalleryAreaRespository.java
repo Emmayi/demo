@@ -29,7 +29,8 @@ public interface GalleryAreaRespository {
         @Options(useGeneratedKeys = true, keyProperty = "id")
         void save(PipeGalleryArea pipeGalleryArea);
 
-        @Update("update pipeGallery_area set number = #{number},name = #{name},length = #{length},pipe_belong = #{pipe_belong},startpoint = #{startpoint},endpoint = #{endpoint},description = #{description}" )
+        @Update("update pipeGallery_area set number = #{number},name = #{name},length = #{length},pipe_belong = #{pipe_belong}," +
+                "startpoint = #{startpoint},endpoint = #{endpoint},description = #{description} where id =#{id} ")
         void update(PipeGalleryArea pipeGalleryArea);
 
         @Delete("delete from pipeGallery_area where id=#{id}")

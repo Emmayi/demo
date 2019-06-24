@@ -29,7 +29,7 @@ public interface DaliyRepository {
     void save(DailyInspection inspectionPlan);
 
     @Update("update inspection_daily set time = #{time},inspection_person = #{inspection_person},path = #{path}," +
-            "work = #{work}")
+            "work = #{work} where id=#{id}")
     void update(DailyInspection inspectionPlan);
 
     @Delete("delete from inspection_daily where id=#{id}")

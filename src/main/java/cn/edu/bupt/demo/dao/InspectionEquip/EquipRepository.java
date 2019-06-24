@@ -25,7 +25,7 @@ public interface EquipRepository {
     void save(InspectionEquip inspectionEquip);
 
     @Update("update inspection_equip set name = #{name},content = #{content}," +
-            "period = #{period},last_time = #{last_time}")
+            "period = #{period},last_time = #{last_time} where id = #{id}")
     void update(InspectionEquip inspectionPlan);
 
     @Delete("delete from inspection_equip where id=#{id}")

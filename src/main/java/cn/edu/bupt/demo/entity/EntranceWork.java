@@ -1,63 +1,30 @@
 package cn.edu.bupt.demo.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
 public class EntranceWork extends IdBased{
 
+    @Getter@Setter
     private Integer id;
+    @Getter@Setter
     private String duration;
+    @Getter@Setter
     private Long date;
+    @Getter@Setter
     private Integer work_number;
+    @Getter@Setter
     private String activity_range;
+    @Getter@Setter
     private String evaluation;
+    @Getter@Setter
+    private String contact;
+    @Getter@Setter
+    private String contact_number;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-    public Long getDate() {
-        return date;
-    }
-
-    public void setDate(Long date) {
-        this.date = date;
-    }
-
-    public Integer getWork_number() {
-        return work_number;
-    }
-
-    public void setWork_number(Integer work_number) {
-        this.work_number = work_number;
-    }
-
-    public String getActivity_range() {
-        return activity_range;
-    }
-
-    public void setActivity_range(String activity_range) {
-        this.activity_range = activity_range;
-    }
-
-    public String getEvaluation() {
-        return evaluation;
-    }
-
-    public void setEvaluation(String evaluation) {
-        this.evaluation = evaluation;
-    }
 
     @Override
     public String toString() {
@@ -74,6 +41,10 @@ public class EntranceWork extends IdBased{
                 .append(date).append('\"');
         sb.append(",\"evaluation\":\"")
                 .append(evaluation).append('\"');
+        sb.append(",\"contact\":\"")
+                .append(contact).append('\"');
+        sb.append(",\"contact_number\":\"")
+                .append(contact_number).append('\"');
         sb.append('}');
         return sb.toString();
     }

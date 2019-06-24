@@ -25,6 +25,9 @@ public class InspectionPath {
     private Long create_date;
     @Getter@Setter
     private String description;
+    @Getter@Setter
+    private String name;
+
 
     @Override
     public String toString() {
@@ -45,6 +48,8 @@ public class InspectionPath {
                 .append(create_date).append('\"');
         sb.append(",\"description\":\"")
                 .append(description).append('\"');
+        sb.append(",\"name\":\"")
+                .append(name).append('\"');
         sb.append('}');
 
         return sb.toString();

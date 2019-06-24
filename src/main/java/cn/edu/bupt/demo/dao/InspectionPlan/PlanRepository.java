@@ -33,7 +33,7 @@ public interface PlanRepository {
     void save(InspectionPlan inspectionPlan);
 
     @Update("update inspection_plan set number = #{number},path = #{path},inspection_person = #{inspection_person},create_date = #{create_date}," +
-            "inspection_date = #{inspection_date},content = #{content},status = #{status}")
+            "inspection_date = #{inspection_date},content = #{content},status = #{status} where id =#{id}")
     void update(InspectionPlan inspectionPlan);
 
     @Update("update inspection_plan set status = '已完成' where id = #{id}")
