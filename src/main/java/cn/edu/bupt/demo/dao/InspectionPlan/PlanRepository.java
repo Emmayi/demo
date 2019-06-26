@@ -28,7 +28,7 @@ public interface PlanRepository {
     Integer findCountOfPerson(String inspection_person);
 
     @Insert("insert into inspection_plan (number,path,inspection_person,create_date,inspection_date,content,status) " +
-            "values (#{number},#{path}#{inspection_person},#{create_date},#{inspection_date},#{content},#{status})")
+            "values (#{number},#{path},#{inspection_person},#{create_date},#{inspection_date},#{content},#{status})")
     @Options(useGeneratedKeys = true,keyProperty="id")
     void save(InspectionPlan inspectionPlan);
 
