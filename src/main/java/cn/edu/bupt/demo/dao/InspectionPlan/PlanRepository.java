@@ -29,7 +29,7 @@ public interface PlanRepository {
 
     @Insert("insert into inspection_plan (number,path,inspection_person,create_date,inspection_date,content,status) " +
             "values (#{number},#{path},#{inspection_person},#{create_date},#{inspection_date},#{content},#{status})")
-    @Options(useGeneratedKeys = true,keyProperty="id")
+    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(InspectionPlan inspectionPlan);
 
     @Update("update inspection_plan set number = #{number},path = #{path},inspection_person = #{inspection_person},create_date = #{create_date}," +

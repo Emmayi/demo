@@ -34,7 +34,7 @@ public interface TeamRespository {
 
     @Insert("insert into emergency_team (name,category,level,specialty,introduction,affiliation,principal,phone,location)" +
             " values (#{name},#{category},#{level},#{specialty},#{introduction},#{affiliation},#{principal},#{phone},#{location})")
-    @Options(useGeneratedKeys = true,keyProperty="id")
+    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(EmergencyTeam emergencyTeam);
 
     @Update("update emergency_team set name = #{name},category = #{category},level = #{level},specialty = #{specialty},introduction = #{introduction},affiliation = #{affiliation}, " +

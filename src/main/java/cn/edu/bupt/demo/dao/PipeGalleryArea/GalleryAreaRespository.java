@@ -26,7 +26,7 @@ public interface GalleryAreaRespository {
 
         @Insert("insert into pipeGallery_area (number,name,length,pipe_belong,startpoint,endpoint,description)" +
                 " values (#{number},#{name},#{length},#{pipe_belong},#{startpoint},#{endpoint},#{description})")
-        @Options(useGeneratedKeys = true, keyProperty = "id")
+        @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
         void save(PipeGalleryArea pipeGalleryArea);
 
         @Update("update pipeGallery_area set number = #{number},name = #{name},length = #{length},pipe_belong = #{pipe_belong}," +

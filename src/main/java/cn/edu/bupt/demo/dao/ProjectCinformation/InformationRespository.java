@@ -24,7 +24,7 @@ public interface InformationRespository {
 
     @Insert("insert into project_cinformation (location,area,drawpoint,mainequipments,proequipments,department,mainusage)" +
             " values (#{location},#{area},#{drawpoint},#{mainequipments},#{proequipments},#{department},#{mainusage})")
-    @Options(useGeneratedKeys = true,keyProperty="id")
+    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(ProjectCinformation projectCinformation);
 
     @Update("update project_cinformation set location = #{location},area = #{area},drawpoint = #{drawpoint},mainequipments = #{mainequipments},proequipments = #{proequipments},department = #{department}, " +

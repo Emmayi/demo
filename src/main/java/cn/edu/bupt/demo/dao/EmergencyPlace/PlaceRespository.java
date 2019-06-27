@@ -33,7 +33,7 @@ public interface PlaceRespository {
 
     @Insert("insert into emergency_place (name,category,location,area,capacity,introduction,affiliation,principal,telephone,cellphone)" +
             " values (#{name},#{category},#{location},#{area},#{capacity},#{introduction},#{affiliation},#{principal},#{telephone},#{cellphone})")
-    @Options(useGeneratedKeys = true,keyProperty="id")
+    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(EmergencyPlace emergencyPlace);
 
     @Update("update emergency_place set name = #{name},category = #{category},location = #{location},area = #{area},capacity = #{capacity},introduction = #{introduction},affiliation = #{affiliation}, " +

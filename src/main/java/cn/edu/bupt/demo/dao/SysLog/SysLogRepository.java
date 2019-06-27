@@ -20,6 +20,6 @@ public interface SysLogRepository {
 
     @Insert("insert into sys_log (user_id,user_name,action,create_Time) " +
             "values (#{user_id},#{user_name},#{action},#{create_Time})")
-    @Options(useGeneratedKeys = true,keyProperty="id")
+    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(SysLog sysLog);
 }

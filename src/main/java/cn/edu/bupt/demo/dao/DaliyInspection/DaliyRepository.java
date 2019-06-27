@@ -25,7 +25,7 @@ public interface DaliyRepository {
 
     @Insert("insert into inspection_daily (time,inspection_person,path,work) " +
             "values (#{time},#{inspection_person},#{path},#{work})")
-    @Options(useGeneratedKeys = true,keyProperty="id")
+    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(DailyInspection inspectionPlan);
 
     @Update("update inspection_daily set time = #{time},inspection_person = #{inspection_person},path = #{path}," +
