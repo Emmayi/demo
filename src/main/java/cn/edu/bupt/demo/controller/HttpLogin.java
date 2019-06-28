@@ -45,7 +45,7 @@ public class HttpLogin {
     protected void httplogin() throws Exception{
         cookieStore.clear();
         //请求体
-        RequestBody bodyLogin = RequestBody.create(js, "{\"username\":\"czxstc200@gmail.com\",\"password\":\"password\"}");
+        RequestBody bodyLogin = RequestBody.create(js, "{\"username\":\"zhangyi@qq.com\",\"password\":\"123456\"}");
 
         //创建一个Request Request是OkHttp中访问的请求，Builder是辅助类。Response即OkHttp中的响应。
         final Request requestLogin = new Request.Builder()
