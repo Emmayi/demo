@@ -168,7 +168,7 @@ public class EquisController {
         }
     }
 
-/*    //获取所有的设备
+    //获取所有的设备
     @RequestMapping(value = "/equisALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllEquis() throws Exception{
@@ -177,7 +177,7 @@ public class EquisController {
         }catch (Exception e){
             throw new Exception("getAllEquis error!");
         }
-    }*/
+    }
 
 
 }

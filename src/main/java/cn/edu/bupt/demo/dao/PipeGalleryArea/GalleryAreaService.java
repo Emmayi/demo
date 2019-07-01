@@ -17,6 +17,12 @@ public interface GalleryAreaService {
 
     Integer AreaCountOfPipebelong(String pipe_belong);
 
+    String getId(String response);
+
+    String getNumber(String number);
+
+    void fillNumber(String number,String id);
+
     void save(PipeGalleryArea pipeGalleryArea);
 
     void update(PipeGalleryArea pipeGalleryArea);

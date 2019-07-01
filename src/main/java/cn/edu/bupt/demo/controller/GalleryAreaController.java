@@ -6,6 +6,11 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import sun.security.util.Length;
+
+
 
 @RestController
 @RequestMapping("api/v1/info")
@@ -71,6 +76,12 @@ public class GalleryAreaController {
         PipeGalleryArea pipeGalleryArea = JSONObject.parseObject(galleryAreaInfo,PipeGalleryArea.class);
         try {
             galleryAreaService.save(pipeGalleryArea);
+            String response=pipeGalleryArea.toString();
+            String id=galleryAreaService.getId(response);
+            String number=galleryAreaService.getNumber(id);
+            galleryAreaService.fillNumber(number,id);
+            Integer ID=Integer.parseInt(id);
+            pipeGalleryArea=galleryAreaService.findAreaById(ID);
             return pipeGalleryArea.toString();
         } catch (Exception e) {
             throw new Exception("createArea error!");
@@ -105,4 +116,5 @@ public class GalleryAreaController {
             e.printStackTrace();
         }
     }
+
 }

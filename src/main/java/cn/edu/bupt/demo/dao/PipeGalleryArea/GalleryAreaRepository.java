@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 @Mapper
-public interface GalleryAreaRespository {
+public interface GalleryAreaRepository {
 
         @Select("select * from pipeGallery_area limit #{index},#{pageSize}")
         List<PipeGalleryArea> findAllByPage(@Param("index") Integer index, @Param("pageSize") Integer pageSize);
@@ -32,6 +32,9 @@ public interface GalleryAreaRespository {
         @Update("update pipeGallery_area set number = #{number},name = #{name},length = #{length},pipe_belong = #{pipe_belong}," +
                 "startpoint = #{startpoint},endpoint = #{endpoint},description = #{description} where id =#{id} ")
         void update(PipeGalleryArea pipeGalleryArea);
+
+        @Update("update pipeGallery_area set number = #{number} where id=#{id}")
+        void fillnumber(@Param("number")String number,@Param("id")Integer id);
 
         @Delete("delete from pipeGallery_area where id=#{id}")
         void deleteById(Integer id);
