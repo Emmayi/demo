@@ -74,7 +74,7 @@ public class GalleryAreaServiceImpl implements GalleryAreaService {
     }
 
     @Override
-    public String getNumber(String id){
+    public String setNumber(String id){
         int Len= 6-id.length();
         String num="GL";
         StringBuilder sb=new StringBuilder();
@@ -88,10 +88,9 @@ public class GalleryAreaServiceImpl implements GalleryAreaService {
     }
 
     @Override
-    public void fillNumber(String number,String id){
+    public void fillNumber(String number,Integer id){
         log.trace("Executing fillNumber [{}]", number,id);
-        Integer ID=Integer.parseInt(id);
-        galleryAreaRepository.fillnumber(number,ID);
+        galleryAreaRepository.fillnumber(number,id);
     }
 
     @Override

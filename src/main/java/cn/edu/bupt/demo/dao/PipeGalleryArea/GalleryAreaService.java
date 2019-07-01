@@ -19,9 +19,9 @@ public interface GalleryAreaService {
 
     String getId(String response);
 
-    String getNumber(String number);
+    String setNumber(String number);
 
-    void fillNumber(String number,String id);
+    void fillNumber(String number,Integer id);
 
     void save(PipeGalleryArea pipeGalleryArea);
 
