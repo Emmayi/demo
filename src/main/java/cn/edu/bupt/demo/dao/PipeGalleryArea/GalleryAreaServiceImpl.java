@@ -47,12 +47,6 @@ public class GalleryAreaServiceImpl implements GalleryAreaService {
         return count;
     }
 
-    @Override
-    public String getId(String response) {
-        JSONObject jsonObject = JSONObject.parseObject(response);
-        String id=jsonObject.getString("id");
-        return id;
-    }
 
     @Override
     public Integer AreaCountOfPipebelong(String pipe_belong) {
@@ -76,7 +70,7 @@ public class GalleryAreaServiceImpl implements GalleryAreaService {
     @Override
     public String setNumber(String id){
         int Len= 6-id.length();
-        String num="GL";
+        String num="QY";
         StringBuilder sb=new StringBuilder();
         sb.append(num);
         for (int i=0;i<Len;i++){
@@ -87,11 +81,7 @@ public class GalleryAreaServiceImpl implements GalleryAreaService {
         return number;
     }
 
-    @Override
-    public void fillNumber(String number,Integer id){
-        log.trace("Executing fillNumber [{}]", number,id);
-        galleryAreaRepository.fillnumber(number,id);
-    }
+
 
     @Override
     public void deleteById(Integer id) {

@@ -33,9 +33,6 @@ public interface GalleryAreaRepository {
                 "startpoint = #{startpoint},endpoint = #{endpoint},description = #{description} where id =#{id} ")
         void update(PipeGalleryArea pipeGalleryArea);
 
-        @Update("update pipeGallery_area set number = #{number} where id=#{id}")
-        void fillnumber(@Param("number")String number,@Param("id")Integer id);
-
         @Delete("delete from pipeGallery_area where id=#{id}")
         void deleteById(Integer id);
 

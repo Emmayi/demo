@@ -71,14 +71,13 @@ public class GalleryAreaController {
     public String creategalleryArea(@RequestBody String galleryAreaInfo) throws Exception{
         PipeGalleryArea pipeGalleryArea = JSONObject.parseObject(galleryAreaInfo,PipeGalleryArea.class);
         try {
-            pipeGalleryArea.setNumber("GL000000");
+            pipeGalleryArea.setNumber("QY000000");
             galleryAreaService.save(pipeGalleryArea);
-            String response=pipeGalleryArea.toString();
-            String id=galleryAreaService.getId(response);
+            Integer ID=pipeGalleryArea.getId();
+            String id=Integer.toString(ID);
             String number=galleryAreaService.setNumber(id);
-            Integer ID=Integer.parseInt(id);
-            galleryAreaService.fillNumber(number,ID);
-            pipeGalleryArea=galleryAreaService.findAreaById(ID);
+            pipeGalleryArea.setNumber(number);
+            galleryAreaService.update(pipeGalleryArea);
             return pipeGalleryArea.toString();
         } catch (Exception e) {
             throw new Exception("createArea error!");
@@ -95,6 +94,9 @@ public class GalleryAreaController {
             throw new RuntimeException("没有Id，无法更新!");
         }
         try {
+            Integer ID=pipeGalleryArea.getId();
+            String id=Integer.toString(ID);
+            pipeGalleryArea.setNumber(galleryAreaService.setNumber(id));
             galleryAreaService.update(pipeGalleryArea);
             return pipeGalleryArea.toString();
         } catch (Exception e) {
