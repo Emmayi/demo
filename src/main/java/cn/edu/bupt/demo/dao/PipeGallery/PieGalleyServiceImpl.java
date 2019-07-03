@@ -80,12 +80,15 @@ public class PieGalleyServiceImpl implements PipeGalleryService {
         return number;
     }
 
-
-
     @Override
     public void deleteById(Integer id) {
         log.trace("Executing deleteById [{}]");
         pipeGalleryRepository.deleteById(id);
     }
 
+    @Override
+    public List<PipeGallery> findAll(){
+        log.trace("Executing findAll [{}]");
+        return pipeGalleryRepository.findAllPipe();
+    }
 }

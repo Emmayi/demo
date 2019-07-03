@@ -115,4 +115,17 @@ public class GalleryAreaController {
         }
     }
 
+    //获取所有区域
+    @RequestMapping(value = "galleryAreaAll",method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
+    @ResponseStatus(value = HttpStatus.OK)
+    public String getAllArea() throws Exception{
+        try{
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("AllArea", galleryAreaService.findAll());
+            return jsonObject.toString();
+        }catch (Exception e){
+            throw new Exception("getAllArea error!");
+        }
+    }
+
 }

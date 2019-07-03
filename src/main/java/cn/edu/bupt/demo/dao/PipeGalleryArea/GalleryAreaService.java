@@ -19,6 +19,8 @@ public interface GalleryAreaService {
 
     String setNumber(String number);
 
+    List<PipeGalleryArea> findAll();
+
     void save(PipeGalleryArea pipeGalleryArea);
 
     void update(PipeGalleryArea pipeGalleryArea);

@@ -4,6 +4,7 @@ package cn.edu.bupt.demo.controller;
 import cn.edu.bupt.demo.dao.PipeGallery.PipeGalleryService;
 import cn.edu.bupt.demo.entity.PipeGallery;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -112,6 +113,19 @@ public class PipeCotroller {
            pipeGalleryService.deleteById(Id);
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    //获取所有管廊
+    @RequestMapping(value = "pipeGalleryAll",method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
+    @ResponseStatus(value = HttpStatus.OK)
+    public String getAllPipe() throws Exception{
+        try{
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("AllPipes", pipeGalleryService.findAll());
+            return jsonObject.toString();
+        }catch (Exception e){
+            throw new Exception("getAllPipe error!");
         }
     }
 

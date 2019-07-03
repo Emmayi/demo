@@ -12,6 +12,8 @@ public interface PipeGalleryService {
 
     PipeGallery findPipeById(Integer id);
 
+    List<PipeGallery> findAll();
+
     Integer getPipeCount();
 
     Integer PipeCountOfunit(String unit);
@@ -23,4 +25,5 @@ public interface PipeGalleryService {
     void update(PipeGallery pipeGallery);
 
     void deleteById(Integer id);
+
 }

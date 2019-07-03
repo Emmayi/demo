@@ -81,11 +81,15 @@ public class GalleryAreaServiceImpl implements GalleryAreaService {
         return number;
     }
 
-
-
     @Override
     public void deleteById(Integer id) {
         log.trace("Executing deleteById [{}]");
         galleryAreaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<PipeGalleryArea> findAll(){
+        log.trace("Executing findAll [{}]");
+        return galleryAreaRepository.findAllArea();
     }
 }
