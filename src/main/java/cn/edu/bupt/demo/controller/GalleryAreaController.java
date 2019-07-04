@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("api/v1/info")
 @CrossOrigin
@@ -70,13 +71,18 @@ public class GalleryAreaController {
     public String creategalleryArea(@RequestBody String galleryAreaInfo) throws Exception{
         PipeGalleryArea pipeGalleryArea = JSONObject.parseObject(galleryAreaInfo,PipeGalleryArea.class);
         try {
+            pipeGalleryArea.setNumber("QY000000");
             galleryAreaService.save(pipeGalleryArea);
+            Integer ID=pipeGalleryArea.getId();
+            String id=Integer.toString(ID);
+            String number=galleryAreaService.setNumber(id);
+            pipeGalleryArea.setNumber(number);
+            galleryAreaService.update(pipeGalleryArea);
             return pipeGalleryArea.toString();
         } catch (Exception e) {
             throw new Exception("createArea error!");
         }
     }
-
 
 
     //更新
@@ -88,6 +94,9 @@ public class GalleryAreaController {
             throw new RuntimeException("没有Id，无法更新!");
         }
         try {
+            Integer ID=pipeGalleryArea.getId();
+            String id=Integer.toString(ID);
+            pipeGalleryArea.setNumber(galleryAreaService.setNumber(id));
             galleryAreaService.update(pipeGalleryArea);
             return pipeGalleryArea.toString();
         } catch (Exception e) {
@@ -105,4 +114,18 @@ public class GalleryAreaController {
             e.printStackTrace();
         }
     }
+
+    //获取所有区域
+    @RequestMapping(value = "galleryAreaAll",method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
+    @ResponseStatus(value = HttpStatus.OK)
+    public String getAllArea() throws Exception{
+        try{
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("AllArea", galleryAreaService.findAll());
+            return jsonObject.toString();
+        }catch (Exception e){
+            throw new Exception("getAllArea error!");
+        }
+    }
+
 }

@@ -1,6 +1,8 @@
 package cn.edu.bupt.demo.dao.PipeGalleryArea;
 
 import cn.edu.bupt.demo.entity.PipeGalleryArea;
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,63 +12,84 @@ import java.util.List;
 @Service
 public class GalleryAreaServiceImpl implements GalleryAreaService {
     @Autowired
-    GalleryAreaRespository galleryAreaRespository;
+    GalleryAreaRepository galleryAreaRepository;
 
     @Override
     public List<PipeGalleryArea> findAllByPage(Integer page, Integer pageSize) {
         log.trace("Executing findAreaByPage [{}]", page,pageSize);
         Integer index = page * pageSize;
-        return galleryAreaRespository.findAllByPage(index,pageSize);
+        return galleryAreaRepository.findAllByPage(index,pageSize);
     }
 
     @Override
     public List<PipeGalleryArea> findGalleryareaBypipe_belongAndPage(String pipe_belong,Integer page, Integer pageSize) {
         Integer index = page*pageSize;
-        return galleryAreaRespository.findGalleryareaBypipe_belongAndPage(pipe_belong,index,pageSize);
+        return galleryAreaRepository.findGalleryareaBypipe_belongAndPage(pipe_belong,index,pageSize);
     }
 
     @Override
     public Integer findAreaPageNum(Integer size) {
         log.trace("Executing findAreaPageNum [{}]", size);
-        Integer num = (galleryAreaRespository.AllAreaCount()+size-1)/size;
+        Integer num = (galleryAreaRepository.AllAreaCount()+size-1)/size;
         return num;
     }
 
     @Override
     public PipeGalleryArea findAreaById(Integer id) {
         log.trace("Executing findAreaById [{}]", id);
-        return galleryAreaRespository.findGalleryareaById(id);
+        return galleryAreaRepository.findGalleryareaById(id);
     }
 
     @Override
     public Integer getAreaCount() {
         log.trace("Executing getAreaCount [{}]");
-        Integer count = galleryAreaRespository.AllAreaCount();
+        Integer count = galleryAreaRepository.AllAreaCount();
         return count;
     }
+
 
     @Override
     public Integer AreaCountOfPipebelong(String pipe_belong) {
         log.trace("Executing AreaCountOfPipebelong [{}]");
-        Integer count = galleryAreaRespository.AreaCountOfPipe_belong(pipe_belong);
+        Integer count = galleryAreaRepository.AreaCountOfPipe_belong(pipe_belong);
         return count;
     }
 
     @Override
     public void save(PipeGalleryArea pipeGalleryArea) {
         log.trace("Executing save [{}]");
-        galleryAreaRespository.save(pipeGalleryArea);
+        galleryAreaRepository.save(pipeGalleryArea);
     }
 
     @Override
     public void update(PipeGalleryArea pipeGalleryArea) {
         log.trace("Executing update [{}]");
-        galleryAreaRespository.update(pipeGalleryArea);
+        galleryAreaRepository.update(pipeGalleryArea);
+    }
+
+    @Override
+    public String setNumber(String id){
+        int Len= 6-id.length();
+        String num="QY";
+        StringBuilder sb=new StringBuilder();
+        sb.append(num);
+        for (int i=0;i<Len;i++){
+            sb.append("0");
+        }
+        sb.append(id);
+        String number=""+sb;
+        return number;
     }
 
     @Override
     public void deleteById(Integer id) {
         log.trace("Executing deleteById [{}]");
-        galleryAreaRespository.deleteById(id);
+        galleryAreaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<PipeGalleryArea> findAll(){
+        log.trace("Executing findAll [{}]");
+        return galleryAreaRepository.findAllArea();
     }
 }

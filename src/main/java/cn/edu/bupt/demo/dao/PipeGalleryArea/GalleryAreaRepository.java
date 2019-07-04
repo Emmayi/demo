@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 @Mapper
-public interface GalleryAreaRespository {
+public interface GalleryAreaRepository {
 
         @Select("select * from pipeGallery_area limit #{index},#{pageSize}")
         List<PipeGalleryArea> findAllByPage(@Param("index") Integer index, @Param("pageSize") Integer pageSize);
