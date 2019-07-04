@@ -29,12 +29,12 @@ public class DocumentsController {
 
 
     //获取所有文件接口
-    @RequestMapping(value = "/showFile/{id}/{type}", method = RequestMethod.GET)
-    public String getAllFile(@PathVariable("id") Integer id,
+    @RequestMapping(value = "/showFile/{name}/{type}", method = RequestMethod.GET)
+    public String getAllFile(@PathVariable("name") String name,
                              @PathVariable("type") Integer type) throws IOException {
         JsonObject jsonObject = new JsonObject();
         List<String> filenames = new LinkedList<>();
-        File filePath = new File(storePath+"/"+id+"/"+type+"/");
+        File filePath = new File(storePath+"/"+name+"/"+type+"/");
         if(filePath.exists()){
             File[] files = filePath.listFiles();
             if(files!=null){
@@ -54,7 +54,7 @@ public class DocumentsController {
     //上传文件接口
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFile(@RequestParam("file") MultipartFile file,
-                             @RequestParam("id") Integer id,
+                             @RequestParam("name") String name,
                              @RequestParam("type") Integer type) throws Exception{
         try {
             if (file.isEmpty()) {
@@ -65,7 +65,7 @@ public class DocumentsController {
             String fileName = file.getOriginalFilename();
             fileName = URLDecoder.decode(fileName,"UTF-8");
             String suffixName = fileName.substring(fileName.lastIndexOf("."));
-            String newPath = storePath+"/"+id+"/"+type;
+            String newPath = storePath+"/"+name+"/"+type;
             File filePath = new File(newPath, fileName);
             if (!filePath.getParentFile().exists()) {
 
@@ -87,8 +87,8 @@ public class DocumentsController {
 
 
     //下载文件接口
-    @RequestMapping(value = "/download/{id}/{type}/{fileName}/{fileType}", method = RequestMethod.GET)
-    public void downloadFile(@PathVariable("id") Integer id,
+    @RequestMapping(value = "/download/{name}/{type}/{fileName}/{fileType}", method = RequestMethod.GET)
+    public void downloadFile(@PathVariable("name") String name,
                              @PathVariable("type") Integer type,
                              @PathVariable("fileName") String filename,
                              @PathVariable("fileType") String fileType,
@@ -99,7 +99,7 @@ public class DocumentsController {
         filename = URLDecoder.decode(filename,"UTF-8");
         FileInputStream fis = null;
         try {
-            File file = new File(storePath+"/"+id+"/"+type+"/"+filename+"."+fileType);
+            File file = new File(storePath+"/"+name+"/"+type+"/"+filename+"."+fileType);
             fis = new FileInputStream(file);
             response.setHeader("charset", "utf-8");
             String encodeName = URLEncoder.encode(file.getName(), StandardCharsets.UTF_8.toString());
@@ -123,8 +123,8 @@ public class DocumentsController {
     }
 
     //删除文件接口
-    @RequestMapping(value = "/delete/{id}/{type}/{fileName}/{fileType}", method = RequestMethod.DELETE)
-    public void deleteFile(@PathVariable("id") Integer id,
+    @RequestMapping(value = "/delete/{name}/{type}/{fileName}/{fileType}", method = RequestMethod.DELETE)
+    public void deleteFile(@PathVariable("name") String name,
                            @PathVariable("type") Integer type,
                            @PathVariable("fileName") String fileName,
                            @PathVariable("fileType") String fileType) throws UnsupportedEncodingException {
@@ -132,7 +132,7 @@ public class DocumentsController {
         System.out.println("name1"+fileName);
 //        fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.toString());
 //        fileName=new String(fileName.getBytes("iso8859-1"),"UTF-8");
-        File file = new File(storePath+"/"+id+"/"+type+"/"+fileName+"."+fileType);
+        File file = new File(storePath+"/"+name+"/"+type+"/"+fileName+"."+fileType);
         System.out.println(file.getName()+"|"+file.exists());
         if(file.exists()){
             System.out.println(file.delete());
