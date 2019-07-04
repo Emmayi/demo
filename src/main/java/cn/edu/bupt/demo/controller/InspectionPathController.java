@@ -78,6 +78,7 @@ public class InspectionPathController {
         }
     }
 
+
     //更新巡检路径的信息
     @MyLog(value = "更新巡检路径内容")
     @RequestMapping(value = "/inspectionPath", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
