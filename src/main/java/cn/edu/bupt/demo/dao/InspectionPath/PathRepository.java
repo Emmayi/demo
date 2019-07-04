@@ -27,7 +27,7 @@ public interface PathRepository {
     Integer findCountOfArea(String area_belong);
 
     @Insert("insert into inspection_path (number,area_belong,pipe_belong,startpoint,endpoint,create_date,description,name) " +
-            "values (#{number},#{area_belong}#{pipe_belong},#{startpoint},#{endpoint},#{create_date},#{description},#{name})")
+            "values (#{number},#{area_belong},#{pipe_belong},#{startpoint},#{endpoint},#{create_date},#{description},#{name})")
     @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(InspectionPath inspectionPath);
 

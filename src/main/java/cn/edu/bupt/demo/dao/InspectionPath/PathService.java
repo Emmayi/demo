@@ -16,6 +16,8 @@ public interface PathService {
 
     Integer findCountOfArea(String area);
 
+    String setNumber(String number);
+
     void save(InspectionPath inspectionPath);
 
     void update(InspectionPath inspectionPath);

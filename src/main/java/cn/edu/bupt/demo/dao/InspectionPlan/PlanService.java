@@ -19,6 +19,8 @@ public interface PlanService {
 
     Integer findCountOfPerson(String inspection_person);
 
+    String setNumber(String number);
+
     void save(InspectionPlan inspectionPlan);
 
     void update(InspectionPlan inspectionPlan);

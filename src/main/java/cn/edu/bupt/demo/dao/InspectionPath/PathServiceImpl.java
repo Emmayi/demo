@@ -75,4 +75,18 @@ public class PathServiceImpl implements PathService{
         log.trace("Executing findAll [{}]");
         return pathRepository.findAll();
     }
+
+    @Override
+    public String setNumber(String id){
+        int Len= 6-id.length();
+        String num="LX";
+        StringBuilder sb=new StringBuilder();
+        sb.append(num);
+        for (int i=0;i<Len;i++){
+            sb.append("0");
+        }
+        sb.append(id);
+        String number=""+sb;
+        return number;
+    }
 }

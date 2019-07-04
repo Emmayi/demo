@@ -83,7 +83,13 @@ public class PlanController {
         InspectionPlan inspectionPlan = JSONObject.parseObject(reportInfo, InspectionPlan.class);
 
         try {
+            inspectionPlan.setNumber("JH000000");
             planService.save(inspectionPlan);
+            Integer ID=inspectionPlan.getId();
+            String id=Integer.toString(ID);
+            String number=planService.setNumber(id);
+            inspectionPlan.setNumber(number);
+            planService.update(inspectionPlan);
             return inspectionPlan.toString();
         } catch (Exception e) {
             throw new Exception("createInspectionPlan error!");
@@ -102,6 +108,9 @@ public class PlanController {
         }
 
         try {
+            Integer ID=inspectionPlan.getId();
+            String id=Integer.toString(ID);
+            inspectionPlan.setNumber(planService.setNumber(id));
             planService.update(inspectionPlan);
             return inspectionPlan.toString();
         } catch (Exception e) {

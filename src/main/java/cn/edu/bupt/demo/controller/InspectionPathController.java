@@ -65,7 +65,13 @@ public class InspectionPathController {
     public String createInspectionPath(@RequestBody String pathInfo) throws Exception{
         InspectionPath inspectionPath = JSONObject.parseObject(pathInfo, InspectionPath.class);
         try {
+            inspectionPath.setNumber("LX000000");
             pathService.save(inspectionPath);
+            Integer ID=inspectionPath.getId();
+            String id=Integer.toString(ID);
+            String number=pathService.setNumber(id);
+            inspectionPath.setNumber(number);
+            pathService.update(inspectionPath);
             return inspectionPath.toString();
         } catch (Exception e) {
             throw new Exception("createInspectionPath error!");
@@ -83,6 +89,9 @@ public class InspectionPathController {
             throw new RuntimeException("没有Id，无法更新!");
         }
         try {
+            Integer ID=inspectionPath.getId();
+            String id=Integer.toString(ID);
+            inspectionPath.setNumber(pathService.setNumber(id));
             pathService.update(inspectionPath);
             return inspectionPath.toString();
         } catch (Exception e) {
