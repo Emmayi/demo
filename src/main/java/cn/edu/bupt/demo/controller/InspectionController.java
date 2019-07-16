@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.InspectionReport.InspectionRepository;
 import cn.edu.bupt.demo.dao.InspectionReport.InspectionService;
@@ -41,6 +42,7 @@ public class InspectionController {
 //    private String storePath= "/Users/zy/Desktop/file";//存放我们上传的文件路径
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/inspectionReportByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionReportByPage(@RequestParam (name="limit") int limit,
@@ -68,6 +70,7 @@ public class InspectionController {
     }
 
     //通过Id查找巡检报告的信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/inspectionById",params = {"reportId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionById(@RequestParam Integer reportId) throws Exception{
@@ -79,6 +82,7 @@ public class InspectionController {
     }
 
     //通过值班人查找巡检报告的信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/inspectionByDutyPerson",params = {"dutyPerson"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionByDutyPerson(@RequestParam String dutyPerson) throws Exception{
@@ -90,6 +94,7 @@ public class InspectionController {
     }
 
     //通过巡检人查找巡检报告信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/inspectionByPlanId",params = {"id"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionByInspectionPerson(@RequestParam Integer id) throws Exception{
@@ -101,6 +106,7 @@ public class InspectionController {
     }
 
     //创建巡检报告，填写信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @MyLog(value = "添加新的巡检报告")
     @RequestMapping(value = "/inspection", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -115,6 +121,7 @@ public class InspectionController {
     }
 
     //更新巡检报告的信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @MyLog(value = "更新巡检报告内容")
     @RequestMapping(value = "/inspection", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -133,6 +140,7 @@ public class InspectionController {
     }
 
     //根据Id删除巡检报告信息
+    @Auth(roles = {"BranchDispatcher"})
     @RequestMapping(value = "/inspectionId",params = {"inspectionId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteReportById(@RequestParam Integer inspectionId){
@@ -144,6 +152,7 @@ public class InspectionController {
     }
 
     //根据工作人员Name删除工作人员信息
+    @Auth(roles = {"BranchDispatcher"})
     @RequestMapping(value = "/inspectionPerson",params = {"inspectionPerson"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteReportByInspectionPerson(@RequestParam String inspectionPerson){
@@ -155,6 +164,7 @@ public class InspectionController {
     }
 
     //获取所有巡检报告信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/allReport",method = RequestMethod.GET)
     @ResponseBody
     public String findAllReport() throws Exception{
@@ -167,6 +177,7 @@ public class InspectionController {
 
 
     //上传图片、视频，使用type区分
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/inspection/upload", method = RequestMethod.POST)
     public String uploadFile(@RequestParam("file") MultipartFile file,
                              @RequestParam("type") String type,
@@ -198,6 +209,7 @@ public class InspectionController {
     }
 
     //删除文件接口
+    @Auth(roles = {"BranchDispatcher"})
     @RequestMapping(value = "/inspection/delete/{id}/{type}/{fileName}/{fileType}", method = RequestMethod.DELETE)
     public void deleteFile(@PathVariable("id") Integer id,
                            @PathVariable("type") String type,

@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.dao.EmergencySupplies.SuppliesService;
 import cn.edu.bupt.demo.entity.EmergencySupplies;
 import com.alibaba.fastjson.JSONObject;
@@ -23,6 +24,7 @@ public class SuppliesController {
     SuppliesService suppliesService;
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/emergencySuppliesByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionEquipByPage(@RequestParam (name="limit") int limit,
@@ -51,6 +53,7 @@ public class SuppliesController {
     }
 
     //获取所有物资的页数
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/suppliesPage", params = {  "limit"  }, method = RequestMethod.GET)
     @ResponseBody
     public Integer getSuppliesPages(@RequestParam int limit) throws Exception {
@@ -62,6 +65,7 @@ public class SuppliesController {
     }
 
     //根据id获取物资信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/supplies",params = {"supplyId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getSupplyById(@RequestParam Integer supplyId) throws Exception{
@@ -73,6 +77,7 @@ public class SuppliesController {
     }
 
     //增加物资的信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/supplies", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createSupply(@RequestBody String supplyInfo) throws Exception{
@@ -88,6 +93,7 @@ public class SuppliesController {
 
 
     //更新
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/supplies", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateSupply(@RequestBody String supplyInfo) throws Exception{
@@ -104,6 +110,7 @@ public class SuppliesController {
     }
 
     //通过Id删除信息
+    @Auth(roles = {"BranchDispatcher"})
     @RequestMapping(value = "/supplies",params = {"supplyId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deletePlanById(@RequestParam Integer supplyId){
@@ -115,7 +122,8 @@ public class SuppliesController {
     }
 
     //获取所有的物资
-/*    @RequestMapping(value = "/suppliesALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @RequestMapping(value = "/suppliesALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllSupplies() throws Exception{
         try {
@@ -123,7 +131,7 @@ public class SuppliesController {
         }catch (Exception e){
             throw new Exception("getAllSupplies error!");
         }
-    }*/
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.EmergencyPlan.EmergencyRepository;
 import cn.edu.bupt.demo.dao.EmergencyPlan.EmergencyService;
@@ -31,6 +32,7 @@ public class EmergencyPlanController {
     EmergencyRepository emergencyRepository;
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/emergencyPlanByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getEmergencyPlanByPage(@RequestParam (name="limit") int limit,
@@ -59,6 +61,7 @@ public class EmergencyPlanController {
 
 
     //获取所有应急预案的页数
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/emergencyPages", params = {  "limit"  }, method = RequestMethod.GET)
     @ResponseBody
     public Integer getPlanPages(@RequestParam int limit) throws Exception {
@@ -70,6 +73,7 @@ public class EmergencyPlanController {
     }
 
     //根据应急预案id获取应急预案
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/emergencyById",params = {"emergencyId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getPlanById(@RequestParam Integer emergencyId) throws Exception{
@@ -81,6 +85,7 @@ public class EmergencyPlanController {
     }
 
     //根据level获取应急预案
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/emergencyByLevel",params = {"level"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getPlanByLevel(@RequestParam Integer level) throws Exception{
@@ -92,6 +97,7 @@ public class EmergencyPlanController {
     }
 
     //增加应急预案的信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @MyLog(value = "添加新的应急预案")
     @RequestMapping(value = "/emergency", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -106,6 +112,7 @@ public class EmergencyPlanController {
     }
 
     //更新应急预案
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @MyLog(value = "更新应急预案")
     @RequestMapping(value = "/emergency", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -124,6 +131,7 @@ public class EmergencyPlanController {
     }
 
     //通过Id删除信息
+    @Auth(roles = {"BranchDispatcher"})
     @MyLog(value = "删除应急预案")
     @RequestMapping(value = "/emergency",params = {"id"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
@@ -142,6 +150,7 @@ public class EmergencyPlanController {
     }
 
     //获取所有的应急预案
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/emergencyALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllPlan() throws Exception{

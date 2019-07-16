@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.dao.StaffNumber.StaffService;
 import cn.edu.bupt.demo.entity.StaffNumber;
 import com.alibaba.fastjson.JSONObject;
@@ -28,6 +29,7 @@ public class StaffController {
     private StaffService staffService;
 
     //根据工作人员id获取工作人员信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/staffById",params = {"staffId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getStaffById(@RequestParam Integer staffId) throws Exception{
@@ -39,6 +41,7 @@ public class StaffController {
     }
 
     //根据工作人员name获取工作人员信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/staffByName",params = {"staffName"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getStaffByName(@RequestParam String staffName) throws Exception{
@@ -50,6 +53,7 @@ public class StaffController {
     }
 
     //创建Staff，填写信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/staff", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createStaff(@RequestBody String staffInfo) throws Exception{
@@ -63,6 +67,7 @@ public class StaffController {
     }
 
     //更新staff信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/staff", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateStaff(@RequestBody String staffInfo) throws Exception{
@@ -79,6 +84,7 @@ public class StaffController {
     }
 
     //根据StaffId统计一共有多少
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/staffCount", method = RequestMethod.GET)
     @ResponseBody
     public Integer staffCountById() throws Exception{
@@ -91,6 +97,7 @@ public class StaffController {
     }
 
     //根据StaffId查找StaffName
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/staffName",params = {"staffId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     public String findStaffName(@RequestParam Integer staffId) throws Exception{
         try {
@@ -101,6 +108,7 @@ public class StaffController {
     }
 
     //根据工作人员Id删除工作人员信息
+    @Auth(roles = {"BranchDispatcher"})
     @RequestMapping(value = "/staffId",params = {"staffId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteStaffById(@RequestParam Integer staffId){
@@ -112,6 +120,7 @@ public class StaffController {
     }
 
     //根据工作人员Name删除工作人员信息
+    @Auth(roles = {"BranchDispatcher"})
     @RequestMapping(value = "/staffName",params = {"staffName"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteStaffById(@RequestParam String staffName){
@@ -123,6 +132,7 @@ public class StaffController {
     }
 
     //获取所有工作人员信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/allStaff",method = RequestMethod.GET)
     @ResponseBody
     public String findAllStaff() throws Exception{

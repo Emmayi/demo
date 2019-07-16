@@ -13,7 +13,7 @@ public interface PlaceRespository {
     @Select("select*from emergency_place where category = #{category} limit #{index},#{pageSize}")
     List<EmergencyPlace> findPlaceByCategoryAndPage(@Param("category")String category,@Param("index")Integer index,@Param("pageSize")Integer pageSize);
 
-    @Select("select * from emergency_place where place_id = #{place_id}")
+    @Select("select * from emergency_place where id = #{place_id}")
     EmergencyPlace findEmergencyPlaceById(Integer place_id);
 
 /*    @Select("select * from emergency_place where name = #{name}")
@@ -37,12 +37,12 @@ public interface PlaceRespository {
     void save(EmergencyPlace emergencyPlace);
 
     @Update("update emergency_place set name = #{name},category = #{category},location = #{location},area = #{area},capacity = #{capacity},introduction = #{introduction},affiliation = #{affiliation}, " +
-            "principal = #{principal},telephone = #{telephone},cellphone = #{cellphone} where place_id=#{place_id}")
+            "principal = #{principal},telephone = #{telephone},cellphone = #{cellphone} where id=#{place_id}")
     void update(EmergencyPlace emergencyPlace);
 
-    @Delete("delete from emergency_place where place_id=#{place_id}")
+    @Delete("delete from emergency_place where id=#{place_id}")
     void deleteById(Integer place_id);
 
-    @Select("select * from emergency_place where place_id > 0")
+    @Select("select * from emergency_place where id > 0")
     List<EmergencyPlace> findAllPlace();
 }

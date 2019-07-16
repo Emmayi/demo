@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.dao.EmergencyTeam.TeamService;
 import cn.edu.bupt.demo.entity.EmergencyTeam;
 import com.alibaba.fastjson.JSONObject;
@@ -31,6 +32,7 @@ public class TeamController {
     }*/
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/emergencyTeamByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionTeamByPage(@RequestParam (name="limit") int limit,
@@ -59,6 +61,7 @@ public class TeamController {
     }
 
     //获取所有队伍的页数
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/teamPage", params = {  "limit"  }, method = RequestMethod.GET)
     @ResponseBody
     public Integer getTeamPages(@RequestParam int limit) throws Exception {
@@ -70,6 +73,7 @@ public class TeamController {
     }
 
     //根据id获取队伍信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/team",params = {"teamId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getTeamById(@RequestParam Integer teamId) throws Exception{
@@ -126,6 +130,7 @@ public class TeamController {
     }*/
 
     //增加队伍的信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/team", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createTeam(@RequestBody String teamInfo) throws Exception{
@@ -155,6 +160,7 @@ public class TeamController {
     }
 
     //更新
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/team", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateTeam(@RequestBody String teamInfo) throws Exception{
@@ -185,6 +191,7 @@ public class TeamController {
     }
 
     //通过Id删除信息
+    @Auth(roles = {"BranchDispatcher"})
     @RequestMapping(value = "/team",params = {"teamId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deletePlanById(@RequestParam Integer teamId){
@@ -195,7 +202,8 @@ public class TeamController {
         }
     }
 
-/*    //获取所有的队伍
+    //获取所有的队伍
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/teamALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllTeam() throws Exception{
@@ -204,6 +212,6 @@ public class TeamController {
         }catch (Exception e){
             throw new Exception("getAllTeam error!");
         }
-    }*/
+    }
 
 }

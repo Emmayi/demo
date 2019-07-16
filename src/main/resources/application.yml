@@ -9,7 +9,8 @@ spring:
       force: true
   datasource:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://39.104.165.155:3306/management?characterEncoding=UTF-8&useUnicode=true&&useSSL=true&characterSetResults=utf8  #jdbc:mysql://39.104.165.155 172.24.32.169 localhost:3306/dbgirl_test?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      #url: jdbc:mysql://39.104.165.155:3306/management?characterEncoding=UTF-8&useUnicode=true&&useSSL=true&characterSetResults=utf8  #jdbc:mysql://39.104.165.155 172.24.32.169 localhost:3306/dbgirl_test?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      url: jdbc:mysql://39.104.165.155:3306/BUPT_IOT?characterEncoding=UTF-8&useUnicode=true&useSSL=true
       username: root
       password: root
       cachePrepStmts: true  # 开启二级缓存

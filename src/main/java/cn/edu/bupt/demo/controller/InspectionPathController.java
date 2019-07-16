@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.InspectionPath.PathService;
 import cn.edu.bupt.demo.entity.InspectionPath;
@@ -22,6 +23,7 @@ public class InspectionPathController {
     private PathService pathService;
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/inspectionPathByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionPathByPage(@RequestParam (name="limit") int limit,
@@ -48,6 +50,7 @@ public class InspectionPathController {
     }
 
     //通过Id查找巡检路径的信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/inspectionPath",params = {"id"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionPathById(@RequestParam Integer id) throws Exception{
@@ -59,6 +62,7 @@ public class InspectionPathController {
     }
 
     //创建巡检路径，填写信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @MyLog(value = "添加新的巡检路径")
     @RequestMapping(value = "/inspectionPath", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -80,6 +84,7 @@ public class InspectionPathController {
 
 
     //更新巡检路径的信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @MyLog(value = "更新巡检路径内容")
     @RequestMapping(value = "/inspectionPath", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -102,6 +107,7 @@ public class InspectionPathController {
 
 
     //根据Id删除巡检路径信息
+    @Auth(roles = {"BranchDispatcher"})
     @MyLog(value = "删除巡检路径")
     @RequestMapping(value = "/inspection",params = {"id"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
@@ -114,6 +120,7 @@ public class InspectionPathController {
     }
 
     //获取所有巡检路径信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/allPath",method = RequestMethod.GET)
     @ResponseBody
     public String findAllPath() throws Exception{

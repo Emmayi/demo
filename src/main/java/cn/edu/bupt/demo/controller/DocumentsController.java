@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.annotation.Auth;
 import com.google.gson.JsonObject;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class DocumentsController {
 
 
     //获取所有文件接口
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/showFile/{name}/{type}", method = RequestMethod.GET)
     public String getAllFile(@PathVariable("name") String name,
                              @PathVariable("type") Integer type) throws IOException {
@@ -52,6 +54,7 @@ public class DocumentsController {
     }
 
     //上传文件接口
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFile(@RequestParam("file") MultipartFile file,
                              @RequestParam("name") String name,
@@ -87,6 +90,7 @@ public class DocumentsController {
 
 
     //下载文件接口
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/download/{name}/{type}/{fileName}/{fileType}", method = RequestMethod.GET)
     public void downloadFile(@PathVariable("name") String name,
                              @PathVariable("type") Integer type,
@@ -123,6 +127,7 @@ public class DocumentsController {
     }
 
     //删除文件接口
+    @Auth(roles = {"BranchDispatcher"})
     @RequestMapping(value = "/delete/{name}/{type}/{fileName}/{fileType}", method = RequestMethod.DELETE)
     public void deleteFile(@PathVariable("name") String name,
                            @PathVariable("type") Integer type,

@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.dao.EmergencyEquis.EquisService;
 import cn.edu.bupt.demo.entity.EmergencyEquis;
 import com.alibaba.fastjson.JSONObject;
@@ -32,6 +33,7 @@ public class EquisController {
     }*/
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/emergencyEquisByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionEquisByPage(@RequestParam (name="limit") int limit,
@@ -60,6 +62,7 @@ public class EquisController {
     }
 
     //获取所有设备的页数
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/equisPage", params = {  "limit"  }, method = RequestMethod.GET)
     @ResponseBody
     public Integer getEquisPages(@RequestParam int limit) throws Exception {
@@ -71,6 +74,7 @@ public class EquisController {
     }
 
     //根据id获取设备信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/equis",params = {"equisId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getEquisById(@RequestParam Integer equisId) throws Exception{
@@ -127,6 +131,7 @@ public class EquisController {
     }*/
 
     //增加设备的信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/equis", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createEquis(@RequestBody String equisInfo) throws Exception{
@@ -142,6 +147,7 @@ public class EquisController {
 
 
     //更新
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/equis", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateEquis(@RequestBody String equisInfo) throws Exception{
@@ -158,6 +164,7 @@ public class EquisController {
  }
 
     //通过Id删除信息
+    @Auth(roles = {"BranchDispatcher"})
     @RequestMapping(value = "/equis",params = {"equisId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteEquisById(@RequestParam Integer equisId){
@@ -169,6 +176,7 @@ public class EquisController {
     }
 
     //获取所有的设备
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/equisALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllEquis() throws Exception{

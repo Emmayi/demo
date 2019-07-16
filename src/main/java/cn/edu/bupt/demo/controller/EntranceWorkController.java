@@ -1,5 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.EntranceWork.EntranceService;
 import cn.edu.bupt.demo.entity.EntranceWork;
@@ -27,6 +28,7 @@ public class EntranceWorkController {
     EntranceService entranceService;
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/entranceWorkByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getEntranceWorkByPage(@RequestParam (name="limit") int limit,
@@ -55,6 +57,7 @@ public class EntranceWorkController {
 
 
     //根据入廊作业id获取入廊信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/entranceWorkById",params = {"entranceId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getEntranceWorkById(@RequestParam Integer entranceId) throws Exception{
@@ -69,6 +72,7 @@ public class EntranceWorkController {
 
     //增加入廊作业的信息
     @MyLog(value = "添加新的入廊作业")
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/entranceWork", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createEntranceWork(@RequestBody String workInfo) throws Exception{
@@ -84,6 +88,7 @@ public class EntranceWorkController {
     }
 
     //更新入廊信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @MyLog(value = "更新入廊作业")
     @RequestMapping(value = "/entranceWork", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -106,6 +111,7 @@ public class EntranceWorkController {
     }
 
     //添加评价
+    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
     @MyLog(value = "为入廊作业添加评价")
     @RequestMapping(value = "/entranceWorkEvaluation", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -125,6 +131,7 @@ public class EntranceWorkController {
     }
 
     //通过Id删除信息
+    @Auth(roles = {"BranchDispatcher"})
     @MyLog(value = "删除入廊作业")
     @RequestMapping(value = "/entranceWorkById",params = {"WorkId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
@@ -137,6 +144,7 @@ public class EntranceWorkController {
     }
 
     //通过Date删除信息
+    @Auth(roles = {"BranchDispatcher"})
     @RequestMapping(value = "/entranceWorkByDate",params = {"date"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteWorkByDate(@RequestParam Long date){
@@ -148,6 +156,7 @@ public class EntranceWorkController {
     }
 
     //获取所有的入廊作业
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/entranceWork", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllEntranceWork() throws Exception{
