@@ -5,6 +5,7 @@ import cn.edu.bupt.demo.dao.SysLog.SysLogService;
 import cn.edu.bupt.demo.entity.SysLog;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("api/v1/info")
 @CrossOrigin
+@Api(description= "获取设备数据")
 public class DeviceController {
 
     HttpLogin httpLogin = new HttpLogin();

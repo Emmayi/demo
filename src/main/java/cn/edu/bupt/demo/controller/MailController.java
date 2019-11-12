@@ -5,6 +5,7 @@ import cn.edu.bupt.demo.dao.StaffNumber.StaffService;
 import cn.edu.bupt.demo.entity.InspectionEquip;
 import cn.edu.bupt.demo.entity.InspectionPlan;
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ import java.util.Date;
 @RestController
 @RequestMapping("api/v1/info")
 @CrossOrigin
+@Api(description= "邮件接口")
 public class MailController {
 
     @Autowired

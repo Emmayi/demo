@@ -2,6 +2,7 @@ package cn.edu.bupt.demo.controller;
 
 import cn.edu.bupt.demo.annotation.Auth;
 import com.google.gson.JsonObject;
+import io.swagger.annotations.Api;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/info")
 @CrossOrigin
+@Api(description= "文件上传与下载")
 public class DocumentsController {
 
     String storePath= "/home/zy/info/EmergencyPlanFile";//存放上传的文件路径

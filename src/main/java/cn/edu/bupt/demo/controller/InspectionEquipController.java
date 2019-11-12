@@ -4,6 +4,7 @@ import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.InspectionEquip.EquipService;
 import cn.edu.bupt.demo.entity.InspectionEquip;
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/info")
 @CrossOrigin
+@Api(description= "巡检设备")
 public class InspectionEquipController {
 
     @Autowired

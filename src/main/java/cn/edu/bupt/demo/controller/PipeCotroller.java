@@ -5,6 +5,7 @@ import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.dao.PipeGallery.PipeGalleryService;
 import cn.edu.bupt.demo.entity.PipeGallery;
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/info")
 @CrossOrigin
+@Api(description= "管廊管道")
 public class PipeCotroller {
     @Autowired
     PipeGalleryService pipeGalleryService;

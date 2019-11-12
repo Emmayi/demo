@@ -3,6 +3,7 @@ package cn.edu.bupt.demo.controller;
 import cn.edu.bupt.demo.dao.DaliyInspection.DaliyService;
 import cn.edu.bupt.demo.entity.DailyInspection;
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/info")
 @CrossOrigin
+@Api(description= "日常巡检")
 public class DaliyController {
     @Autowired
     private DaliyService daliyService;

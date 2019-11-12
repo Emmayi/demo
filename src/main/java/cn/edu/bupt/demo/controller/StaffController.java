@@ -6,6 +6,7 @@ import cn.edu.bupt.demo.entity.StaffNumber;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/info")
 @CrossOrigin
+@Api(description= "用户")
 public class StaffController {
 
     @Autowired

@@ -4,6 +4,7 @@ import cn.edu.bupt.demo.dao.ProjectCinformation.InformationService;
 import cn.edu.bupt.demo.entity.ProjectCinformation;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

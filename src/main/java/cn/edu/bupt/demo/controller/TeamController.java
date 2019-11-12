@@ -6,6 +6,7 @@ import cn.edu.bupt.demo.entity.EmergencyTeam;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,22 +15,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/info")
 @CrossOrigin
+@Api(description= "应急救援队伍")
 public class TeamController {
     @Autowired
     TeamService teamService;
-
-   /* //配合分页设置，获取所有的队伍信息
-    @RequestMapping(value = "/teamByPage", params = {  "limit","page"  }, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public String getTeamByPage(@RequestParam int limit,
-                                    @RequestParam int page) throws Exception {
-        try {
-            return teamService.findAllByPage(page,limit).toString();
-
-        } catch (Exception e) {
-            throw new Exception("getTeamByPage error!");
-        }
-    }*/
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
     @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})

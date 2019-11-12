@@ -4,6 +4,7 @@ import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.dao.PipeGalleryArea.GalleryAreaService;
 import cn.edu.bupt.demo.entity.PipeGalleryArea;
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/info")
 @CrossOrigin
+@Api(description= "管廊区域")
 public class GalleryAreaController {
     @Autowired
     GalleryAreaService galleryAreaService;

@@ -8,6 +8,7 @@ import cn.edu.bupt.demo.entity.EmergencyPlan;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ import java.io.File;
 @RestController
 @RequestMapping("/api/v1/info")
 @CrossOrigin
+@Api(description= "应急预案")
 public class EmergencyPlanController {
 
     private String storePath= "/home/zy/file";//存放上传的文件路径
