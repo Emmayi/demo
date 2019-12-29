@@ -23,9 +23,12 @@ public class SysLog implements Serializable{
     private String user_name;
     @Setter@Getter
     private String action;
-
     @Setter@Getter
     private Timestamp create_Time;
+    @Setter@Getter
+    private String account;
+    @Setter@Getter
+    private String role;
 
     @Override
     public String toString() {
@@ -40,6 +43,10 @@ public class SysLog implements Serializable{
                 .append(action).append('\"');
         sb.append(",\"create_Time\":\"")
                 .append(create_Time).append('\"');
+        sb.append(",\"account\":\"")
+                .append(account).append('\"');
+        sb.append(",\"role\":\"")
+                .append(role).append('\"');
         sb.append('}');
         return sb.toString();
     }

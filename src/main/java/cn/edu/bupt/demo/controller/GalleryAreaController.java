@@ -1,6 +1,7 @@
 package cn.edu.bupt.demo.controller;
 
 import cn.edu.bupt.demo.annotation.Auth;
+import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.PipeGalleryArea.GalleryAreaService;
 import cn.edu.bupt.demo.entity.PipeGalleryArea;
 import com.alibaba.fastjson.JSONObject;
@@ -19,7 +20,7 @@ public class GalleryAreaController {
     GalleryAreaService galleryAreaService;
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/galleryAreaByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionGalleryAreaByPage(@RequestParam(name="limit") int limit,
@@ -48,7 +49,7 @@ public class GalleryAreaController {
     }
 
     //获取所有管廊区域的页数
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/galleryAreaPage", params = {  "limit"  }, method = RequestMethod.GET)
     @ResponseBody
     public Integer getAreaPages(@RequestParam int limit) throws Exception {
@@ -60,7 +61,7 @@ public class GalleryAreaController {
     }
 
     //根据id获取管廊区域信息
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/galleryArea",params = {"Id"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAreaById(@RequestParam Integer Id) throws Exception{
@@ -72,7 +73,8 @@ public class GalleryAreaController {
     }
 
     //增加管廊区域的信息
-    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
+    @MyLog(value = "添加新管廊区域")
     @RequestMapping(value = "/galleryArea", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String creategalleryArea(@RequestBody String galleryAreaInfo) throws Exception{
@@ -93,7 +95,8 @@ public class GalleryAreaController {
 
 
     //更新
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
+    @MyLog(value = "更新管廊区域")
     @RequestMapping(value = "/galleryArea", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updategalleryArea(@RequestBody String galleryAreaInfo) throws Exception{
@@ -113,7 +116,8 @@ public class GalleryAreaController {
     }
 
     //通过Id删除信息
-    @Auth(roles = {"BranchDispatcher"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher"})
+    @MyLog(value = "删除管廊区域")
     @RequestMapping(value = "/galleryArea",params = {"Id"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteAreaById(@RequestParam Integer Id){
@@ -125,7 +129,7 @@ public class GalleryAreaController {
     }
 
     //获取所有区域
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "galleryAreaAll",method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
     @ResponseStatus(value = HttpStatus.OK)
     public String getAllArea() throws Exception{

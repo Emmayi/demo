@@ -2,6 +2,7 @@ package cn.edu.bupt.demo.controller;
 
 
 import cn.edu.bupt.demo.annotation.Auth;
+import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.PipeGallery.PipeGalleryService;
 import cn.edu.bupt.demo.entity.PipeGallery;
 import com.alibaba.fastjson.JSONObject;
@@ -20,7 +21,7 @@ public class PipeCotroller {
     PipeGalleryService pipeGalleryService;
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/pipeByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionPipeByPage(@RequestParam(name="limit") int limit,
@@ -49,7 +50,7 @@ public class PipeCotroller {
     }
 
     //获取所有管廊的页数
-    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/pipePage", params = {  "limit"  }, method = RequestMethod.GET)
     @ResponseBody
     public Integer getPipePages(@RequestParam int limit) throws Exception {
@@ -61,7 +62,7 @@ public class PipeCotroller {
     }
 
     //根据id获取管廊信息
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/pipeGallery",params = {"Id"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getPipeById(@RequestParam Integer Id) throws Exception{
@@ -73,7 +74,8 @@ public class PipeCotroller {
     }
 
     //增加管廊的信息
-    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
+    @MyLog(value = "添加新管廊")
     @RequestMapping(value = "/pipeGallery", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createpipeGallery(@RequestBody String pipeGalleryInfo) throws Exception{
@@ -94,7 +96,8 @@ public class PipeCotroller {
 
 
     //更新
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
+    @MyLog(value = "更新管廊信息")
     @RequestMapping(value = "/pipeGallery", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updatepipeGallery(@RequestBody String pipeGalleryInfo) throws Exception{
@@ -114,7 +117,7 @@ public class PipeCotroller {
     }
 
     //通过Id删除信息
-    @Auth(roles = {"BranchDispatcher"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher"})
     @RequestMapping(value = "/pipeGallery",params = {"Id"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteAreaById(@RequestParam Integer Id){
@@ -126,7 +129,7 @@ public class PipeCotroller {
     }
 
     //获取所有管廊
-    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "pipeGalleryAll",method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
     @ResponseStatus(value = HttpStatus.OK)
     public String getAllPipe() throws Exception{

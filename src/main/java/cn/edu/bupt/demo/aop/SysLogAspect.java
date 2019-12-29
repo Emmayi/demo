@@ -2,6 +2,7 @@ package cn.edu.bupt.demo.aop;
 
 import cn.edu.bupt.demo.dao.SysLog.SysLogService;
 import cn.edu.bupt.demo.entity.SysLog;
+import io.swagger.models.auth.In;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,7 +11,10 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -61,25 +65,37 @@ public class SysLogAspect {
             sys_log.setAction(userAction.value());
         }
 
-        // 请求的类名
-        String className = point.getTarget().getClass().getName();
-        // 请求的方法名
-        String methodName = signature.getName();
-        // 请求的方法参数值
-        String args = Arrays.toString(point.getArgs());
-
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //从session中获取当前登陆人id
-//		Long userid = (Long)SecurityUtils.getSubject().getSession().getAttribute("userid");
+//        Integer userid = Integer.valueOf(request.getQueryString());
+
+        Integer userid = Integer.valueOf(request.getParameter("user_id"));
+        System.out.println(userid);
+
+        String role = sysLogService.role(userid);
+        System.out.println(role);
+
+        String account = sysLogService.account(userid);
+        System.out.println(account);
+
+        String username = sysLogService.userName(userid);
+        System.out.println(username);
+
+
+
+//		String userid = (Long)SecurityUtils.getSubject().getSession().getAttribute("user_id");
 //		String username = (Long)SecurityUtils.getSubject().getSession().getAttribute("username");
 
-        String userid = "RY110380";//应该从session中获取当前登录人的id，这里简单模拟下
-        String username = "Emma";//应该从session中获取当前登录人name
 
-        sys_log.setUser_id(userid);
+        sys_log.setUser_id(userid.toString());
 
         sys_log.setUser_name(username);
 
         sys_log.setCreate_Time(new java.sql.Timestamp(new Date().getTime()));
+
+        sys_log.setAccount(account);
+
+        sys_log.setRole(role);
 
         log.info(sys_log.toString());
 

@@ -2,6 +2,7 @@ package cn.edu.bupt.demo.controller;
 
 import cn.edu.bupt.demo.dao.Mail.MailService;
 import cn.edu.bupt.demo.dao.StaffNumber.StaffService;
+import cn.edu.bupt.demo.dao.User.UserRepository;
 import cn.edu.bupt.demo.entity.InspectionEquip;
 import cn.edu.bupt.demo.entity.InspectionPlan;
 import com.alibaba.fastjson.JSONObject;
@@ -27,7 +28,7 @@ public class MailController {
     private MailService mailService;
 
     @Autowired
-    private StaffService staffService;
+    private UserRepository userRepository;
 
     /**
      *
@@ -37,7 +38,7 @@ public class MailController {
 
         InspectionPlan inspectionPlan = JSONObject.parseObject(info, InspectionPlan.class);
 
-        String to = staffService.findEmailByName(inspectionPlan.getId());
+        String to = userRepository.findEmailByName(inspectionPlan.getId());
 
         try {
             mailService.sendMessageMail(inspectionPlan, to,"巡检计划表通知", "message1.ftl");
@@ -52,7 +53,7 @@ public class MailController {
     public void sendEquipMailMessage(@RequestBody String info) throws Exception{
 
         InspectionEquip inspectionEquip = JSONObject.parseObject(info, InspectionEquip.class);
-        String to = staffService.findEmailByName(inspectionEquip.getId());
+        String to = userRepository.findEmailByName(inspectionEquip.getId());
         try {
             mailService.sendMessageMail(inspectionEquip, to,"设备定期检测通知", "message2.ftl");
 

@@ -26,7 +26,7 @@ public class PlanController {
     private PlanService planService;
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/inspectionPlanByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionReportByPage(@RequestParam (name="limit") int limit,
@@ -54,7 +54,7 @@ public class PlanController {
     }
 
     //通过Id查找巡检计划的信息
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/planById",params = {"id"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getPlanById(@RequestParam Integer id) throws Exception{
@@ -67,7 +67,7 @@ public class PlanController {
 
 
     //统计一共有多少计划
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/plan", method = RequestMethod.GET)
     @ResponseBody
     public Integer getAllCount() throws Exception{
@@ -81,7 +81,7 @@ public class PlanController {
 
 
     //创建巡检计划，填写信息
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @MyLog(value = "创建巡检计划")
     @RequestMapping(value = "/plan", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -104,7 +104,7 @@ public class PlanController {
     }
 
     //更新巡检计划的信息
-    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/plan", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateInspectionPlan(@RequestBody String reportInfo) throws Exception{
@@ -127,7 +127,7 @@ public class PlanController {
     }
 
     //更新状态
-    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/planStatus", params = {"id"},method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public void updateInspectionPlan(@RequestParam Integer id) throws Exception{
@@ -140,7 +140,7 @@ public class PlanController {
     }
 
     //根据巡检人员id删除巡检计划
-    @Auth(roles = {"BranchDispatcher"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher"})
     @MyLog(value = "删除巡检计划")
     @RequestMapping(value = "/plan",params = {"id"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
@@ -153,7 +153,7 @@ public class PlanController {
     }
 
     //获取所有巡检计划信息
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/allPlan",method = RequestMethod.GET)
     @ResponseBody
     public String findAllReport() throws Exception{

@@ -2,6 +2,7 @@ package cn.edu.bupt.demo.controller;
 
 import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.dao.StaffNumber.StaffService;
+import cn.edu.bupt.demo.dao.User.UserRepository;
 import cn.edu.bupt.demo.entity.StaffNumber;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
@@ -29,6 +30,9 @@ public class StaffController {
 
     @Autowired
     private StaffService staffService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     //根据工作人员id获取工作人员信息
     @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
@@ -142,6 +146,19 @@ public class StaffController {
             return staffService.findAllStaff().toString();
         }catch (Exception e){
             throw new Exception("findAllStaff error!");
+        }
+    }
+
+    //从这里开始是关于user表的内容
+    // 获取所有user信息
+    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @RequestMapping(value = "/allUser",method = RequestMethod.GET)
+    @ResponseBody
+    public String findAllUser() throws Exception{
+        try {
+            return userRepository.findAll().toString();
+        }catch (Exception e){
+            throw new Exception("findAllUser error!");
         }
     }
 

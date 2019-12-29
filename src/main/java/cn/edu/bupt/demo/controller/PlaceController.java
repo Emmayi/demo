@@ -34,7 +34,7 @@ public class PlaceController {
     }*/
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/emergencyPlaceByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionPlaceByPage(@RequestParam (name="limit") int limit,
@@ -63,7 +63,7 @@ public class PlaceController {
     }
 
     //获取所有场所的页数
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/placePage", params = {  "limit"  }, method = RequestMethod.GET)
     @ResponseBody
     public Integer getPlacePages(@RequestParam int limit) throws Exception {
@@ -75,7 +75,7 @@ public class PlaceController {
     }
 
     //根据id获取物资信息
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/place",params = {"placeId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getPlaceById(@RequestParam Integer placeId) throws Exception{
@@ -132,7 +132,7 @@ public class PlaceController {
     }*/
 
     //增加场所的信息
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/place", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createPlace(@RequestBody String placeInfo) throws Exception{
@@ -164,7 +164,7 @@ public class PlaceController {
     }
 
     //更新
-    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/place", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updatePlace(@RequestBody String placeInfo) throws Exception{
@@ -196,7 +196,7 @@ public class PlaceController {
     }
 
     //通过Id删除信息
-    @Auth(roles = {"BranchDispatcher"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher"})
     @RequestMapping(value = "/place",params = {"placeId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deletePlanById(@RequestParam Integer placeId){
@@ -208,7 +208,7 @@ public class PlaceController {
     }
 
     //获取所有的场所
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/placeALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllPlace() throws Exception{

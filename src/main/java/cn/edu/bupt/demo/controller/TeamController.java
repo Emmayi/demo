@@ -21,7 +21,7 @@ public class TeamController {
     TeamService teamService;
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/emergencyTeamByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionTeamByPage(@RequestParam (name="limit") int limit,
@@ -50,7 +50,7 @@ public class TeamController {
     }
 
     //获取所有队伍的页数
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/teamPage", params = {  "limit"  }, method = RequestMethod.GET)
     @ResponseBody
     public Integer getTeamPages(@RequestParam int limit) throws Exception {
@@ -62,7 +62,7 @@ public class TeamController {
     }
 
     //根据id获取队伍信息
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/team",params = {"teamId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getTeamById(@RequestParam Integer teamId) throws Exception{
@@ -84,28 +84,6 @@ public class TeamController {
         }
     }
 
-    //根据Affiliation获取队伍信息
-    @RequestMapping(value = "/team",params = {"affiliation"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public String getTeamByAffiliation(@RequestParam String affiliation) throws Exception{
-        try {
-            return teamService.findTeamByAffiliation(affiliation).toString();
-        }catch (Exception e){
-            throw new Exception("getTeamByAffiliation error!");
-        }
-    }
-
-    //根据Location获取队伍信息
-    @RequestMapping(value = "/team",params = {"location"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public String getTeamByLocation(@RequestParam String location) throws Exception{
-        try {
-            return teamService.findTeamByLocation(location).toString();
-        }catch (Exception e){
-            throw new Exception("getTeamByLocation error!");
-        }
-    }*/
-
 /*    //统计有多少
     @RequestMapping(value = "/teamCount", method = RequestMethod.GET)
     @ResponseBody
@@ -119,7 +97,7 @@ public class TeamController {
     }*/
 
     //增加队伍的信息
-    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/team", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String createTeam(@RequestBody String teamInfo) throws Exception{
@@ -149,7 +127,7 @@ public class TeamController {
     }
 
     //更新
-    @Auth(roles = {"BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/team", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String updateTeam(@RequestBody String teamInfo) throws Exception{
@@ -180,7 +158,7 @@ public class TeamController {
     }
 
     //通过Id删除信息
-    @Auth(roles = {"BranchDispatcher"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher"})
     @RequestMapping(value = "/team",params = {"teamId"},method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deletePlanById(@RequestParam Integer teamId){
@@ -192,7 +170,7 @@ public class TeamController {
     }
 
     //获取所有的队伍
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/teamALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllTeam() throws Exception{
