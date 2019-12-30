@@ -10,20 +10,32 @@ import org.apache.ibatis.annotations.Select;
  */
 public class InspectionReport extends IdBased {
 
-    private Integer id;
-    private String duty_person;
-    private String inspection_person;
-    private Long create_date;
-    private Long calendar_date;
-    private String state;
-    private String summary;
-    private String abnormal;
-    private String maintenance;
-    private String image;
-    private String video;
 
+    private Integer id;
+    @Getter@Setter
+    private String duty_person;
+    @Getter@Setter
+    private String inspection_person;
+    @Getter@Setter
+    private Long create_date;
+    @Getter@Setter
+    private Long calendar_date;
+    @Getter@Setter
+    private Integer state;
+    @Getter@Setter
+    private String summary;
+    @Getter@Setter
+    private String abnormal;
+    @Getter@Setter
+    private String maintenance;
+    @Getter@Setter
+    private String image;
+    @Getter@Setter
+    private String video;
     @Getter@Setter
     private Integer plan_id;
+    @Getter@Setter
+    private String maintenanceDescription;
 
     @Override
     public Integer getId() {
@@ -33,86 +45,6 @@ public class InspectionReport extends IdBased {
     @Override
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getDuty_person() {
-        return duty_person;
-    }
-
-    public void setDuty_person(String duty_person) {
-        this.duty_person = duty_person;
-    }
-
-    public String getInspection_person() {
-        return inspection_person;
-    }
-
-    public void setInspection_person(String inspection_person) {
-        this.inspection_person = inspection_person;
-    }
-
-    public Long getCreate_date() {
-        return create_date;
-    }
-
-    public void setCreate_date(Long create_date) {
-        this.create_date = create_date;
-    }
-
-    public Long getCalendar_date() {
-        return calendar_date;
-    }
-
-    public void setCalendar_date(Long calendar_date) {
-        this.calendar_date = calendar_date;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public String getAbnormal() {
-        return abnormal;
-    }
-
-    public void setAbnormal(String abnormal) {
-        this.abnormal = abnormal;
-    }
-
-    public String getMaintenance() {
-        return maintenance;
-    }
-
-    public void setMaintenance(String maintenance) {
-        this.maintenance = maintenance;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getVideo() {
-        return video;
-    }
-
-    public void setVideo(String video) {
-        this.video = video;
     }
 
     @Override
@@ -130,8 +62,8 @@ public class InspectionReport extends IdBased {
                 .append(create_date).append('\"');
         sb.append(",\"calendar_date\":\"")
                 .append(calendar_date).append('\"');
-        sb.append(",\"state\":\"")
-                .append(state).append('\"');
+        sb.append(",\"state\":")
+                .append(state);
         sb.append(",\"summary\":\"")
                 .append(summary).append('\"');
         sb.append(",\"abnormal\":\"")
@@ -142,6 +74,8 @@ public class InspectionReport extends IdBased {
                 .append(image).append('\"');
         sb.append(",\"video\":\"")
                 .append(video).append('\"');
+        sb.append(",\"maintenanceDescription\":\"")
+                .append(maintenanceDescription).append('\"');
         sb.append('}');
 
         return sb.toString();

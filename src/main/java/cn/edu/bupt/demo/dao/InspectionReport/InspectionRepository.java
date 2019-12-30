@@ -31,13 +31,14 @@ public interface InspectionRepository {
     @Select("select count(*) from inspection_report where calendar_date = #{calendar_date}")
     Integer findDayCount(Long calendar_date);
 
-    @Insert("insert into inspection_report (duty_person,inspection_person,create_date,calendar_date,state,summary,abnormal,maintenance,image,video,plan_id) " +
-                                "values (#{duty_person},#{inspection_person},#{create_date},#{calendar_date},#{state},#{summary},#{abnormal},#{maintenance},#{image},#{video},#{plan_id})")
+    @Insert("insert into inspection_report (duty_person,inspection_person,create_date,calendar_date,state,summary,abnormal,maintenance,image,video,plan_id,maintenanceDescription) " +
+                                "values (#{duty_person},#{inspection_person},#{create_date},#{calendar_date},#{state},#{summary},#{abnormal},#{maintenance},#{image},#{video},#{plan_id},#{maintenanceDescription})")
     @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
     void save(InspectionReport inspectionReport);
 
     @Update("update inspection_report set duty_person = #{duty_person},inspection_person = #{inspection_person},create_date = #{create_date}," +
-            "calendar_date = #{calendar_date},state = #{state},summary = #{summary},abnormal = #{abnormal},maintenance = #{maintenance},plan_id=#{plan_id} where id=#{id}")
+            "calendar_date = #{calendar_date},state = #{state},summary = #{summary},abnormal = #{abnormal},maintenance = #{maintenance}," +
+            "plan_id=#{plan_id},maintenanceDescription=#{maintenanceDescription} where id=#{id}")
     void update(InspectionReport inspectionReport);
 
     @Delete("delete from inspection_report where id=#{id}")
