@@ -23,13 +23,13 @@ public interface PipeGalleryRepository {
     @Select("select count(*) from pipeGallery where unit = #{unit}")
     Integer PipeCountOfUnit(String unit);
 
-    @Insert("insert into pipeGallery (number,name,length,unit,startpoint,endpoint,description)" +
-            " values (#{number},#{name},#{length},#{unit},#{startpoint},#{endpoint},#{description})")
+    @Insert("insert into pipeGallery (number,name,length,unit,startpoint,endpoint,description,drawpoint)" +
+            " values (#{number},#{name},#{length},#{unit},#{startpoint},#{endpoint},#{description},#{drawpoint})")
     @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
     void save(PipeGallery pipeGallery);
 
     @Update("update pipeGallery set number = #{number},name = #{name},length = #{length},unit = #{unit}," +
-            "startpoint = #{startpoint},endpoint = #{endpoint},description = #{description} where id =#{id} ")
+            "startpoint = #{startpoint},endpoint = #{endpoint},description = #{description}, drawpoint=#{drawpoint} where id =#{id} ")
     void update(PipeGallery pipeGallery);
 
     @Delete("delete from pipeGallery where id=#{id}")

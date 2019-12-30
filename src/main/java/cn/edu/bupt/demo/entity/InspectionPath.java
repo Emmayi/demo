@@ -27,7 +27,8 @@ public class InspectionPath {
     private String description;
     @Getter@Setter
     private String name;
-
+    @Getter@Setter
+    private String drawpoint;
 
     @Override
     public String toString() {
@@ -50,6 +51,8 @@ public class InspectionPath {
                 .append(description).append('\"');
         sb.append(",\"name\":\"")
                 .append(name).append('\"');
+        sb.append(",\"drawpoint\":\"")
+                .append(drawpoint).append('\"');
         sb.append('}');
 
         return sb.toString();

@@ -24,13 +24,13 @@ public interface GalleryAreaRepository {
         @Select("select count(*) from pipeGallery_area where pipe_belong = #{pipe_belong}")
         Integer AreaCountOfPipe_belong(String pipe_belong);
 
-        @Insert("insert into pipeGallery_area (number,name,length,pipe_belong,startpoint,endpoint,description)" +
-                " values (#{number},#{name},#{length},#{pipe_belong},#{startpoint},#{endpoint},#{description})")
+        @Insert("insert into pipeGallery_area (number,name,length,pipe_belong,startpoint,endpoint,description,drawpoint)" +
+                " values (#{number},#{name},#{length},#{pipe_belong},#{startpoint},#{endpoint},#{description},#{drawpoint})")
         @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
         void save(PipeGalleryArea pipeGalleryArea);
 
         @Update("update pipeGallery_area set number = #{number},name = #{name},length = #{length},pipe_belong = #{pipe_belong}," +
-                "startpoint = #{startpoint},endpoint = #{endpoint},description = #{description} where id =#{id} ")
+                "startpoint = #{startpoint},endpoint = #{endpoint},description = #{description},drawpoint=#{drawpoint} where id =#{id} ")
         void update(PipeGalleryArea pipeGalleryArea);
 
         @Delete("delete from pipeGallery_area where id=#{id}")

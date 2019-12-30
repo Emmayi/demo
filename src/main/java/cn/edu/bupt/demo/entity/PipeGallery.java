@@ -21,6 +21,8 @@ public class PipeGallery {
         private String endpoint;
         @Getter@Setter
         private String description;
+        @Getter@Setter
+        private String drawpoint;
 
         @Override
         public String toString() {
@@ -41,6 +43,8 @@ public class PipeGallery {
                     .append(endpoint).append('\"');
             sb.append(",\"description\":\"")
                     .append(description).append('\"');
+            sb.append(",\"drawpoint\":\"")
+                    .append(drawpoint).append('\"');
             sb.append('}');
 
             return sb.toString();
