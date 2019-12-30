@@ -29,12 +29,16 @@ public class InspectionPath {
     private String name;
     @Getter@Setter
     private String drawpoint;
+    @Getter@Setter
+    private Integer status;
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
         sb.append("\"id\":")
                 .append(id);
+        sb.append("\"status\":")
+                .append(status);
         sb.append(",\"number\":\"")
                 .append(number).append('\"');
         sb.append(",\"area_belong\":\"")
