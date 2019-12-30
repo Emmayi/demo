@@ -2,6 +2,7 @@ package cn.edu.bupt.demo.controller;
 
 import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.aop.MyLog;
+import cn.edu.bupt.demo.dao.PipeGalleryArea.GalleryAreaRepository;
 import cn.edu.bupt.demo.dao.PipeGalleryArea.GalleryAreaService;
 import cn.edu.bupt.demo.entity.PipeGalleryArea;
 import com.alibaba.fastjson.JSONObject;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 public class GalleryAreaController {
     @Autowired
     GalleryAreaService galleryAreaService;
+
+    @Autowired
+    GalleryAreaRepository galleryAreaRepository;
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
     @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
@@ -69,6 +73,18 @@ public class GalleryAreaController {
             return galleryAreaService.findAreaById(Id).toString();
         }catch (Exception e){
             throw new Exception("getAreaById error!");
+        }
+    }
+
+    //根据管廊名称获取管廊区域名称列表
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
+    @RequestMapping(value = "/galleryAreaName",params = {"pipeName"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getAreaNameByPipeName(@RequestParam String pipeName) throws Exception{
+        try {
+            return galleryAreaRepository.findAreaNameByPipeName(pipeName).toString();
+        }catch (Exception e){
+            throw new Exception("getAreaNameByPipeName error!");
         }
     }
 

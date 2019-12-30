@@ -40,11 +40,11 @@ public class PointLanlonController {
     @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/lanlon",  params = {  "point"  },method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getAllPointName(@RequestParam String point) throws Exception{
+    public String getLatlonByPoint(@RequestParam String point) throws Exception{
         try {
-            return pointLanlonRepository.findAllPoint().toString();
+            return pointLanlonRepository.findLatlonByPoint(point).toString();
         }catch (Exception e){
-            throw new Exception("getAllPointName error!");
+            throw new Exception("getLatlonByPoint error!");
         }
     }
 

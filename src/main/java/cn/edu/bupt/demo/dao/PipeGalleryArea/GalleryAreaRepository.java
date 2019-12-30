@@ -4,6 +4,7 @@ import cn.edu.bupt.demo.entity.PipeGalleryArea;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 public interface GalleryAreaRepository {
@@ -17,6 +18,8 @@ public interface GalleryAreaRepository {
         @Select("select * from pipeGallery_area where id = #{id}")
         PipeGalleryArea findGalleryareaById(Integer id);
 
+        @Select("select name from pipeGallery_area where pipe_belong = #{pipeName}")
+        Set<String> findAreaNameByPipeName(String pipename);
 
         @Select("select count(*) from pipeGallery_area")
         Integer AllAreaCount();
