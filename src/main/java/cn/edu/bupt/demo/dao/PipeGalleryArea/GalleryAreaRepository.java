@@ -18,6 +18,11 @@ public interface GalleryAreaRepository {
         @Select("select * from pipeGallery_area where id = #{id}")
         PipeGalleryArea findGalleryareaById(Integer id);
 
+        @Select("SELECT * FROM pipeGallery_area" +
+                "WHERE (name = #{name} OR #{name} IS '') AND (`length` = #{length} OR #{length} IS '') AND (pipe_belong =#{pipe_belong} OR #{pipe_belong} IS '')" +
+                " id >0 limit #{index}, #{pageSize}")
+        List<PipeGalleryArea> findalleryareaByThreeItems(@Param("name")String name, @Param("length")Integer length, @Param("pipe_belong")String pipe_belong, @Param("index") Integer index, @Param("pageSize") Integer pageSize);
+
         @Select("select name from pipeGallery_area where pipe_belong = #{pipeName}")
         Set<String> findAreaNameByPipeName(String pipename);
 

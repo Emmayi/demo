@@ -6,6 +6,8 @@ import cn.edu.bupt.demo.dao.PipeGalleryArea.GalleryAreaRepository;
 import cn.edu.bupt.demo.dao.PipeGalleryArea.GalleryAreaService;
 import cn.edu.bupt.demo.entity.PipeGalleryArea;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,6 +53,27 @@ public class GalleryAreaController {
             throw new Exception("getInspectionGalleryAreaByPage error!");
         }
     }
+
+    //多字段查询
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
+    @RequestMapping(value = "/galleryAreaByItems", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getGalleryAreaByThreeItems(@RequestParam String name,
+                                             @RequestParam int length,
+                                             @RequestParam String pipe_belong,
+                                             @RequestParam int page,
+                                             @RequestParam int pageSize) throws Exception{
+
+        try {
+            Integer index = page * pageSize;
+            return galleryAreaRepository.findalleryareaByThreeItems(name,length,pipe_belong,index,pageSize).toString();
+
+        } catch (Exception e) {
+            throw new Exception("getGalleryAreaByThreeItems error!");
+        }
+    }
+
+
 
     //获取所有管廊区域的页数
     @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})

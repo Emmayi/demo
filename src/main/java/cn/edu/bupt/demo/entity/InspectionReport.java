@@ -66,8 +66,8 @@ public class InspectionReport extends IdBased {
                 .append(state);
         sb.append(",\"summary\":\"")
                 .append(summary).append('\"');
-        sb.append(",\"abnormal\":\"")
-                .append(abnormal).append('\"');
+        sb.append(",\"abnormal\":")
+                .append(abnormal);
         sb.append(",\"maintenance\":\"")
                 .append(maintenance).append('\"');
         sb.append(",\"image\":\"")
