@@ -27,7 +27,7 @@ import java.util.List;
 @Api(description= "文件上传与下载")
 public class DocumentsController {
 
-    String storePath= "/home/zy/info/EmergencyPlanFile";//存放上传的文件路径
+    String storePath= "/home/xuhao/zy/info/InspectionReport";//存放上传的文件路径
 //    String storePath = "/Users/zy/Desktop/file";
 
 

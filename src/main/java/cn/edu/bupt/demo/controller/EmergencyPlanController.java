@@ -12,8 +12,12 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 /**
  * @author zy
@@ -26,7 +30,7 @@ import java.io.File;
 @Api(description= "应急预案")
 public class EmergencyPlanController {
 
-    private String storePath= "/home/zy/file";//存放上传的文件路径
+    private String storePath= "/home/xuhao/zy/info/EmergencyPlanFile";//存放上传的文件路径
 
     @Autowired
     EmergencyService emergencyService;
@@ -160,6 +164,50 @@ public class EmergencyPlanController {
             return emergencyService.findAllPlan().toString();
         }catch (Exception e){
             throw new Exception("getAllPlan error!");
+        }
+    }
+
+    //上传应急预案
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
+    @RequestMapping(value = "/emergency/upload", method = RequestMethod.POST)
+    public String uploadFile(@RequestParam("file") MultipartFile file) throws Exception{
+
+        try {
+            if (file.isEmpty()) {
+                return "文件为空";
+            }
+            String fileName = file.getOriginalFilename();
+            fileName = URLDecoder.decode(fileName,"UTF-8");
+            String newPath = storePath+"/";
+            File filePath = new File(newPath, fileName);
+            if (!filePath.getParentFile().exists()) {
+                filePath.getParentFile().mkdirs();//如果目录不存在，创建目录
+            }
+
+            String path = newPath+File.separator+fileName;
+            File dest = new File(path);
+            file.transferTo(dest);// 文件写入
+            return "上传成功";
+
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "上传失败";
+    }
+
+    //删除文件接口
+    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher"})
+    @RequestMapping(value = "/emergency/delete/{type}/{fileName}/{fileType}", method = RequestMethod.DELETE)
+    public void deleteFile(@PathVariable("fileName") String fileName,
+                           @PathVariable("fileType") String fileType) throws UnsupportedEncodingException {
+
+        System.out.println("name1: "+fileName);
+        File file = new File(storePath+"/"+fileName+"."+fileType);
+        System.out.println(file.getName()+"|"+file.exists());
+        if(file.exists()){
+            System.out.println(file.delete());
         }
     }
 

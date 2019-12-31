@@ -40,8 +40,8 @@ public class InspectionController {
     private InspectionRepository inspectionRepository;
 
 
-    private String storePath= "/home/zy/info/InspectionReport";//存放我们上传的文件路径
-//    private String storePath= "/Users/zy/Desktop/file";//存放我们上传的文件路径
+    private String storePath= "/home/xuhao/zy/info/InspectionReport";//存放上传的文件路径
+//    private String storePath= "/Users/zy/Desktop/file";//存放上传的文件路径
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
     @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
@@ -183,8 +183,7 @@ public class InspectionController {
     @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
     @RequestMapping(value = "/inspection/upload", method = RequestMethod.POST)
     public String uploadFile(@RequestParam("file") MultipartFile file,
-                             @RequestParam("type") String type,
-                             @RequestParam("id") Integer id) throws Exception{
+                             @RequestParam("type") String type) throws Exception{
 
         try {
             if (file.isEmpty()) {
@@ -192,7 +191,7 @@ public class InspectionController {
             }
             String fileName = file.getOriginalFilename();
             fileName = URLDecoder.decode(fileName,"UTF-8");
-            String newPath = storePath+"/"+id+"/"+type;
+            String newPath = storePath+"/"+type;
             File filePath = new File(newPath, fileName);
             if (!filePath.getParentFile().exists()) {
                 filePath.getParentFile().mkdirs();//如果目录不存在，创建目录
@@ -200,7 +199,7 @@ public class InspectionController {
 
             String path = newPath+File.separator+fileName;
             File dest = new File(path);
-            file.transferTo(dest);// 文件写入
+            file.transferTo(dest);
             return "上传成功";
 
         } catch (IllegalStateException e) {
@@ -213,14 +212,13 @@ public class InspectionController {
 
     //删除文件接口
     @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher"})
-    @RequestMapping(value = "/inspection/delete/{id}/{type}/{fileName}/{fileType}", method = RequestMethod.DELETE)
-    public void deleteFile(@PathVariable("id") Integer id,
-                           @PathVariable("type") String type,
+    @RequestMapping(value = "/inspection/delete/{type}/{fileName}/{fileType}", method = RequestMethod.DELETE)
+    public void deleteFile(@PathVariable("type") String type,
                            @PathVariable("fileName") String fileName,
                            @PathVariable("fileType") String fileType) throws UnsupportedEncodingException {
 
         System.out.println("name1: "+fileName);
-        File file = new File(storePath+"/"+id+"/"+type+"/"+fileName+"."+fileType);
+        File file = new File(storePath+"/"+type+"/"+fileName+"."+fileType);
         System.out.println(file.getName()+"|"+file.exists());
         if(file.exists()){
             System.out.println(file.delete());

@@ -5,6 +5,7 @@ import cn.edu.bupt.demo.aop.MyLog;
 import cn.edu.bupt.demo.dao.InspectionPath.PathService;
 import cn.edu.bupt.demo.entity.InspectionPath;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
