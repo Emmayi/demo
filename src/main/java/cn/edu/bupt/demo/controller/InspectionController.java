@@ -200,7 +200,7 @@ public class InspectionController {
             String path = newPath+File.separator+fileName;
             File dest = new File(path);
             file.transferTo(dest);
-            return "上传成功";
+            return path;
 
         } catch (IllegalStateException e) {
             e.printStackTrace();
