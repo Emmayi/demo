@@ -32,6 +32,7 @@ public class EmergencyPlanController {
 
     private String storePath= "/home/xuhao/zy/info/EmergencyPlanFile";//存放上传的文件路径
 
+
     @Autowired
     EmergencyService emergencyService;
     @Autowired
