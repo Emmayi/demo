@@ -37,8 +37,6 @@ public class InspectionPath {
         final StringBuilder sb = new StringBuilder("{");
         sb.append("\"id\":")
                 .append(id);
-        sb.append("\"status\":")
-                .append(status);
         sb.append(",\"number\":\"")
                 .append(number).append('\"');
         sb.append(",\"area_belong\":\"")
