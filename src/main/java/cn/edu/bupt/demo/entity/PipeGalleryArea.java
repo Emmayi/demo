@@ -46,8 +46,8 @@ public class PipeGalleryArea {
                 .append(description).append('\"');
         sb.append(",\"drawpoint\":\"")
                 .append(drawpoint).append('\"');
-        sb.append(",\"principal\":\"")
-                .append(principal).append('\"');
+        sb.append(",\"principal\":")
+                .append(principal);
         sb.append('}');
 
         return sb.toString();
