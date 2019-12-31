@@ -30,8 +30,8 @@ public class GalleryAreaController {
     @RequestMapping(value = "/galleryAreaByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getInspectionGalleryAreaByPage(@RequestParam(name="limit") int limit,
-                                           @RequestParam (name="page") int page,
-                                           @RequestParam(value="pipe_belong",required=false,defaultValue = "1") String pipe_belong )throws Exception {
+                                                 @RequestParam (name="page") int page,
+                                                 @RequestParam(value="pipe_belong",required=false,defaultValue = "1") String pipe_belong)throws Exception {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("limit",limit);
@@ -58,15 +58,24 @@ public class GalleryAreaController {
     @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
     @RequestMapping(value = "/galleryAreaByItems", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getGalleryAreaByThreeItems(@RequestParam String name,
-                                             @RequestParam int length,
-                                             @RequestParam String pipe_belong,
+    public String getGalleryAreaByThreeItems(@RequestParam(value="pipe_belong",required=false,defaultValue = "a") String pipe_belong,
+                                             @RequestParam(value="name",required=false,defaultValue = "b") String name,
+                                             @RequestParam(value="length",required=false,defaultValue = "1") Integer length,
                                              @RequestParam int page,
                                              @RequestParam int pageSize) throws Exception{
 
         try {
+            if(pipe_belong.equals("a")){
+                pipe_belong="null";
+            }
+            if(name.equals("b")){
+                name="null";
+            }
+            if(length.equals(1)){
+                length=6;
+            }
             Integer index = page * pageSize;
-            return galleryAreaRepository.findalleryareaByThreeItems(name,length,pipe_belong,index,pageSize).toString();
+            return galleryAreaRepository.findalleryareaByThreeItems(name,length,"null",index,pageSize).toString();
 
         } catch (Exception e) {
             throw new Exception("getGalleryAreaByThreeItems error!");

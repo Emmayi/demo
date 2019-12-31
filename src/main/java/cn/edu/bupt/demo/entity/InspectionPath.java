@@ -57,6 +57,8 @@ public class InspectionPath {
                 .append(name).append('\"');
         sb.append(",\"drawpoint\":\"")
                 .append(drawpoint).append('\"');
+        sb.append(",\"status\":\"")
+                .append(status).append('\"');
         sb.append('}');
 
         return sb.toString();
