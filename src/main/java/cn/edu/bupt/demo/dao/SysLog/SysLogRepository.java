@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Mapper
 public interface SysLogRepository {
-    @Select("select * from sys_log limit #{index},#{pageSize} order by id desc")
+    @Select("select * from sys_log order by id desc limit #{index},#{pageSize}")
     List<SysLog> findLogByPage(@Param("index")Integer index,
                                @Param("pageSize")Integer pageSize);
 
