@@ -31,7 +31,7 @@
     </appender>
 
     <!-- 配置包的device-manager工程的log, 没有在该包下的log使用根配置 -->
-    <logger name="com.bupt.dashboard" level="TRACE" />
+    <logger name="cn.edu.bupt.demo" level="TRACE" />
 
     <!-- 配置swagger的的log -->
     <!--<logger name="org.thymeleaf" level="WARN" />-->
