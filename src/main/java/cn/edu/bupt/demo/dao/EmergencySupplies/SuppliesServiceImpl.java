@@ -14,28 +14,28 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class SuppliesServiceImpl implements SuppliesService{
+public class SuppliesServiceImpl implements SuppliesService {
 
     @Autowired
     SuppliesRespository suppliesRespository;
 
     @Override
     public List<EmergencySupplies> findAllByPage(Integer page, Integer pageSize) {
-        log.trace("Executing findPlanByPage [{}]", page,pageSize);
+        log.trace("Executing findPlanByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
-        return suppliesRespository.findAllByPage(index,pageSize);
+        return suppliesRespository.findAllByPage(index, pageSize);
     }
 
     @Override
     public List<EmergencySupplies> findSuppliesByCategoryAndPage(String category, Integer page, Integer pageSize) {
         Integer index = page * pageSize;
-        return suppliesRespository.findSuppliesByCategoryAndPage(category,index,pageSize);
+        return suppliesRespository.findSuppliesByCategoryAndPage(category, index, pageSize);
     }
 
     @Override
     public Integer findSuppliesPageNum(Integer size) {
         log.trace("Executing findSuppliesPageNum [{}]", size);
-        Integer num = (suppliesRespository.AllSuppliesCount()+size-1)/size;
+        Integer num = (suppliesRespository.AllSuppliesCount() + size - 1) / size;
         return num;
     }
 

@@ -25,7 +25,7 @@ import java.util.Map;
  */
 
 @Service
-public class MailServiceImpl implements MailService{
+public class MailServiceImpl implements MailService {
 
     //邮件的发送者
     @Value("${spring.mail.username}")

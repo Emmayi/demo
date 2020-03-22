@@ -2,7 +2,6 @@ package cn.edu.bupt.demo.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.ibatis.annotations.Select;
 
 /**
  * @author zy
@@ -12,29 +11,41 @@ public class InspectionReport extends IdBased {
 
 
     private Integer id;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String duty_person;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String inspection_person;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long create_date;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long calendar_date;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Integer state;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String summary;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String abnormal;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String maintenance;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String image;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String video;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Integer plan_id;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String maintenanceDescription;
 
     @Override

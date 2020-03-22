@@ -2,8 +2,6 @@ package cn.edu.bupt.demo.dao.StaffNumber;
 
 import cn.edu.bupt.demo.dao.DataValidationException;
 import cn.edu.bupt.demo.dao.DataValidator;
-import cn.edu.bupt.demo.dao.StaffNumber.StaffRepository;
-import cn.edu.bupt.demo.dao.StaffNumber.StaffService;
 import cn.edu.bupt.demo.entity.StaffNumber;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +17,29 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class StaffServiceImpl implements StaffService{
+public class StaffServiceImpl implements StaffService {
 
     @Autowired
     private StaffRepository staffRepository;
+    private DataValidator<StaffNumber> staffValidator =
+            new DataValidator<StaffNumber>() {
+
+                @Override
+                protected void validateDataImpl(StaffNumber staffNumber) {
+                    if (StringUtils.isEmpty(staffNumber.getGender())) {
+                        throw new DataValidationException("请填写性别！");
+                    }
+
+                    if (StringUtils.isEmpty(staffNumber.getName())) {
+                        throw new DataValidationException("请填写姓名！");
+                    }
+
+                    if (!StringUtils.isEmpty(staffNumber.getPhone())) {
+                        validatePhone(staffNumber.getPhone());
+                    }
+
+                }
+            };
 
     @Override
     public StaffNumber findStaffById(Integer id) {
@@ -44,7 +61,7 @@ public class StaffServiceImpl implements StaffService{
 
     @Override
     public String findEmailByName(Integer planId) {
-        log.trace("Executing findEmailByName [{}]",planId);
+        log.trace("Executing findEmailByName [{}]", planId);
         return staffRepository.findEmailByName(planId);
     }
 
@@ -71,7 +88,7 @@ public class StaffServiceImpl implements StaffService{
         log.trace("Executing deleteStaffById, name [{}]", id);
         try {
             staffRepository.deleteById(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -82,7 +99,7 @@ public class StaffServiceImpl implements StaffService{
         log.trace("Executing deleteStaffByName, name [{}]", name);
         try {
             staffRepository.deleteByName(name);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -93,24 +110,4 @@ public class StaffServiceImpl implements StaffService{
         return staffRepository.findAll();
 
     }
-
-    private DataValidator<StaffNumber> staffValidator =
-            new DataValidator<StaffNumber>() {
-
-                @Override
-                protected void validateDataImpl(StaffNumber staffNumber) {
-                    if (StringUtils.isEmpty(staffNumber.getGender())) {
-                        throw new DataValidationException("请填写性别！");
-                    }
-
-                    if (StringUtils.isEmpty(staffNumber.getName())) {
-                        throw new DataValidationException("请填写姓名！");
-                    }
-
-                    if (!StringUtils.isEmpty(staffNumber.getPhone())) {
-                        validatePhone(staffNumber.getPhone());
-                    }
-
-                }
-            };
 }

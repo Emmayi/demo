@@ -4,8 +4,6 @@ import cn.edu.bupt.demo.annotation.Auth;
 import cn.edu.bupt.demo.dao.EmergencyEquis.EquisService;
 import cn.edu.bupt.demo.entity.EmergencyEquis;
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/info")
 @CrossOrigin
-@Api(description= "应急设备")
+@Api(description = "应急设备")
 public class EquisController {
 
     @Autowired
@@ -35,26 +33,26 @@ public class EquisController {
     }*/
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
-    @RequestMapping(value = "/emergencyEquisByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
+    @RequestMapping(value = "/emergencyEquisByPage", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getInspectionEquisByPage(@RequestParam (name="limit") int limit,
-                                           @RequestParam (name="page") int page,
-                                           @RequestParam(value="category",required=false,defaultValue = "1") String category )throws Exception {
+    public String getInspectionEquisByPage(@RequestParam(name = "limit") int limit,
+                                           @RequestParam(name = "page") int page,
+                                           @RequestParam(value = "category", required = false, defaultValue = "1") String category) throws Exception {
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("limit",limit);
-            jsonObject.put("page",page);
+            jsonObject.put("limit", limit);
+            jsonObject.put("page", page);
 
-            if(category.equals("1")){
+            if (category.equals("1")) {
                 Integer count = equisService.getEquisCount();
-                jsonObject.put("allCount",count);
-                jsonObject.put("data",equisService.findAllByPage(page,limit));
+                jsonObject.put("allCount", count);
+                jsonObject.put("data", equisService.findAllByPage(page, limit));
                 return jsonObject.toString();
-            }else {
+            } else {
                 Integer count = equisService.EquisCountOfCategory(category);
-                jsonObject.put("data",equisService.findEquisByCategoryAndPage(category,page,limit));
-                jsonObject.put("allCount",count);
+                jsonObject.put("data", equisService.findEquisByCategoryAndPage(category, page, limit));
+                jsonObject.put("allCount", count);
                 return jsonObject.toString();
             }
 
@@ -64,8 +62,8 @@ public class EquisController {
     }
 
     //获取所有设备的页数
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
-    @RequestMapping(value = "/equisPage", params = {  "limit"  }, method = RequestMethod.GET)
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
+    @RequestMapping(value = "/equisPage", params = {"limit"}, method = RequestMethod.GET)
     @ResponseBody
     public Integer getEquisPages(@RequestParam int limit) throws Exception {
         try {
@@ -76,13 +74,13 @@ public class EquisController {
     }
 
     //根据id获取设备信息
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
-    @RequestMapping(value = "/equis",params = {"equisId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
+    @RequestMapping(value = "/equis", params = {"equisId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getEquisById(@RequestParam Integer equisId) throws Exception{
+    public String getEquisById(@RequestParam Integer equisId) throws Exception {
         try {
             return equisService.findEquisById(equisId).toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("getEquisById error!");
         }
     }
@@ -133,11 +131,11 @@ public class EquisController {
     }*/
 
     //增加设备的信息
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor"})
     @RequestMapping(value = "/equis", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String createEquis(@RequestBody String equisInfo) throws Exception{
-        EmergencyEquis emergencyEquis = JSONObject.parseObject(equisInfo,EmergencyEquis.class);
+    public String createEquis(@RequestBody String equisInfo) throws Exception {
+        EmergencyEquis emergencyEquis = JSONObject.parseObject(equisInfo, EmergencyEquis.class);
         try {
             equisService.save(emergencyEquis);
             return emergencyEquis.toString();
@@ -147,14 +145,13 @@ public class EquisController {
     }
 
 
-
     //更新
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
     @RequestMapping(value = "/equis", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String updateEquis(@RequestBody String equisInfo) throws Exception{
-        EmergencyEquis emergencyEquis = JSONObject.parseObject(equisInfo,EmergencyEquis.class);
-        if(emergencyEquis.getEquis_id().equals("")) {
+    public String updateEquis(@RequestBody String equisInfo) throws Exception {
+        EmergencyEquis emergencyEquis = JSONObject.parseObject(equisInfo, EmergencyEquis.class);
+        if (emergencyEquis.getEquis_id().equals("")) {
             throw new RuntimeException("没有Id，无法更新!");
         }
         try {
@@ -163,28 +160,28 @@ public class EquisController {
         } catch (Exception e) {
             throw new Exception("updateEquis error!");
         }
- }
+    }
 
     //通过Id删除信息
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher"})
-    @RequestMapping(value = "/equis",params = {"equisId"},method = RequestMethod.DELETE)
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher"})
+    @RequestMapping(value = "/equis", params = {"equisId"}, method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deleteEquisById(@RequestParam Integer equisId){
+    public void deleteEquisById(@RequestParam Integer equisId) {
         try {
             equisService.deleteById(equisId);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     //获取所有的设备
-    @Auth(roles = {"BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"BranchDispatcher", "BranchMonitor", "Repairman"})
     @RequestMapping(value = "/equisALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getAllEquis() throws Exception{
+    public String getAllEquis() throws Exception {
         try {
             return equisService.findAllEquis().toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("getAllEquis error!");
         }
     }

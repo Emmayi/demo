@@ -4,7 +4,7 @@ package cn.edu.bupt.demo.entity;
  * @author zy
  * @date 2018/11/24 下午9:59
  */
-public class EmergencyPlan extends IdBased{
+public class EmergencyPlan extends IdBased {
 
     private Integer emergency_id;
     private String name;

@@ -38,7 +38,7 @@ public interface RoleRepository {
     Role findById(Integer id);
 
     @Insert("insert into role (name,description) values (#{name},#{description}) ")
-    @Options(useGeneratedKeys = true,keyProperty="id")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     Integer saveRole(Role role);
 
     @Delete("delete from role where id = #{id}")

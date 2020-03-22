@@ -11,14 +11,6 @@ public class Role {
 
     private String description;
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public Role(Integer id, String name, String description) {
         this.id = id;
         this.name = name;
@@ -28,6 +20,14 @@ public class Role {
     public Role(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getDescription() {

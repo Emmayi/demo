@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class PlanServiceImpl implements PlanService{
+public class PlanServiceImpl implements PlanService {
 
     @Autowired
     PlanRepository planRepository;
@@ -28,14 +28,14 @@ public class PlanServiceImpl implements PlanService{
     public List<InspectionPlan> findAllPlanByPage(Integer page, Integer pageSize) {
         log.trace("Executing findAllPlanByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
-        return planRepository.findAllPlanByPage(index,pageSize);
+        return planRepository.findAllPlanByPage(index, pageSize);
     }
 
     @Override
     public List<InspectionPlan> findPlanByInspectionPerson(String inspection_person, Integer page, Integer pageSize) {
-        log.trace("Executing findPlanByInspectionPerson [{}]",inspection_person, page, pageSize);
+        log.trace("Executing findPlanByInspectionPerson [{}]", inspection_person, page, pageSize);
         Integer index = page * pageSize;
-        return planRepository.findPlanByInspectionPerson(inspection_person,index,pageSize);
+        return planRepository.findPlanByInspectionPerson(inspection_person, index, pageSize);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class PlanServiceImpl implements PlanService{
 
     @Override
     public Integer findCountOfPerson(String inspection_person) {
-        log.trace("Executing findCountOfPerson [{}]",inspection_person);
+        log.trace("Executing findCountOfPerson [{}]", inspection_person);
         Integer count = planRepository.findCountOfPerson(inspection_person);
         return count;
     }
@@ -83,16 +83,16 @@ public class PlanServiceImpl implements PlanService{
     }
 
     @Override
-    public String setNumber(String id){
-        int Len= 6-id.length();
-        String num="JH";
-        StringBuilder sb=new StringBuilder();
+    public String setNumber(String id) {
+        int Len = 6 - id.length();
+        String num = "JH";
+        StringBuilder sb = new StringBuilder();
         sb.append(num);
-        for (int i=0;i<Len;i++){
+        for (int i = 0; i < Len; i++) {
             sb.append("0");
         }
         sb.append(id);
-        String number=""+sb;
+        String number = "" + sb;
         return number;
     }
 

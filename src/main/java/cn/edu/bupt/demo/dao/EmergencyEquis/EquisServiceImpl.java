@@ -16,22 +16,22 @@ public class EquisServiceImpl implements EquisService {
 
     @Override
     public List<EmergencyEquis> findAllByPage(Integer page, Integer pageSize) {
-        log.trace("Executing findPlanByPage [{}]", page,pageSize);
+        log.trace("Executing findPlanByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
-        return equisRespository.findAllByPage(index,pageSize);
+        return equisRespository.findAllByPage(index, pageSize);
     }
 
     @Override
-    public  List<EmergencyEquis> findEquisByCategoryAndPage(String category,Integer page, Integer pageSize){
-        log.trace("Executing findEquisByCategoryAndPage[{}]",category,page,pageSize);
-        Integer index = page*pageSize;
-        return equisRespository.findEquisByCategoryAndPage(category,page,pageSize);
+    public List<EmergencyEquis> findEquisByCategoryAndPage(String category, Integer page, Integer pageSize) {
+        log.trace("Executing findEquisByCategoryAndPage[{}]", category, page, pageSize);
+        Integer index = page * pageSize;
+        return equisRespository.findEquisByCategoryAndPage(category, page, pageSize);
     }
 
     @Override
     public Integer findEquisPageNum(Integer size) {
         log.trace("Executing findEquisPageNum [{}]", size);
-        Integer num = (equisRespository.AllEquisCount()+size-1)/size;
+        Integer num = (equisRespository.AllEquisCount() + size - 1) / size;
         return num;
     }
 
@@ -67,7 +67,7 @@ public class EquisServiceImpl implements EquisService {
     }
 
     @Override
-    public Integer EquisCountOfCategory(String category){
+    public Integer EquisCountOfCategory(String category) {
         log.trace("Executing EquisCountOfCategory[{}]");
         Integer count = equisRespository.EquisCountOfCategory(category);
         return count;
@@ -76,7 +76,7 @@ public class EquisServiceImpl implements EquisService {
     @Override
     public void save(EmergencyEquis emergencyEquis) {
         log.trace("Executing save [{}]");
-       equisRespository.save(emergencyEquis);
+        equisRespository.save(emergencyEquis);
     }
 
     @Override

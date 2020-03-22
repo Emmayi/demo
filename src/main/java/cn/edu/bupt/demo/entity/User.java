@@ -9,25 +9,35 @@ import lombok.Setter;
  */
 public class User {
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Integer id;
-    @Getter @Setter
+    @Getter
+    @Setter
     private String addtional_info;
-    @Getter @Setter
+    @Getter
+    @Setter
     private String authority;
-    @Getter @Setter
+    @Getter
+    @Setter
     private Integer customer_id;
-    @Getter @Setter
+    @Getter
+    @Setter
     private String email;
-    @Getter @Setter
+    @Getter
+    @Setter
     private String name;
-    @Getter @Setter
+    @Getter
+    @Setter
     private Integer tenant_id;
-    @Getter @Setter
+    @Getter
+    @Setter
     private String phone;
-    @Getter @Setter
+    @Getter
+    @Setter
     private String wechat;
-    @Getter @Setter
+    @Getter
+    @Setter
     private Integer base_role_id;
 
     @Override

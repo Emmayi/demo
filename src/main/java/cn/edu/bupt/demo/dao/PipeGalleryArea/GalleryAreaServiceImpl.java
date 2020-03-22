@@ -1,11 +1,10 @@
 package cn.edu.bupt.demo.dao.PipeGalleryArea;
 
 import cn.edu.bupt.demo.entity.PipeGalleryArea;
-import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Slf4j
@@ -16,21 +15,21 @@ public class GalleryAreaServiceImpl implements GalleryAreaService {
 
     @Override
     public List<PipeGalleryArea> findAllByPage(Integer page, Integer pageSize) {
-        log.trace("Executing findAreaByPage [{}]", page,pageSize);
+        log.trace("Executing findAreaByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
-        return galleryAreaRepository.findAllByPage(index,pageSize);
+        return galleryAreaRepository.findAllByPage(index, pageSize);
     }
 
     @Override
-    public List<PipeGalleryArea> findGalleryareaBypipe_belongAndPage(String pipe_belong,Integer page, Integer pageSize) {
-        Integer index = page*pageSize;
-        return galleryAreaRepository.findGalleryareaBypipe_belongAndPage(pipe_belong,index,pageSize);
+    public List<PipeGalleryArea> findGalleryareaBypipe_belongAndPage(String pipe_belong, Integer page, Integer pageSize) {
+        Integer index = page * pageSize;
+        return galleryAreaRepository.findGalleryareaBypipe_belongAndPage(pipe_belong, index, pageSize);
     }
 
     @Override
     public Integer findAreaPageNum(Integer size) {
         log.trace("Executing findAreaPageNum [{}]", size);
-        Integer num = (galleryAreaRepository.AllAreaCount()+size-1)/size;
+        Integer num = (galleryAreaRepository.AllAreaCount() + size - 1) / size;
         return num;
     }
 
@@ -68,16 +67,16 @@ public class GalleryAreaServiceImpl implements GalleryAreaService {
     }
 
     @Override
-    public String setNumber(String id){
-        int Len= 6-id.length();
-        String num="QY";
-        StringBuilder sb=new StringBuilder();
+    public String setNumber(String id) {
+        int Len = 6 - id.length();
+        String num = "QY";
+        StringBuilder sb = new StringBuilder();
         sb.append(num);
-        for (int i=0;i<Len;i++){
+        for (int i = 0; i < Len; i++) {
             sb.append("0");
         }
         sb.append(id);
-        String number=""+sb;
+        String number = "" + sb;
         return number;
     }
 
@@ -88,7 +87,7 @@ public class GalleryAreaServiceImpl implements GalleryAreaService {
     }
 
     @Override
-    public List<PipeGalleryArea> findAll(){
+    public List<PipeGalleryArea> findAll() {
         log.trace("Executing findAll [{}]");
         return galleryAreaRepository.findAllArea();
     }

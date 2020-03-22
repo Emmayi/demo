@@ -16,7 +16,7 @@ public interface InspectionService {
 
     List<InspectionReport> findReportByPlanId(Integer plan_id);
 
-    List<InspectionReport> findReportByCalendarDate(Long calendar_date,Integer page, Integer pageSize);
+    List<InspectionReport> findReportByCalendarDate(Long calendar_date, Integer page, Integer pageSize);
 
     List<InspectionReport> findReportByPage(Integer page, Integer pageSize);
 

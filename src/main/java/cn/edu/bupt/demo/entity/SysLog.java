@@ -3,31 +3,36 @@ package cn.edu.bupt.demo.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
-import java.sql.Timestamp.*;
-
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * @author zy
  * @date 2019/5/29 下午7:34
  */
-public class SysLog implements Serializable{
+public class SysLog implements Serializable {
 
-    @Setter@Getter
+    @Setter
+    @Getter
     private Integer id;//日志记录序号
 
-    @Setter@Getter
+    @Setter
+    @Getter
     private String user_id;
-    @Setter@Getter
+    @Setter
+    @Getter
     private String user_name;
-    @Setter@Getter
+    @Setter
+    @Getter
     private String action;
-    @Setter@Getter
+    @Setter
+    @Getter
     private Timestamp create_Time;
-    @Setter@Getter
+    @Setter
+    @Getter
     private String account;
-    @Setter@Getter
+    @Setter
+    @Getter
     private String role;
 
     @Override

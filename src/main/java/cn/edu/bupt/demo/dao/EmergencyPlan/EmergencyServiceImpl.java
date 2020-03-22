@@ -14,22 +14,22 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class EmergencyServiceImpl implements EmergencyService{
+public class EmergencyServiceImpl implements EmergencyService {
 
     @Autowired
     EmergencyRepository emergencyRepository;
 
     @Override
     public List<EmergencyPlan> findPlanByPage(Integer page, Integer pageSize) {
-        log.trace("Executing findPlanByPage [{}]", page,pageSize);
+        log.trace("Executing findPlanByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
-        return emergencyRepository.findAllByPage(index,pageSize);
+        return emergencyRepository.findAllByPage(index, pageSize);
     }
 
     @Override
     public Integer findPlanPageNum(Integer size) {
         log.trace("Executing findPlanPageNum [{}]", size);
-        Integer num = (emergencyRepository.AllPlanCount()+size-1)/size;
+        Integer num = (emergencyRepository.AllPlanCount() + size - 1) / size;
         return num;
     }
 

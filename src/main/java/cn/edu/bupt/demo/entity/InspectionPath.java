@@ -1,6 +1,5 @@
 package cn.edu.bupt.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,27 +9,38 @@ import lombok.Setter;
  */
 public class InspectionPath {
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private Integer id;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String number;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String area_belong;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String pipe_belong;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String startpoint;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String endpoint;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long create_date;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String description;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String name;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String drawpoint;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Integer status;
 
     @Override

@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class InspectionServiceImpl implements InspectionService{
+public class InspectionServiceImpl implements InspectionService {
 
     @Autowired
     InspectionRepository inspectionRepository;
@@ -40,14 +40,14 @@ public class InspectionServiceImpl implements InspectionService{
 
     @Override
     public List<InspectionReport> findReportByCalendarDate(Long calendar_date, Integer page, Integer pageSize) {
-        log.trace("Executing findReportByCalendarDate [{}]", calendar_date,page,pageSize);
+        log.trace("Executing findReportByCalendarDate [{}]", calendar_date, page, pageSize);
         Integer index = page * pageSize;
-        return inspectionRepository.findReportByCreateDate(calendar_date,index,pageSize);
+        return inspectionRepository.findReportByCreateDate(calendar_date, index, pageSize);
     }
 
     @Override
     public List<InspectionReport> findReportByPage(Integer page, Integer pageSize) {
-        log.trace("Executing findReportByPage [{}]", page,pageSize);
+        log.trace("Executing findReportByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
         return inspectionRepository.findReportByPage(index, pageSize);
     }

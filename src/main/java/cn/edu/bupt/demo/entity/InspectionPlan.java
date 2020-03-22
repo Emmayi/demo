@@ -12,28 +12,36 @@ import lombok.Setter;
 @Data
 public class InspectionPlan {
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Integer id;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String inspection_person;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Long create_date;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Long inspection_date;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String content;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String status;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String number;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String path;
 
     @Override

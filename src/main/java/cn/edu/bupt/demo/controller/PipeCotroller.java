@@ -7,7 +7,6 @@ import cn.edu.bupt.demo.dao.PipeGallery.PipeGalleryService;
 import cn.edu.bupt.demo.entity.PipeGallery;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,32 +14,32 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/info")
 @CrossOrigin
-@Api(description= "管廊管道")
+@Api(description = "管廊管道")
 public class PipeCotroller {
     @Autowired
     PipeGalleryService pipeGalleryService;
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
-    @RequestMapping(value = "/pipeByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
+    @RequestMapping(value = "/pipeByPage", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getInspectionPipeByPage(@RequestParam(name="limit") int limit,
-                                                 @RequestParam (name="page") int page,
-                                                 @RequestParam(value="unit",required=false,defaultValue = "1") String unit )throws Exception {
+    public String getInspectionPipeByPage(@RequestParam(name = "limit") int limit,
+                                          @RequestParam(name = "page") int page,
+                                          @RequestParam(value = "unit", required = false, defaultValue = "1") String unit) throws Exception {
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("limit",limit);
-            jsonObject.put("page",page);
+            jsonObject.put("limit", limit);
+            jsonObject.put("page", page);
 
-            if(unit.equals("1")){
+            if (unit.equals("1")) {
                 Integer count = pipeGalleryService.getPipeCount();
-                jsonObject.put("allCount",count);
-                jsonObject.put("data",pipeGalleryService.findAllByPage(page,limit));
+                jsonObject.put("allCount", count);
+                jsonObject.put("data", pipeGalleryService.findAllByPage(page, limit));
                 return jsonObject.toString();
-            }else {
+            } else {
                 Integer count = pipeGalleryService.PipeCountOfunit(unit);
-                jsonObject.put("data",pipeGalleryService.findPipeByunitAndPage(unit,page,limit));
-                jsonObject.put("allCount",count);
+                jsonObject.put("data", pipeGalleryService.findPipeByunitAndPage(unit, page, limit));
+                jsonObject.put("allCount", count);
                 return jsonObject.toString();
             }
 
@@ -50,8 +49,8 @@ public class PipeCotroller {
     }
 
     //获取所有管廊的页数
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
-    @RequestMapping(value = "/pipePage", params = {  "limit"  }, method = RequestMethod.GET)
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor"})
+    @RequestMapping(value = "/pipePage", params = {"limit"}, method = RequestMethod.GET)
     @ResponseBody
     public Integer getPipePages(@RequestParam int limit) throws Exception {
         try {
@@ -62,30 +61,30 @@ public class PipeCotroller {
     }
 
     //根据id获取管廊信息
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
-    @RequestMapping(value = "/pipeGallery",params = {"Id"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
+    @RequestMapping(value = "/pipeGallery", params = {"Id"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getPipeById(@RequestParam Integer Id) throws Exception{
+    public String getPipeById(@RequestParam Integer Id) throws Exception {
         try {
             return pipeGalleryService.findPipeById(Id).toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("getPipeById error!");
         }
     }
 
     //增加管廊的信息
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor"})
     @MyLog(value = "添加新管廊")
     @RequestMapping(value = "/pipeGallery", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String createpipeGallery(@RequestBody String pipeGalleryInfo) throws Exception{
-        PipeGallery pipeGallery = JSONObject.parseObject(pipeGalleryInfo,PipeGallery.class);
+    public String createpipeGallery(@RequestBody String pipeGalleryInfo) throws Exception {
+        PipeGallery pipeGallery = JSONObject.parseObject(pipeGalleryInfo, PipeGallery.class);
         try {
             pipeGallery.setNumber("GL000000");
             pipeGalleryService.save(pipeGallery);
-            Integer ID=pipeGallery.getId();
-            String id=Integer.toString(ID);
-            String number=pipeGalleryService.setNumber(id);
+            Integer ID = pipeGallery.getId();
+            String id = Integer.toString(ID);
+            String number = pipeGalleryService.setNumber(id);
             pipeGallery.setNumber(number);
             pipeGalleryService.update(pipeGallery);
             return pipeGallery.toString();
@@ -96,18 +95,18 @@ public class PipeCotroller {
 
 
     //更新
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
     @MyLog(value = "更新管廊信息")
     @RequestMapping(value = "/pipeGallery", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String updatepipeGallery(@RequestBody String pipeGalleryInfo) throws Exception{
-        PipeGallery pipeGallery = JSONObject.parseObject(pipeGalleryInfo,PipeGallery.class);
-        if(pipeGallery.getId().equals("")) {
+    public String updatepipeGallery(@RequestBody String pipeGalleryInfo) throws Exception {
+        PipeGallery pipeGallery = JSONObject.parseObject(pipeGalleryInfo, PipeGallery.class);
+        if (pipeGallery.getId().equals("")) {
             throw new RuntimeException("没有Id，无法更新!");
         }
         try {
-            Integer ID=pipeGallery.getId();
-            String id=Integer.toString(ID);
+            Integer ID = pipeGallery.getId();
+            String id = Integer.toString(ID);
             pipeGallery.setNumber(pipeGalleryService.setNumber(id));
             pipeGalleryService.update(pipeGallery);
             return pipeGallery.toString();
@@ -117,27 +116,27 @@ public class PipeCotroller {
     }
 
     //通过Id删除信息
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher"})
-    @RequestMapping(value = "/pipeGallery",params = {"Id"},method = RequestMethod.DELETE)
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher"})
+    @RequestMapping(value = "/pipeGallery", params = {"Id"}, method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deleteAreaById(@RequestParam Integer Id){
+    public void deleteAreaById(@RequestParam Integer Id) {
         try {
-           pipeGalleryService.deleteById(Id);
-        }catch (Exception e){
+            pipeGalleryService.deleteById(Id);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     //获取所有管廊
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
-    @RequestMapping(value = "pipeGalleryAll",method = RequestMethod.GET,produces = "text/html;charset=UTF-8")
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor"})
+    @RequestMapping(value = "pipeGalleryAll", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseStatus(value = HttpStatus.OK)
-    public String getAllPipe() throws Exception{
-        try{
-            JSONObject jsonObject=new JSONObject();
+    public String getAllPipe() throws Exception {
+        try {
+            JSONObject jsonObject = new JSONObject();
             jsonObject.put("AllPipes", pipeGalleryService.findAll());
             return jsonObject.toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("getAllPipe error!");
         }
     }

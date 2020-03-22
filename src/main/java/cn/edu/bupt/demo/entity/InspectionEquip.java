@@ -11,15 +11,20 @@ import lombok.Setter;
 @Data
 public class InspectionEquip extends IdBased {
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private Integer id;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String name;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String content;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String period;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long last_time;
 
     @Override

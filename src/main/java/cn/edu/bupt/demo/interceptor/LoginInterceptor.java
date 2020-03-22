@@ -19,12 +19,12 @@ import java.util.Set;
 @Component
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
+    private static LoginInterceptor loginInterceptor;
     @Autowired
     protected RoleService roleService;
-    private static LoginInterceptor loginInterceptor;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         loginInterceptor = this;
         loginInterceptor.roleService = this.roleService;
     }
@@ -59,7 +59,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             String user_id = request.getParameter("user_id");
             int id = Integer.parseInt(user_id);
             Set<String> currentRoles = loginInterceptor.roleService.findRolesNameByUserId(id);
-            for(String role : currentRoles){
+            for (String role : currentRoles) {
                 if (!authSet.contains(role)) {
                     // 校验通过返回false, 否则拦截请求
                     System.out.println("permission denied");

@@ -13,10 +13,10 @@ import java.util.List;
 public interface SuppliesRespository {
 
     @Select("select * from emergency_supplies limit #{index},#{pageSize}")
-    List<EmergencySupplies> findAllByPage(@Param("index")Integer index, @Param("pageSize")Integer pageSize);
+    List<EmergencySupplies> findAllByPage(@Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select * from emergency_supplies where category = #{category} limit #{index},#{pageSize}")
-    List<EmergencySupplies> findSuppliesByCategoryAndPage(@Param("category")String category,@Param("index")Integer index, @Param("pageSize")Integer pageSize);
+    List<EmergencySupplies> findSuppliesByCategoryAndPage(@Param("category") String category, @Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select * from emergency_supplies where supply_id = #{supply_id}")
     EmergencySupplies findEmergencySuppliesById(Integer supply_id);
@@ -29,7 +29,7 @@ public interface SuppliesRespository {
 
     @Insert("insert into emergency_supplies (name,category,quantity,model,purchase_date,manufacturer,manufacture_date,valid_until,use_description,performance_description,affiliation,location)" +
             " values (#{name},#{category},#{quantity},#{model},#{purchase_date},#{manufacturer},#{manufacture_date},#{valid_until},#{use_description},#{performance_description},#{affiliation},#{location})")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void save(EmergencySupplies emergencySupplies);
 
     @Update("update emergency_supplies set name = #{name},category = #{category},quantity = #{quantity},model = #{model},purchase_date = #{purchase_date},manufacturer = #{manufacturer}, " +

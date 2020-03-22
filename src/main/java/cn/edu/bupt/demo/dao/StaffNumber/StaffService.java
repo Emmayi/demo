@@ -1,10 +1,7 @@
 package cn.edu.bupt.demo.dao.StaffNumber;
 
 import cn.edu.bupt.demo.entity.StaffNumber;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
-import javax.net.ssl.SNIHostName;
 import java.util.List;
 
 /**

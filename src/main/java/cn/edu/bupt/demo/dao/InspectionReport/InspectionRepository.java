@@ -19,11 +19,11 @@ public interface InspectionRepository {
 
     @Select("select * from inspection_report where calendar_date = #{calendar_date} limit #{index},#{pageSize}")
     List<InspectionReport> findReportByCreateDate(@Param("calendar_date") Long calendar_date,
-                                                  @Param("index")Integer index,
-                                                  @Param("pageSize")Integer pageSize);
+                                                  @Param("index") Integer index,
+                                                  @Param("pageSize") Integer pageSize);
 
     @Select("select * from inspection_report limit #{index},#{pageSize}")
-    List<InspectionReport> findReportByPage(@Param("index")Integer index,@Param("pageSize")Integer pageSize);
+    List<InspectionReport> findReportByPage(@Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select count(*) from inspection_report")
     Integer findAllCount();
@@ -32,8 +32,8 @@ public interface InspectionRepository {
     Integer findDayCount(Long calendar_date);
 
     @Insert("insert into inspection_report (duty_person,inspection_person,create_date,calendar_date,state,summary,abnormal,maintenance,image,video,plan_id,maintenanceDescription) " +
-                                "values (#{duty_person},#{inspection_person},#{create_date},#{calendar_date},#{state},#{summary},#{abnormal},#{maintenance},#{image},#{video},#{plan_id},#{maintenanceDescription})")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+            "values (#{duty_person},#{inspection_person},#{create_date},#{calendar_date},#{state},#{summary},#{abnormal},#{maintenance},#{image},#{video},#{plan_id},#{maintenanceDescription})")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void save(InspectionReport inspectionReport);
 
     @Update("update inspection_report set duty_person = #{duty_person},inspection_person = #{inspection_person},create_date = #{create_date}," +
@@ -49,7 +49,6 @@ public interface InspectionRepository {
 
     @Select("select * from inspection_report where id > 0")
     List<InspectionReport> findAll();
-
 
 
 }

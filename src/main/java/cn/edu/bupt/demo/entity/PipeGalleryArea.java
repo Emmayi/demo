@@ -2,27 +2,38 @@ package cn.edu.bupt.demo.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
 public class PipeGalleryArea {
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private Integer id;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String number;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String name;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Integer length;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String pipe_belong;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String startpoint;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String endpoint;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String description;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String drawpoint;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String principal;
 
     @Override

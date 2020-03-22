@@ -9,21 +9,21 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class InformationServiceImpl implements InformationService{
+public class InformationServiceImpl implements InformationService {
     @Autowired
     InformationRespository informationRespository;
 
     @Override
     public List<ProjectCinformation> findAllByPage(Integer page, Integer pageSize) {
-        log.trace("Executing findProjectByPage [{}]", page,pageSize);
+        log.trace("Executing findProjectByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
-        return informationRespository.findAllByPage(index,pageSize);
+        return informationRespository.findAllByPage(index, pageSize);
     }
 
     @Override
     public Integer findProjectPageNum(Integer size) {
         log.trace("Executing findProjectPageNum [{}]", size);
-        Integer num = (informationRespository.AllProjectCount()+size-1)/size;
+        Integer num = (informationRespository.AllProjectCount() + size - 1) / size;
         return num;
     }
 

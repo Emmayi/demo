@@ -3,27 +3,32 @@ package cn.edu.bupt.demo.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+public class EntranceWork extends IdBased {
 
-public class EntranceWork extends IdBased{
-
-    @Getter@Setter
+    @Getter
+    @Setter
     private Integer id;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String duration;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long date;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Integer work_number;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String activity_range;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String evaluation;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String contact;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String contact_number;
-
 
 
     @Override

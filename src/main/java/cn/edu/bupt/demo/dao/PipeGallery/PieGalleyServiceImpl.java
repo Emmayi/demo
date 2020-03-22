@@ -1,8 +1,8 @@
 package cn.edu.bupt.demo.dao.PipeGallery;
 
 import cn.edu.bupt.demo.entity.PipeGallery;
-import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,21 +15,21 @@ public class PieGalleyServiceImpl implements PipeGalleryService {
 
     @Override
     public List<PipeGallery> findAllByPage(Integer page, Integer pageSize) {
-        log.trace("Executing findPipeByPage [{}]", page,pageSize);
+        log.trace("Executing findPipeByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
-        return pipeGalleryRepository.findAllByPage(index,pageSize);
+        return pipeGalleryRepository.findAllByPage(index, pageSize);
     }
 
     @Override
-    public List<PipeGallery> findPipeByunitAndPage(String unit,Integer page, Integer pageSize) {
-        Integer index = page*pageSize;
-        return pipeGalleryRepository.findPipeByunitAndPage(unit,index,pageSize);
+    public List<PipeGallery> findPipeByunitAndPage(String unit, Integer page, Integer pageSize) {
+        Integer index = page * pageSize;
+        return pipeGalleryRepository.findPipeByunitAndPage(unit, index, pageSize);
     }
 
     @Override
     public Integer findPipePageNum(Integer size) {
         log.trace("Executing findAreaPageNum [{}]", size);
-        Integer num = (pipeGalleryRepository.AllPipeCount()+size-1)/size;
+        Integer num = (pipeGalleryRepository.AllPipeCount() + size - 1) / size;
         return num;
     }
 
@@ -67,16 +67,16 @@ public class PieGalleyServiceImpl implements PipeGalleryService {
     }
 
     @Override
-    public String setNumber(String id){
-        int Len= 6-id.length();
-        String num="GL";
-        StringBuilder sb=new StringBuilder();
+    public String setNumber(String id) {
+        int Len = 6 - id.length();
+        String num = "GL";
+        StringBuilder sb = new StringBuilder();
         sb.append(num);
-        for (int i=0;i<Len;i++){
+        for (int i = 0; i < Len; i++) {
             sb.append("0");
         }
         sb.append(id);
-        String number=""+sb;
+        String number = "" + sb;
         return number;
     }
 
@@ -87,7 +87,7 @@ public class PieGalleyServiceImpl implements PipeGalleryService {
     }
 
     @Override
-    public List<PipeGallery> findAll(){
+    public List<PipeGallery> findAll() {
         log.trace("Executing findAll [{}]");
         return pipeGalleryRepository.findAllPipe();
     }

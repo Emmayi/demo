@@ -4,6 +4,7 @@ import cn.edu.bupt.demo.entity.InspectionPlan;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+
 @Mapper
 public interface PlanRepository {
     @Select("select * from inspection_plan where id = #{id}")
@@ -11,12 +12,12 @@ public interface PlanRepository {
 
     @Select("select * from inspection_plan where inspection_person = #{inspection_person} limit #{index},#{pageSize}")
     List<InspectionPlan> findPlanByInspectionPerson(@Param("inspection_person") String inspection_person,
-                                                    @Param("index")Integer index,
-                                                    @Param("pageSize")Integer pageSize);
+                                                    @Param("index") Integer index,
+                                                    @Param("pageSize") Integer pageSize);
 
     @Select("select * from inspection_plan limit #{index},#{pageSize}")
-    List<InspectionPlan> findAllPlanByPage(@Param("index")Integer index,
-                                           @Param("pageSize")Integer pageSize);
+    List<InspectionPlan> findAllPlanByPage(@Param("index") Integer index,
+                                           @Param("pageSize") Integer pageSize);
 
     @Select("select * from inspection_plan where inspection_date = #{inspection_date}")
     List<InspectionPlan> findPlanByInspectionDate(Long calendar_date);
@@ -29,7 +30,7 @@ public interface PlanRepository {
 
     @Insert("insert into inspection_plan (number,path,inspection_person,create_date,inspection_date,content,status) " +
             "values (#{number},#{path},#{inspection_person},#{create_date},#{inspection_date},#{content},#{status})")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void save(InspectionPlan inspectionPlan);
 
     @Update("update inspection_plan set number = #{number},path = #{path},inspection_person = #{inspection_person},create_date = #{create_date}," +

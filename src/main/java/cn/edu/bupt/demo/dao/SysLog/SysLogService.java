@@ -15,9 +15,9 @@ public interface SysLogService {
 
     void save(SysLog sysLog);
 
-    String account (Integer user_id);
+    String account(Integer user_id);
 
-    String userName (Integer user_id);
+    String userName(Integer user_id);
 
-    String role (Integer user_id);
+    String role(Integer user_id);
 }

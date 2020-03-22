@@ -1,7 +1,6 @@
 package cn.edu.bupt.demo.dao.InspectionPlan;
 
 import cn.edu.bupt.demo.entity.InspectionPlan;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ public interface PlanService {
 
     List<InspectionPlan> findAllPlanByPage(Integer index, Integer pageSize);
 
-    List<InspectionPlan> findPlanByInspectionPerson(String inspection_person,Integer index, Integer pageSize);
+    List<InspectionPlan> findPlanByInspectionPerson(String inspection_person, Integer index, Integer pageSize);
 
     List<InspectionPlan> findPlanByInspectionDate(Long inspection_date);
 

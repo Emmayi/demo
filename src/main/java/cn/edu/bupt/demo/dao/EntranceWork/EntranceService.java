@@ -1,7 +1,6 @@
 package cn.edu.bupt.demo.dao.EntranceWork;
 
 import cn.edu.bupt.demo.entity.EntranceWork;
-import org.omg.IOP.ENCODING_CDR_ENCAPS;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ public interface EntranceService {
 
     EntranceWork findEntranceWorkById(Integer id);
 
-    List<EntranceWork> findEntranceWorkByRange(String activity_range,Integer page, Integer pageSize);
+    List<EntranceWork> findEntranceWorkByRange(String activity_range, Integer page, Integer pageSize);
 
     Integer workCountByRange(String activity_range);
 

@@ -9,11 +9,14 @@ import lombok.Setter;
  */
 public class PointLanlon {
 
-    @Setter@Getter
+    @Setter
+    @Getter
     private Integer id;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String pointName;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String lanlon;
 
     @Override

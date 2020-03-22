@@ -1,8 +1,5 @@
 package cn.edu.bupt.demo.dao.Role;
 
-import cn.edu.bupt.demo.entity.Role;
-
-import java.util.List;
 import java.util.Set;
 
 /**

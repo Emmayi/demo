@@ -1,12 +1,13 @@
 package cn.edu.bupt.demo.dao.EmergencyPlace;
 
 import cn.edu.bupt.demo.entity.EmergencyPlace;
+
 import java.util.List;
 
 public interface PlaceService {
     List<EmergencyPlace> findAllByPage(Integer page, Integer pageSize);
 
-    List<EmergencyPlace> findPlaceByCategoryAndPage(String category,Integer page, Integer pageSize);
+    List<EmergencyPlace> findPlaceByCategoryAndPage(String category, Integer page, Integer pageSize);
 
     Integer findPlacePageNum(Integer size);
 

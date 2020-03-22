@@ -7,9 +7,9 @@ import java.util.List;
 public interface DaliyService {
     DailyInspection findTableById(Integer id);
 
-    List<DailyInspection> findTableByInspectionPerson(String inspection_person,Integer page,Integer pageSize);
+    List<DailyInspection> findTableByInspectionPerson(String inspection_person, Integer page, Integer pageSize);
 
-    List<DailyInspection> findAllByPage(Integer page,Integer pageSize);
+    List<DailyInspection> findAllByPage(Integer page, Integer pageSize);
 
     Integer getAllCount();
 

@@ -1,7 +1,6 @@
 package cn.edu.bupt.demo.controller;
 
 import cn.edu.bupt.demo.dao.Mail.MailService;
-import cn.edu.bupt.demo.dao.StaffNumber.StaffService;
 import cn.edu.bupt.demo.dao.User.UserRepository;
 import cn.edu.bupt.demo.entity.InspectionEquip;
 import cn.edu.bupt.demo.entity.InspectionPlan;
@@ -9,9 +8,6 @@ import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * @author zy
@@ -21,7 +17,7 @@ import java.util.Date;
 @RestController
 @RequestMapping("api/v1/info")
 @CrossOrigin
-@Api(description= "邮件接口")
+@Api(description = "邮件接口")
 public class MailController {
 
     @Autowired
@@ -34,30 +30,30 @@ public class MailController {
      *
      */
     @RequestMapping(value = "/sendGeneralMessage", method = RequestMethod.POST)
-    public void sendGeneralMailMessage(@RequestBody String info) throws Exception{
+    public void sendGeneralMailMessage(@RequestBody String info) throws Exception {
 
         InspectionPlan inspectionPlan = JSONObject.parseObject(info, InspectionPlan.class);
 
         String to = userRepository.findEmailByName(inspectionPlan.getId());
 
         try {
-            mailService.sendMessageMail(inspectionPlan, to,"巡检计划表通知", "message1.ftl");
+            mailService.sendMessageMail(inspectionPlan, to, "巡检计划表通知", "message1.ftl");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("sendGeneralMailMessage error!");
         }
 
     }
 
     @RequestMapping(value = "/sendEquipMessage", method = RequestMethod.POST)
-    public void sendEquipMailMessage(@RequestBody String info) throws Exception{
+    public void sendEquipMailMessage(@RequestBody String info) throws Exception {
 
         InspectionEquip inspectionEquip = JSONObject.parseObject(info, InspectionEquip.class);
         String to = userRepository.findEmailByName(inspectionEquip.getId());
         try {
-            mailService.sendMessageMail(inspectionEquip, to,"设备定期检测通知", "message2.ftl");
+            mailService.sendMessageMail(inspectionEquip, to, "设备定期检测通知", "message2.ftl");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("sendEquipMailMessage error!");
         }
 

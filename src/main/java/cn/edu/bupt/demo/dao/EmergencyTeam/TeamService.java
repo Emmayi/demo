@@ -7,7 +7,7 @@ import java.util.List;
 public interface TeamService {
     List<EmergencyTeam> findAllByPage(Integer page, Integer pageSize);
 
-    List<EmergencyTeam> findTeamByCategoryAndPage(String category,Integer page, Integer pageSize);
+    List<EmergencyTeam> findTeamByCategoryAndPage(String category, Integer page, Integer pageSize);
 
     Integer findTeamPageNum(Integer size);
 

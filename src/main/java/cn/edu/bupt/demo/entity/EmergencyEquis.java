@@ -15,7 +15,9 @@ public class EmergencyEquis extends IdBased {
     private String affiliation;
     private String location;
 
-    public Integer getEquis_id() {return equis_id;}
+    public Integer getEquis_id() {
+        return equis_id;
+    }
 
     public void setEquis_id(Integer equis_id) {
         this.equis_id = equis_id;

@@ -8,7 +8,7 @@ public interface SuppliesService {
 
     List<EmergencySupplies> findAllByPage(Integer page, Integer pageSize);
 
-    List<EmergencySupplies> findSuppliesByCategoryAndPage(String category,Integer page, Integer pageSize);
+    List<EmergencySupplies> findSuppliesByCategoryAndPage(String category, Integer page, Integer pageSize);
 
     Integer findSuppliesPageNum(Integer size);
 

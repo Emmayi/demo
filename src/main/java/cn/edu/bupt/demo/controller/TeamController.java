@@ -15,32 +15,32 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/info")
 @CrossOrigin
-@Api(description= "应急救援队伍")
+@Api(description = "应急救援队伍")
 public class TeamController {
     @Autowired
     TeamService teamService;
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
-    @RequestMapping(value = "/emergencyTeamByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
+    @RequestMapping(value = "/emergencyTeamByPage", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getInspectionTeamByPage(@RequestParam (name="limit") int limit,
-                                           @RequestParam (name="page") int page,
-                                           @RequestParam(value="category",required=false,defaultValue = "1") String category )throws Exception {
+    public String getInspectionTeamByPage(@RequestParam(name = "limit") int limit,
+                                          @RequestParam(name = "page") int page,
+                                          @RequestParam(value = "category", required = false, defaultValue = "1") String category) throws Exception {
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("limit",limit);
-            jsonObject.put("page",page);
+            jsonObject.put("limit", limit);
+            jsonObject.put("page", page);
 
-            if(category.equals("1")){
+            if (category.equals("1")) {
                 Integer count = teamService.getTeamCount();
-                jsonObject.put("allCount",count);
-                jsonObject.put("data",teamService.findAllByPage(page,limit));
+                jsonObject.put("allCount", count);
+                jsonObject.put("data", teamService.findAllByPage(page, limit));
                 return jsonObject.toString();
-            }else {
+            } else {
                 Integer count = teamService.TeamCountOfCategory(category);
-                jsonObject.put("data",teamService.findTeamByCategoryAndPage(category,page,limit));
-                jsonObject.put("allCount",count);
+                jsonObject.put("data", teamService.findTeamByCategoryAndPage(category, page, limit));
+                jsonObject.put("allCount", count);
                 return jsonObject.toString();
             }
 
@@ -50,8 +50,8 @@ public class TeamController {
     }
 
     //获取所有队伍的页数
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
-    @RequestMapping(value = "/teamPage", params = {  "limit"  }, method = RequestMethod.GET)
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
+    @RequestMapping(value = "/teamPage", params = {"limit"}, method = RequestMethod.GET)
     @ResponseBody
     public Integer getTeamPages(@RequestParam int limit) throws Exception {
         try {
@@ -62,13 +62,13 @@ public class TeamController {
     }
 
     //根据id获取队伍信息
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
-    @RequestMapping(value = "/team",params = {"teamId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
+    @RequestMapping(value = "/team", params = {"teamId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getTeamById(@RequestParam Integer teamId) throws Exception{
+    public String getTeamById(@RequestParam Integer teamId) throws Exception {
         try {
             return teamService.findTeamById(teamId).toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("getTeamById error!");
         }
     }
@@ -97,10 +97,10 @@ public class TeamController {
     }*/
 
     //增加队伍的信息
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor"})
     @RequestMapping(value = "/team", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String createTeam(@RequestBody String teamInfo) throws Exception{
+    public String createTeam(@RequestBody String teamInfo) throws Exception {
         JsonObject teamString = new JsonParser().parse(teamInfo).getAsJsonObject();
         EmergencyTeam emergencyTeam = Json2Team(teamString);
         try {
@@ -127,12 +127,12 @@ public class TeamController {
     }
 
     //更新
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor"})
     @RequestMapping(value = "/team", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String updateTeam(@RequestBody String teamInfo) throws Exception{
+    public String updateTeam(@RequestBody String teamInfo) throws Exception {
         JsonObject teamString = new JsonParser().parse(teamInfo).getAsJsonObject();
-        if(teamString.get("team_id").getAsString().equals("")) {
+        if (teamString.get("team_id").getAsString().equals("")) {
             throw new RuntimeException("没有Id，无法更新!");
         }
 
@@ -158,25 +158,25 @@ public class TeamController {
     }
 
     //通过Id删除信息
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher"})
-    @RequestMapping(value = "/team",params = {"teamId"},method = RequestMethod.DELETE)
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher"})
+    @RequestMapping(value = "/team", params = {"teamId"}, method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deletePlanById(@RequestParam Integer teamId){
+    public void deletePlanById(@RequestParam Integer teamId) {
         try {
             teamService.deleteById(teamId);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     //获取所有的队伍
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
     @RequestMapping(value = "/teamALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getAllTeam() throws Exception{
+    public String getAllTeam() throws Exception {
         try {
             return teamService.findAllTeam().toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("getAllTeam error!");
         }
     }

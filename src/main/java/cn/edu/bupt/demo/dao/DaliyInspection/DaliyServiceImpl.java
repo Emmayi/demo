@@ -14,7 +14,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class DaliyServiceImpl implements DaliyService{
+public class DaliyServiceImpl implements DaliyService {
 
     @Autowired
     DaliyRepository daliyRepository;
@@ -27,16 +27,16 @@ public class DaliyServiceImpl implements DaliyService{
 
     @Override
     public List<DailyInspection> findTableByInspectionPerson(String inspection_person, Integer page, Integer pageSize) {
-        log.trace("Executing findTableByInspectionPerson [{}]", inspection_person,page,pageSize);
+        log.trace("Executing findTableByInspectionPerson [{}]", inspection_person, page, pageSize);
         Integer index = page * pageSize;
-        return daliyRepository.findTableByInspectionPerson(inspection_person,index,pageSize);
+        return daliyRepository.findTableByInspectionPerson(inspection_person, index, pageSize);
     }
 
     @Override
     public List<DailyInspection> findAllByPage(Integer page, Integer pageSize) {
-        log.trace("Executing findAllByPage [{}]",page,pageSize);
+        log.trace("Executing findAllByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
-        return daliyRepository.findAllByPage(index,pageSize);
+        return daliyRepository.findAllByPage(index, pageSize);
     }
 
     @Override

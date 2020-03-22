@@ -2,7 +2,6 @@ package cn.edu.bupt.demo.aop;
 
 import cn.edu.bupt.demo.dao.SysLog.SysLogService;
 import cn.edu.bupt.demo.entity.SysLog;
-import io.swagger.models.auth.In;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,9 +14,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -36,26 +33,27 @@ public class SysLogAspect {
 
     //表示匹配带有自定义注解的方法
     @Pointcut("@annotation(cn.edu.bupt.demo.aop.MyLog)")
-    public void pointcut() {}
+    public void pointcut() {
+    }
 
     @Around("pointcut()")
     public Object around(ProceedingJoinPoint point) {
-        Object result =null;
+        Object result = null;
         long beginTime = System.currentTimeMillis();
 
         try {
             log.info("我在目标方法之前执行！");
             result = point.proceed();
             long endTime = System.currentTimeMillis();
-            insertLog(point,endTime-beginTime);
+            insertLog(point, endTime - beginTime);
         } catch (Throwable e) {
             // TODO Auto-generated catch block
         }
         return result;
     }
 
-    private void insertLog(ProceedingJoinPoint point ,long time) {
-        MethodSignature signature = (MethodSignature)point.getSignature();
+    private void insertLog(ProceedingJoinPoint point, long time) {
+        MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
         SysLog sys_log = new SysLog();
 
@@ -80,7 +78,6 @@ public class SysLogAspect {
 
         String username = sysLogService.userName(userid);
         System.out.println(username);
-
 
 
 //		String userid = (Long)SecurityUtils.getSubject().getSession().getAttribute("user_id");

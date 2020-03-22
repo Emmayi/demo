@@ -9,15 +9,20 @@ import lombok.Setter;
  */
 public class DailyInspection extends IdBased {
 
-    @Getter@Setter
+    @Getter
+    @Setter
     private Integer id;
-    @Getter@Setter
+    @Getter
+    @Setter
     private Long time;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String inspection_person;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String path;
-    @Getter@Setter
+    @Getter
+    @Setter
     private String work;
 
     @Override

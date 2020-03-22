@@ -17,25 +17,25 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/info")
 @CrossOrigin
-@Api(description= "巡检设备")
+@Api(description = "巡检设备")
 public class InspectionEquipController {
 
     @Autowired
     private EquipService equipService;
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
-    @RequestMapping(value = "/inspectionEquipByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/inspectionEquipByPage", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getInspectionEquipByPage(@RequestParam (name="limit") int limit,
-                                        @RequestParam (name="page") int page)throws Exception {
+    public String getInspectionEquipByPage(@RequestParam(name = "limit") int limit,
+                                           @RequestParam(name = "page") int page) throws Exception {
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("limit",limit);
-            jsonObject.put("page",page);
+            jsonObject.put("limit", limit);
+            jsonObject.put("page", page);
 
             Integer count = equipService.getAllCount();
-            jsonObject.put("allCount",count);
-            jsonObject.put("data",equipService.findEquipInspectionPlanByPage(page,limit));
+            jsonObject.put("allCount", count);
+            jsonObject.put("data", equipService.findEquipInspectionPlanByPage(page, limit));
             return jsonObject.toString();
         } catch (Exception e) {
             throw new Exception("getInspectionEquipByPage error!");
@@ -43,23 +43,23 @@ public class InspectionEquipController {
     }
 
     //通过Id查找信息
-    @RequestMapping(value = "/equipPlanById",params = {"id"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/equipPlanById", params = {"id"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getInspecitonEquipById(@RequestParam Integer id) throws Exception{
+    public String getInspecitonEquipById(@RequestParam Integer id) throws Exception {
         try {
             return equipService.findPlanById(id).toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("getInspecitonEquipById error!");
         }
     }
 
     //通过巡检人查找巡检计划的信息
-    @RequestMapping(value = "/equipPlanByName",params = {"name"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/equipPlanByName", params = {"name"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getInspecitonEquipByName(@RequestParam String name) throws Exception{
+    public String getInspecitonEquipByName(@RequestParam String name) throws Exception {
         try {
             return equipService.findPlanByEquipName(name).toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("getInspecitonEquipByName error!");
         }
     }
@@ -68,7 +68,7 @@ public class InspectionEquipController {
     //统计一共有多少报告
     @RequestMapping(value = "/equipPlan", method = RequestMethod.GET)
     @ResponseBody
-    public Integer getAllCount() throws Exception{
+    public Integer getAllCount() throws Exception {
         try {
             Integer count = equipService.getAllCount();
             return count;
@@ -82,7 +82,7 @@ public class InspectionEquipController {
     @MyLog(value = "添加新的年度设备巡检计划")
     @RequestMapping(value = "/equipPlan", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String createInspectionEquip(@RequestBody String equipInfo) throws Exception{
+    public String createInspectionEquip(@RequestBody String equipInfo) throws Exception {
 
         InspectionEquip inspectionEquip = JSONObject.parseObject(equipInfo, InspectionEquip.class);
 
@@ -98,10 +98,10 @@ public class InspectionEquipController {
     @MyLog(value = "更新年度设备巡检计划")
     @RequestMapping(value = "/equipPlan", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String updateInspectionEquip(@RequestBody String equipInfo) throws Exception{
+    public String updateInspectionEquip(@RequestBody String equipInfo) throws Exception {
 
         InspectionEquip inspectionPlan = JSONObject.parseObject(equipInfo, InspectionEquip.class);
-        if(inspectionPlan.getId().equals("")) {
+        if (inspectionPlan.getId().equals("")) {
             throw new RuntimeException("没有Id，无法更新!");
         }
 
@@ -115,23 +115,23 @@ public class InspectionEquipController {
 
     //根据Id删除巡检计划
     @MyLog(value = "删除年度设备巡检计划")
-    @RequestMapping(value = "/equipPlan",params = {"id"},method = RequestMethod.DELETE)
+    @RequestMapping(value = "/equipPlan", params = {"id"}, method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deleteReportByInspectionPerson(@RequestParam Integer id){
+    public void deleteReportByInspectionPerson(@RequestParam Integer id) {
         try {
             equipService.deleteById(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     //获取所有巡检报告信息
-    @RequestMapping(value = "/allEquipPlan",method = RequestMethod.GET)
+    @RequestMapping(value = "/allEquipPlan", method = RequestMethod.GET)
     @ResponseBody
-    public String findAllEquipPlan() throws Exception{
+    public String findAllEquipPlan() throws Exception {
         try {
             return equipService.findAll().toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("findAllEquipPlan error!");
         }
     }

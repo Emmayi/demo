@@ -8,7 +8,7 @@ public interface EquisService {
 
     List<EmergencyEquis> findAllByPage(Integer page, Integer pageSize);
 
-    List<EmergencyEquis> findEquisByCategoryAndPage(String category,Integer page, Integer pageSize);
+    List<EmergencyEquis> findEquisByCategoryAndPage(String category, Integer page, Integer pageSize);
 
     Integer findEquisPageNum(Integer size);
 

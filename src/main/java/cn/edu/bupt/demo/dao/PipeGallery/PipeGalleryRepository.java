@@ -11,7 +11,7 @@ public interface PipeGalleryRepository {
     List<PipeGallery> findAllByPage(@Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select*from pipeGallery where unit = #{unit} limit #{index},#{pageSize}")
-    List<PipeGallery> findPipeByunitAndPage(@Param("unit")String unit,@Param("index")Integer index,@Param("pageSize")Integer pageSize);
+    List<PipeGallery> findPipeByunitAndPage(@Param("unit") String unit, @Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select * from pipeGallery where id = #{id}")
     PipeGallery findPipeById(Integer id);
@@ -25,7 +25,7 @@ public interface PipeGalleryRepository {
 
     @Insert("insert into pipeGallery (number,name,length,unit,startpoint,endpoint,description,drawpoint)" +
             " values (#{number},#{name},#{length},#{unit},#{startpoint},#{endpoint},#{description},#{drawpoint})")
-    @Options(useGeneratedKeys = true, keyProperty = "id",keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void save(PipeGallery pipeGallery);
 
     @Update("update pipeGallery set number = #{number},name = #{name},length = #{length},unit = #{unit}," +

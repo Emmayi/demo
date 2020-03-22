@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/info")
 @CrossOrigin
-@Api(description= "应急场所")
+@Api(description = "应急场所")
 public class PlaceController {
     @Autowired
     PlaceService placeService;
@@ -34,26 +34,26 @@ public class PlaceController {
     }*/
 
     //分页接口配置，有筛选参数返回筛选参数的，没有则显示全部
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
-    @RequestMapping(value = "/emergencyPlaceByPage",  method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
+    @RequestMapping(value = "/emergencyPlaceByPage", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getInspectionPlaceByPage(@RequestParam (name="limit") int limit,
-                                           @RequestParam (name="page") int page,
-                                           @RequestParam(value="category",required=false,defaultValue = "1") String category )throws Exception {
+    public String getInspectionPlaceByPage(@RequestParam(name = "limit") int limit,
+                                           @RequestParam(name = "page") int page,
+                                           @RequestParam(value = "category", required = false, defaultValue = "1") String category) throws Exception {
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("limit",limit);
-            jsonObject.put("page",page);
+            jsonObject.put("limit", limit);
+            jsonObject.put("page", page);
 
-            if(category.equals("1")){
+            if (category.equals("1")) {
                 Integer count = placeService.getPlaceCount();
-                jsonObject.put("allCount",count);
-                jsonObject.put("data",placeService.findAllByPage(page,limit));
+                jsonObject.put("allCount", count);
+                jsonObject.put("data", placeService.findAllByPage(page, limit));
                 return jsonObject.toString();
-            }else {
+            } else {
                 Integer count = placeService.PlaceCountOfCategory(category);
-                jsonObject.put("data",placeService.findPlaceByCategoryAndPage(category,page,limit));
-                jsonObject.put("allCount",count);
+                jsonObject.put("data", placeService.findPlaceByCategoryAndPage(category, page, limit));
+                jsonObject.put("allCount", count);
                 return jsonObject.toString();
             }
 
@@ -63,8 +63,8 @@ public class PlaceController {
     }
 
     //获取所有场所的页数
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
-    @RequestMapping(value = "/placePage", params = {  "limit"  }, method = RequestMethod.GET)
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
+    @RequestMapping(value = "/placePage", params = {"limit"}, method = RequestMethod.GET)
     @ResponseBody
     public Integer getPlacePages(@RequestParam int limit) throws Exception {
         try {
@@ -75,13 +75,13 @@ public class PlaceController {
     }
 
     //根据id获取物资信息
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
-    @RequestMapping(value = "/place",params = {"placeId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
+    @RequestMapping(value = "/place", params = {"placeId"}, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getPlaceById(@RequestParam Integer placeId) throws Exception{
+    public String getPlaceById(@RequestParam Integer placeId) throws Exception {
         try {
             return placeService.findPlaceById(placeId).toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("getPlaceById error!");
         }
     }
@@ -132,10 +132,10 @@ public class PlaceController {
     }*/
 
     //增加场所的信息
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
     @RequestMapping(value = "/place", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String createPlace(@RequestBody String placeInfo) throws Exception{
+    public String createPlace(@RequestBody String placeInfo) throws Exception {
         JsonObject placeString = new JsonParser().parse(placeInfo).getAsJsonObject();
         EmergencyPlace emergencyPlace = Json2Place(placeString);
         try {
@@ -164,12 +164,12 @@ public class PlaceController {
     }
 
     //更新
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor"})
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor"})
     @RequestMapping(value = "/place", method = RequestMethod.PUT, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String updatePlace(@RequestBody String placeInfo) throws Exception{
+    public String updatePlace(@RequestBody String placeInfo) throws Exception {
         JsonObject placeString = new JsonParser().parse(placeInfo).getAsJsonObject();
-        if(placeString.get("place_id").getAsString().equals("")) {
+        if (placeString.get("place_id").getAsString().equals("")) {
             throw new RuntimeException("没有Id，无法更新!");
         }
 
@@ -186,7 +186,6 @@ public class PlaceController {
         emergencyPlace.setCellphone(placeString.get("cellphone").getAsString());
 
 
-
         try {
             placeService.update(emergencyPlace);
             return emergencyPlace.toString();
@@ -196,25 +195,25 @@ public class PlaceController {
     }
 
     //通过Id删除信息
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher"})
-    @RequestMapping(value = "/place",params = {"placeId"},method = RequestMethod.DELETE)
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher"})
+    @RequestMapping(value = "/place", params = {"placeId"}, method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void deletePlanById(@RequestParam Integer placeId){
+    public void deletePlanById(@RequestParam Integer placeId) {
         try {
             placeService.deleteById(placeId);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     //获取所有的场所
-    @Auth(roles = {"GeneralDispatcher","GeneralMonitor","BranchDispatcher","BranchMonitor","Repairman"})
+    @Auth(roles = {"GeneralDispatcher", "GeneralMonitor", "BranchDispatcher", "BranchMonitor", "Repairman"})
     @RequestMapping(value = "/placeALL", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getAllPlace() throws Exception{
+    public String getAllPlace() throws Exception {
         try {
             return placeService.findAllPlace().toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("getAllPlace error!");
         }
     }

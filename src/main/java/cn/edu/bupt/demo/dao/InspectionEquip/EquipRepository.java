@@ -4,11 +4,12 @@ import cn.edu.bupt.demo.entity.InspectionEquip;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+
 @Mapper
 public interface EquipRepository {
 
     @Select("select * from inspection_report limit #{index},#{pageSize}")
-    List<InspectionEquip> findEquipInspectionPlanByPage(@Param("index")Integer index,@Param("pageSize")Integer pageSize);
+    List<InspectionEquip> findEquipInspectionPlanByPage(@Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select * from inspection_equip where id = #{id}")
     InspectionEquip findPlanById(Integer id);
@@ -21,7 +22,7 @@ public interface EquipRepository {
 
     @Insert("insert into inspection_equip (name,content,period,last_time) " +
             "values (#{name},#{content},#{period}),#{last_time}")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void save(InspectionEquip inspectionEquip);
 
     @Update("update inspection_equip set name = #{name},content = #{content}," +

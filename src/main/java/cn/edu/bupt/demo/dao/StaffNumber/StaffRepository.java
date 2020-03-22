@@ -1,7 +1,8 @@
 package cn.edu.bupt.demo.dao.StaffNumber;
 
-import org.apache.ibatis.annotations.*;
 import cn.edu.bupt.demo.entity.StaffNumber;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public interface StaffRepository {
     Integer findAllCount();
 
     @Insert("insert into staff_number (gender,phone,name,email) values (#{gender},#{phone},#{name},#{email})")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void save(StaffNumber staffNumber);
 
     @Update("update staff_number set gender = #{gender},phone = #{phone},name = #{name} email=#{email} where id=#{id}")

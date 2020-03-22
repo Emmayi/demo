@@ -3,7 +3,6 @@ package cn.edu.bupt.demo.dao.EntranceWork;
 import cn.edu.bupt.demo.entity.EntranceWork;
 import org.apache.ibatis.annotations.*;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,13 +14,13 @@ import java.util.List;
 public interface EntranceRepository {
 
     @Select("select * from entrance_work limit #{index},#{pageSize}")
-    List<EntranceWork> findAllByPage(@Param("index")Integer index,@Param("pageSize")Integer pageSize);
+    List<EntranceWork> findAllByPage(@Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select * from entrance_work where id = #{id}")
     EntranceWork findEntranceWorkById(Integer id);
 
     @Select("select * from entrance_work where activity_range = #{activity_range} limit #{index},#{pageSize}")
-    List<EntranceWork> findEntranceWorkByRange(@Param("activity_range")String activity_range,@Param("index")Integer index,@Param("pageSize")Integer pageSize);
+    List<EntranceWork> findEntranceWorkByRange(@Param("activity_range") String activity_range, @Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select count(*) from entrance_work where activity_range = #{activity_range}")
     Integer WorkCountByRange(String activity_range);
@@ -31,7 +30,7 @@ public interface EntranceRepository {
 
     @Insert("insert into entrance_work (duration,date,work_number,activity_range,evaluation,contact,contact_number) " +
             "values (#{duration},#{date},#{work_number},#{activity_range},#{evaluation},#{contact},#{contact_number})")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void save(EntranceWork entranceWork);
 
     @Update("update entrance_work set duration = #{duration},date = #{date},work_number = #{work_number},activity_range = #{activity_range}," +
@@ -39,7 +38,7 @@ public interface EntranceRepository {
     void update(EntranceWork entranceWork);
 
     @Update("update entrance_work set evaluation = #{evaluation} where id=#{id}")
-    void evaluation(@Param("evaluation")String evaluation, @Param("id")Integer id);
+    void evaluation(@Param("evaluation") String evaluation, @Param("id") Integer id);
 
     @Delete("delete from entrance_work where id=#{id}")
     void deleteById(Integer id);
@@ -49,7 +48,6 @@ public interface EntranceRepository {
 
     @Select("select * from entrance_work where id > 0")
     List<EntranceWork> findAll();
-
 
 
 }

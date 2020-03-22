@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface InformationRespository {
     @Select("select * from project_cinformation limit #{index},#{pageSize}")
-    List<ProjectCinformation> findAllByPage(@Param("index")Integer index, @Param("pageSize")Integer pageSize);
+    List<ProjectCinformation> findAllByPage(@Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select * from project_cinformation where project_id = #{project_id}")
     ProjectCinformation findProjectById(Integer project_id);
@@ -24,7 +24,7 @@ public interface InformationRespository {
 
     @Insert("insert into project_cinformation (location,area,drawpoint,mainequipments,proequipments,department,mainusage)" +
             " values (#{location},#{area},#{drawpoint},#{mainequipments},#{proequipments},#{department},#{mainusage})")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void save(ProjectCinformation projectCinformation);
 
     @Update("update project_cinformation set location = #{location},area = #{area},drawpoint = #{drawpoint},mainequipments = #{mainequipments},proequipments = #{proequipments},department = #{department}, " +

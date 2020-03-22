@@ -7,7 +7,7 @@ import java.util.List;
 public interface GalleryAreaService {
     List<PipeGalleryArea> findAllByPage(Integer page, Integer pageSize);
 
-    List<PipeGalleryArea> findGalleryareaBypipe_belongAndPage(String pipe_belong,Integer index,Integer pageSize);
+    List<PipeGalleryArea> findGalleryareaBypipe_belongAndPage(String pipe_belong, Integer index, Integer pageSize);
 
     Integer findAreaPageNum(Integer size);
 

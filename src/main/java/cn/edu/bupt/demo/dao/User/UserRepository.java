@@ -1,7 +1,8 @@
 package cn.edu.bupt.demo.dao.User;
 
 import cn.edu.bupt.demo.entity.User;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 

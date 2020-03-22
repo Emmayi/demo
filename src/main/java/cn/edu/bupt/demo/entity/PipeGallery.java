@@ -4,50 +4,58 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class PipeGallery {
-        @Getter
-        @Setter
-        private Integer id;
-        @Getter@Setter
-        private String number;
-        @Getter@Setter
-        private String name;
-        @Getter@Setter
-        private Integer length;
-        @Getter@Setter
-        private String unit;
-        @Getter@Setter
-        private String startpoint;
-        @Getter@Setter
-        private String endpoint;
-        @Getter@Setter
-        private String description;
-        @Getter@Setter
-        private String drawpoint;
+    @Getter
+    @Setter
+    private Integer id;
+    @Getter
+    @Setter
+    private String number;
+    @Getter
+    @Setter
+    private String name;
+    @Getter
+    @Setter
+    private Integer length;
+    @Getter
+    @Setter
+    private String unit;
+    @Getter
+    @Setter
+    private String startpoint;
+    @Getter
+    @Setter
+    private String endpoint;
+    @Getter
+    @Setter
+    private String description;
+    @Getter
+    @Setter
+    private String drawpoint;
 
-        @Override
-        public String toString() {
-            final StringBuilder sb = new StringBuilder("{");
-            sb.append("\"id\":")
-                    .append(id);
-            sb.append(",\"number\":\"")
-                    .append(number).append('\"');
-            sb.append(",\"name\":\"")
-                    .append(name).append('\"');
-            sb.append(",\"length\":\"")
-                    .append(length).append('\"');
-            sb.append(",\"unit\":\"")
-                    .append(unit).append('\"');
-            sb.append(",\"startpoint\":\"")
-                    .append(startpoint).append('\"');
-            sb.append(",\"endpoint\":\"")
-                    .append(endpoint).append('\"');
-            sb.append(",\"description\":\"")
-                    .append(description).append('\"');
-            sb.append(",\"drawpoint\":\"")
-                    .append(drawpoint).append('\"');
-            sb.append('}');
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"id\":")
+                .append(id);
+        sb.append(",\"number\":\"")
+                .append(number).append('\"');
+        sb.append(",\"name\":\"")
+                .append(name).append('\"');
+        sb.append(",\"length\":\"")
+                .append(length).append('\"');
+        sb.append(",\"unit\":\"")
+                .append(unit).append('\"');
+        sb.append(",\"startpoint\":\"")
+                .append(startpoint).append('\"');
+        sb.append(",\"endpoint\":\"")
+                .append(endpoint).append('\"');
+        sb.append(",\"description\":\"")
+                .append(description).append('\"');
+        sb.append(",\"drawpoint\":\"")
+                .append(drawpoint).append('\"');
+        sb.append('}');
 
-            return sb.toString();
-        }
-
+        return sb.toString();
     }
+
+}

@@ -10,10 +10,10 @@ import java.util.List;
 public interface EquisRespository {
 
     @Select("select * from emergency_equis limit #{index},#{pageSize}")
-    List<EmergencyEquis> findAllByPage(@Param("index")Integer index, @Param("pageSize")Integer pageSize);
+    List<EmergencyEquis> findAllByPage(@Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select*from emergency_equis where category = #{category} limit #{index},#{pageSize}")
-    List<EmergencyEquis> findEquisByCategoryAndPage(@Param("category")String category,@Param("index")Integer index,@Param("pageSize")Integer pageSize);
+    List<EmergencyEquis> findEquisByCategoryAndPage(@Param("category") String category, @Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select * from emergency_equis where equis_id = #{equis_id}")
     EmergencyEquis findEmergencyEquisById(Integer equis_id);
@@ -35,7 +35,7 @@ public interface EquisRespository {
 
     @Insert("insert into emergency_equis (name,category,quantity,model,purchase_date,manufacturer,manufacture_date,valid_until,use_description,performance_description,affiliation,location)" +
             " values (#{name},#{category},#{quantity},#{model},#{purchase_date},#{manufacturer},#{manufacture_date},#{valid_until},#{use_description},#{performance_description},#{affiliation},#{location})")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void save(EmergencyEquis emergencyEquis);
 
     @Update("update emergency_equis set name = #{name},category = #{category},quantity = #{quantity},model = #{model},purchase_date = #{purchase_date},manufacturer = #{manufacturer}, " +

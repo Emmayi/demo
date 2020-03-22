@@ -10,7 +10,7 @@ public interface PathService {
 
     List<InspectionPath> findAllPathByPage(Integer index, Integer pageSize);
 
-    List<InspectionPath> findPathByArea(String area,Integer index, Integer pageSize);
+    List<InspectionPath> findPathByArea(String area, Integer index, Integer pageSize);
 
     Integer getAllCount();
 

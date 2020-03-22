@@ -14,7 +14,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class PathServiceImpl implements PathService{
+public class PathServiceImpl implements PathService {
 
     @Autowired
     PathRepository pathRepository;
@@ -29,14 +29,14 @@ public class PathServiceImpl implements PathService{
     public List<InspectionPath> findAllPathByPage(Integer page, Integer pageSize) {
         log.trace("Executing findAllPathByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
-        return pathRepository.findAllPathByPage(index,pageSize);
+        return pathRepository.findAllPathByPage(index, pageSize);
     }
 
     @Override
     public List<InspectionPath> findPathByArea(String area, Integer page, Integer pageSize) {
-        log.trace("Executing findPathByArea [{}]",area, page, pageSize);
+        log.trace("Executing findPathByArea [{}]", area, page, pageSize);
         Integer index = page * pageSize;
-        return pathRepository.findPathByArea(area,index,pageSize);
+        return pathRepository.findPathByArea(area, index, pageSize);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class PathServiceImpl implements PathService{
 
     @Override
     public Integer findCountOfArea(String area) {
-        log.trace("Executing findCountOfPerson [{}]",area);
+        log.trace("Executing findCountOfPerson [{}]", area);
         Integer count = pathRepository.findCountOfArea(area);
         return count;
     }
@@ -70,6 +70,7 @@ public class PathServiceImpl implements PathService{
         log.trace("Executing deleteById [{}]", id);
         pathRepository.deleteById(id);
     }
+
     @Override
     public List<InspectionPath> findAll() {
         log.trace("Executing findAll [{}]");
@@ -77,16 +78,16 @@ public class PathServiceImpl implements PathService{
     }
 
     @Override
-    public String setNumber(String id){
-        int Len= 6-id.length();
-        String num="LX";
-        StringBuilder sb=new StringBuilder();
+    public String setNumber(String id) {
+        int Len = 6 - id.length();
+        String num = "LX";
+        StringBuilder sb = new StringBuilder();
         sb.append(num);
-        for (int i=0;i<Len;i++){
+        for (int i = 0; i < Len; i++) {
             sb.append("0");
         }
         sb.append(id);
-        String number=""+sb;
+        String number = "" + sb;
         return number;
     }
 }

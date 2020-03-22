@@ -15,21 +15,21 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<EmergencyTeam> findAllByPage(Integer page, Integer pageSize) {
-        log.trace("Executing findTeamByPage [{}]", page,pageSize);
+        log.trace("Executing findTeamByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
-        return teamRespository.findAllByPage(index,pageSize);
+        return teamRespository.findAllByPage(index, pageSize);
     }
 
     @Override
     public List<EmergencyTeam> findTeamByCategoryAndPage(String category, Integer page, Integer pageSize) {
         Integer index = page * pageSize;
-        return teamRespository.findTeamByCategoryAndPage(category,index,pageSize);
+        return teamRespository.findTeamByCategoryAndPage(category, index, pageSize);
     }
 
     @Override
     public Integer findTeamPageNum(Integer size) {
         log.trace("Executing findTeamPageNum [{}]", size);
-        Integer num = (teamRespository.AllTeamCount()+size-1)/size;
+        Integer num = (teamRespository.AllTeamCount() + size - 1) / size;
         return num;
     }
 

@@ -14,14 +14,14 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class EquipServiceImpl  implements EquipService{
+public class EquipServiceImpl implements EquipService {
 
     @Autowired
     EquipRepository equipRepository;
 
     @Override
     public List<InspectionEquip> findEquipInspectionPlanByPage(Integer page, Integer pageSize) {
-        log.trace("Executing findReportByPage [{}]", page,pageSize);
+        log.trace("Executing findReportByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
         return equipRepository.findEquipInspectionPlanByPage(index, pageSize);
     }

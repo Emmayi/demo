@@ -8,10 +8,10 @@ import java.util.List;
 @Mapper
 public interface PlaceRespository {
     @Select("select * from emergency_place limit #{index},#{pageSize}")
-    List<EmergencyPlace> findAllByPage(@Param("index")Integer index, @Param("pageSize")Integer pageSize);
+    List<EmergencyPlace> findAllByPage(@Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select*from emergency_place where category = #{category} limit #{index},#{pageSize}")
-    List<EmergencyPlace> findPlaceByCategoryAndPage(@Param("category")String category,@Param("index")Integer index,@Param("pageSize")Integer pageSize);
+    List<EmergencyPlace> findPlaceByCategoryAndPage(@Param("category") String category, @Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select * from emergency_place where id = #{place_id}")
     EmergencyPlace findEmergencyPlaceById(Integer place_id);
@@ -33,7 +33,7 @@ public interface PlaceRespository {
 
     @Insert("insert into emergency_place (name,category,location,area,capacity,introduction,affiliation,principal,telephone,cellphone)" +
             " values (#{name},#{category},#{location},#{area},#{capacity},#{introduction},#{affiliation},#{principal},#{telephone},#{cellphone})")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void save(EmergencyPlace emergencyPlace);
 
     @Update("update emergency_place set name = #{name},category = #{category},location = #{location},area = #{area},capacity = #{capacity},introduction = #{introduction},affiliation = #{affiliation}, " +

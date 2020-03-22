@@ -14,22 +14,22 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class EntranceServiceImpl implements EntranceService{
+public class EntranceServiceImpl implements EntranceService {
 
     @Autowired
     EntranceRepository entranceRepository;
 
     @Override
     public List<EntranceWork> findALlByPage(Integer page, Integer pageSize) {
-        log.trace("Executing findALlByPage [{}]", page,pageSize);
+        log.trace("Executing findALlByPage [{}]", page, pageSize);
         Integer index = page * pageSize;
-        return entranceRepository.findAllByPage(index,pageSize);
+        return entranceRepository.findAllByPage(index, pageSize);
     }
 
     @Override
     public Integer findEntranceWorkPageNum(Integer size) {
         log.trace("Executing findEntranceWorkPageNum [{}]", size);
-        Integer num = (entranceRepository.AllWorkCount()+size-1)/size;
+        Integer num = (entranceRepository.AllWorkCount() + size - 1) / size;
         return num;
     }
 
@@ -40,15 +40,15 @@ public class EntranceServiceImpl implements EntranceService{
     }
 
     @Override
-    public List<EntranceWork> findEntranceWorkByRange(String  activity_range,Integer page, Integer pageSize) {
-        log.trace("Executing findEntranceWorkByRange [{}]", activity_range,page,pageSize);
+    public List<EntranceWork> findEntranceWorkByRange(String activity_range, Integer page, Integer pageSize) {
+        log.trace("Executing findEntranceWorkByRange [{}]", activity_range, page, pageSize);
         Integer index = page * pageSize;
-        return entranceRepository.findEntranceWorkByRange(activity_range,index,pageSize);
+        return entranceRepository.findEntranceWorkByRange(activity_range, index, pageSize);
     }
 
     @Override
     public Integer workCountByRange(String activity_range) {
-        log.trace("Executing workCountByRange [{}]",activity_range);
+        log.trace("Executing workCountByRange [{}]", activity_range);
         Integer count = entranceRepository.WorkCountByRange(activity_range);
         return count;
     }
@@ -73,20 +73,20 @@ public class EntranceServiceImpl implements EntranceService{
     }
 
     @Override
-    public void evaluation(String evaluation,Integer id ) {
+    public void evaluation(String evaluation, Integer id) {
         log.trace("Executing evaluation [{}]");
-        entranceRepository.evaluation(evaluation,id);
+        entranceRepository.evaluation(evaluation, id);
     }
 
     @Override
     public void deleteById(Integer id) {
-        log.trace("Executing deleteById [{}]",id);
+        log.trace("Executing deleteById [{}]", id);
         entranceRepository.deleteById(id);
     }
 
     @Override
     public void deleteByDate(Long date) {
-        log.trace("Executing deleteByDate [{}]",date);
+        log.trace("Executing deleteByDate [{}]", date);
         entranceRepository.deleteByDate(date);
     }
 

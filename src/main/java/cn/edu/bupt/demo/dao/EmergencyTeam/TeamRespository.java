@@ -8,10 +8,10 @@ import java.util.List;
 @Mapper
 public interface TeamRespository {
     @Select("select * from emergency_team limit #{index},#{pageSize}")
-    List<EmergencyTeam> findAllByPage(@Param("index")Integer index, @Param("pageSize")Integer pageSize);
+    List<EmergencyTeam> findAllByPage(@Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
     @Select("select * from emergency_team where category = #{category} limit #{index},#{pageSize}")
-    List<EmergencyTeam> findTeamByCategoryAndPage(@Param("category")String category,@Param("index")Integer index, @Param("pageSize")Integer pageSize);
+    List<EmergencyTeam> findTeamByCategoryAndPage(@Param("category") String category, @Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
 
     @Select("select * from emergency_team where team_id = #{team_id}")
@@ -34,7 +34,7 @@ public interface TeamRespository {
 
     @Insert("insert into emergency_team (name,category,level,specialty,introduction,affiliation,principal,phone,location)" +
             " values (#{name},#{category},#{level},#{specialty},#{introduction},#{affiliation},#{principal},#{phone},#{location})")
-    @Options(useGeneratedKeys = true,keyProperty="id",keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void save(EmergencyTeam emergencyTeam);
 
     @Update("update emergency_team set name = #{name},category = #{category},level = #{level},specialty = #{specialty},introduction = #{introduction},affiliation = #{affiliation}, " +
