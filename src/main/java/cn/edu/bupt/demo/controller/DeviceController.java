@@ -1,11 +1,20 @@
 package cn.edu.bupt.demo.controller;
 
+import cn.bupt.edu.base.protocol.ProtocolReqMsgProto;
+import cn.bupt.edu.base.task.client.ClientFutureTask;
+import cn.bupt.edu.base.task.client.ClientTask;
+import cn.bupt.edu.base.util.RPCUUID;
+import cn.bupt.edu.client.datadispatch.ClientTaskMap;
+import cn.edu.bupt.demo.channel.Client;
+import cn.edu.bupt.demo.protobuf.DeviceProto;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.protobuf.ByteString;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author zy
@@ -53,6 +62,40 @@ public class DeviceController {
         } catch (Exception e) {
             throw new Exception("findAllDevice error!");
         }
+    }
+
+    @RequestMapping(value = "/saveDevice", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public DeviceProto.Device saveDevice(@RequestBody DeviceProto.Device device) {
+        ProtocolReqMsgProto.ProtocolReqMsg.Builder reqBuilder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
+        String uuid = RPCUUID.getUUID();
+        reqBuilder.setUuid(uuid);
+        reqBuilder.setVersion(1);
+        reqBuilder.addChain("device-access");
+        reqBuilder.setPath("/api/v1/deviceaccess/device");
+        reqBuilder.setBody(ByteString.copyFrom(device.toByteArray()));
+        ClientTask tc = new ClientTask() {
+            @Override
+            public Object call() throws Exception {
+                DeviceProto.Device device = DeviceProto.Device.parseFrom(this.getResp().getBody());
+                this.getLogger().info("device name = {}", device.getName());
+                return device;
+            }
+        };
+        ClientFutureTask dt = new ClientFutureTask(tc);
+        ClientTaskMap.getInstance().putTask(uuid, dt);
+        Client.getChannel().writeAndFlush(reqBuilder.build());
+        try {
+            Object resp = dt.get();
+            if (resp instanceof DeviceProto.Device) {
+                return (DeviceProto.Device) resp;
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

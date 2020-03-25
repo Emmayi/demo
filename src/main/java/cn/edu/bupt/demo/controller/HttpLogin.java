@@ -15,7 +15,7 @@ public class HttpLogin {
     public static String id;
     static private Cookie ck;
     static private String session;
-//    public String deviceToken;
+    //    public String deviceToken;
     private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
     private String host = "39.104.84.131";
     ///创建okHttpClient对象
