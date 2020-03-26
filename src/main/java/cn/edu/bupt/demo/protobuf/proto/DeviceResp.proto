@@ -1,9 +1,9 @@
 syntax = "proto3";
 option java_generic_services = true;
 option java_package = "cn.edu.bupt.demo.protobuf";
-option java_outer_classname = "DeviceProto";
+option java_outer_classname = "DeviceRespProto";
 
-message Device {
+message DeviceResp {
     string id = 1;
     int32 tenantId = 2;
     int32 customerId = 3;
@@ -17,4 +17,6 @@ message Device {
     string location = 11;
     string siteId = 12;
     int64 lifeTime = 13;
+    int64 createdTime = 14;
+    string searchTextSource = 15;
 }
