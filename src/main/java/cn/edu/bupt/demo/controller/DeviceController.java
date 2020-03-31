@@ -77,7 +77,7 @@ public class DeviceController {
             rreqbuilder.setPath("/api/v1/deviceaccess/data/alllatestdata/deviceId");
             rreqbuilder.addChain("device-access");
             rreqbuilder.setVersion(1);
-            rreqbuilder.setUuid(uuid);
+            rreqbuilder.setUuid(ruuid);
             rreqbuilder.setBody(ByteString.copyFrom(JSONObject.toJSONBytes(rreq)));
             ClientTask rtc = new ClientTask() {
                 @Override
