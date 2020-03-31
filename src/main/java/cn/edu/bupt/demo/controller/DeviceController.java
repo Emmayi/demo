@@ -70,7 +70,7 @@ public class DeviceController {
             String id = jsonObject.get("id").toString();
             JSONObject rreq = new JSONObject();
             rreq.put("deviceId", id);
-            logger.info("***********************************************/api/v1/deviceaccess/data/alllatestdata/deviceId******************************************");
+            logger.info("deviceId = {}",id);
             ProtocolReqMsgProto.ProtocolReqMsg.Builder rreqbuilder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
             String ruuid = RPCUUID.getUUID();
             rreqbuilder.setPath("/api/v1/deviceaccess/data/alllatestdata/deviceId");
@@ -88,7 +88,7 @@ public class DeviceController {
             ClientTaskMap.getInstance().putTask(uuid, rdt);
             Client.getChannel().writeAndFlush(rreqbuilder.build());
             JSONArray ja = (JSONArray) rdt.get();
-            //JSONArray ja = JSONArray.parseArray(attributes);
+            logger.info("keys = {}",ja);
             Iterator<Object> it = ja.iterator();
             while (it.hasNext()) {
                 JSONObject ob = (JSONObject) it.next();
