@@ -65,6 +65,7 @@ public class DeviceController {
         Client.getChannel().writeAndFlush(reqbuilder.build());
         JSONObject obj = (JSONObject) dt.get();
         JSONArray jsonArray = JSONArray.parseArray(obj.get("data").toString());
+        logger.info("jsonArray = {}",jsonArray);
         if (jsonArray.size() > 0) {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String id = jsonObject.get("id").toString();
