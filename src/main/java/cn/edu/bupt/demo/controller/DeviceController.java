@@ -85,7 +85,7 @@ public class DeviceController {
                     return JSONArray.parse(this.getResp().getBody().toByteArray());
                 }
             };
-            ClientFutureTask rdt = new ClientFutureTask(tc);
+            ClientFutureTask rdt = new ClientFutureTask(rtc);
             ClientTaskMap.getInstance().putTask(uuid, rdt);
             Client.getChannel().writeAndFlush(rreqbuilder.build());
             JSONArray ja = (JSONArray) rdt.get();
