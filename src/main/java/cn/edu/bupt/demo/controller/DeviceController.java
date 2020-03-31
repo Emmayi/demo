@@ -65,15 +65,11 @@ public class DeviceController {
         Client.getChannel().writeAndFlush(reqbuilder.build());
         JSONObject obj = (JSONObject) dt.get();
         JSONArray jsonArray = JSONArray.parseArray(obj.get("data").toString());
-//            String device = httpLogin.findDevice();
-//            JSONArray jsonArray = JSONArray.parseArray(device);
         if (jsonArray.size() > 0) {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String id = jsonObject.get("id").toString();
             JSONObject rreq = new JSONObject();
             rreq.put("deviceId", id);
-            // String attributes = httpLogin.findAttributes(id);
-            //解析字段返回
             logger.info("***********************************************/api/v1/deviceaccess/data/alllatestdata/deviceId******************************************");
             ProtocolReqMsgProto.ProtocolReqMsg.Builder rreqbuilder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
             String ruuid = RPCUUID.getUUID();
@@ -85,10 +81,7 @@ public class DeviceController {
             ClientTask rtc = new ClientTask() {
                 @Override
                 public Object call() throws Exception {
-                    logger.info("------------------------------------get result-------------------------------------------------");
-                    Object obj = JSONArray.parseArray(this.getResp().getBody().toByteArray().toString());
-                    logger.info("get result = {}", obj);
-                    return obj;
+                    return JSONArray.parse(this.getResp().getBody().toByteArray());
                 }
             };
             ClientFutureTask rdt = new ClientFutureTask(tc);
