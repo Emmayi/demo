@@ -57,15 +57,14 @@ public class DeviceController {
         ClientTask tc = new ClientTask() {
             @Override
             public Object call() throws Exception {
-                return JSONArray.parse(this.getResp().getBody().toByteArray());
+                return JSONObject.parse(this.getResp().getBody().toByteArray());
             }
         };
         ClientFutureTask dt = new ClientFutureTask(tc);
         ClientTaskMap.getInstance().putTask(uuid, dt);
         Client.getChannel().writeAndFlush(reqbuilder.build());
-        Object obj = dt.get();
-        logger.info("get object = {}",obj);
-        JSONArray jsonArray = (JSONArray) obj;
+        JSONObject obj = (JSONObject) dt.get();
+        JSONArray jsonArray = JSONArray.parseArray(obj.get("data").toString());
 //            String device = httpLogin.findDevice();
 //            JSONArray jsonArray = JSONArray.parseArray(device);
         if (jsonArray.size() > 0) {
