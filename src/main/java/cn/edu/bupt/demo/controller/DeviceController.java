@@ -5,11 +5,9 @@ import cn.bupt.edu.base.task.client.ClientFutureTask;
 import cn.bupt.edu.base.task.client.ClientTask;
 import cn.bupt.edu.base.util.RPCUUID;
 import cn.bupt.edu.client.datadispatch.ClientTaskMap;
-import cn.bupt.edu.client.handler.DecodeHandler;
 import cn.edu.bupt.demo.channel.Client;
 import cn.edu.bupt.demo.protobuf.DeviceReqProto;
 import cn.edu.bupt.demo.protobuf.DeviceRespProto;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -43,75 +41,75 @@ public class DeviceController {
 
         JSONObject result = new JSONObject();
 
-        try {
-            //httpLogin.httplogin();
-            logger.info("***********************************************/api/v1/deviceaccess/tenant/devices/tenantId******************************************");
-            JSONObject req = new JSONObject();
-            req.put("tenantId",tenantId);
-            req.put("limit",100);
-            ProtocolReqMsgProto.ProtocolReqMsg.Builder reqbuilder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
-            String uuid = RPCUUID.getUUID();
-            reqbuilder.setPath("/api/v1/deviceaccess/tenant/devices/tenantId");
-            reqbuilder.addChain("device-access");
-            reqbuilder.setVersion(1);
-            reqbuilder.setUuid(uuid);
-            reqbuilder.setBody(ByteString.copyFrom(JSONObject.toJSONBytes(req,new SerializerFeature[0])));
-            ClientTask tc = new ClientTask() {
-                @Override
-                public Object call() throws Exception {
-                    return JSONArray.parseArray(this.getResp().getBody().toByteArray().toString());
-                }
-            };
-            ClientFutureTask dt = new ClientFutureTask(tc);
-            ClientTaskMap.getInstance().putTask(uuid, dt);
-            Client.getChannel().writeAndFlush(reqbuilder.build());
-            JSONArray jsonArray = (JSONArray)dt.get();
+//        try {
+        //httpLogin.httplogin();
+        logger.info("***********************************************/api/v1/deviceaccess/tenant/devices/tenantId******************************************");
+        JSONObject req = new JSONObject();
+        req.put("tenantId", tenantId);
+        req.put("limit", 100);
+        ProtocolReqMsgProto.ProtocolReqMsg.Builder reqbuilder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
+        String uuid = RPCUUID.getUUID();
+        reqbuilder.setPath("/api/v1/deviceaccess/tenant/devices/tenantId");
+        reqbuilder.addChain("device-access");
+        reqbuilder.setVersion(1);
+        reqbuilder.setUuid(uuid);
+        reqbuilder.setBody(ByteString.copyFrom(JSONObject.toJSONBytes(req)));
+        ClientTask tc = new ClientTask() {
+            @Override
+            public Object call() throws Exception {
+                return JSONArray.parseArray(this.getResp().getBody().toByteArray().toString());
+            }
+        };
+        ClientFutureTask dt = new ClientFutureTask(tc);
+        ClientTaskMap.getInstance().putTask(uuid, dt);
+        Client.getChannel().writeAndFlush(reqbuilder.build());
+        JSONArray jsonArray = (JSONArray) dt.get();
 //            String device = httpLogin.findDevice();
 //            JSONArray jsonArray = JSONArray.parseArray(device);
-            if (jsonArray.size() > 0) {
-                JSONObject jsonObject = jsonArray.getJSONObject(0);
-                String id = jsonObject.get("id").toString();
-                JSONObject rreq = new JSONObject();
-                rreq.put("deviceId",id);
-               // String attributes = httpLogin.findAttributes(id);
-                //解析字段返回
-                logger.info("***********************************************/api/v1/deviceaccess/data/alllatestdata/deviceId******************************************");
-                ProtocolReqMsgProto.ProtocolReqMsg.Builder rreqbuilder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
-                String ruuid = RPCUUID.getUUID();
-                rreqbuilder.setPath("/api/v1/deviceaccess/data/alllatestdata/deviceId");
-                rreqbuilder.addChain("device-access");
-                rreqbuilder.setVersion(1);
-                rreqbuilder.setUuid(uuid);
-                rreqbuilder.setBody(ByteString.copyFrom(JSONObject.toJSONBytes(rreq,new SerializerFeature[0])));
-                ClientTask rtc = new ClientTask() {
-                    @Override
-                    public Object call() throws Exception {
-                        logger.info("------------------------------------get result-------------------------------------------------");
-                        Object obj = JSONArray.parseArray(this.getResp().getBody().toByteArray().toString());
-                        logger.info("get result = {}",obj);
-                        return obj;
-                    }
-                };
-                ClientFutureTask rdt = new ClientFutureTask(tc);
-                ClientTaskMap.getInstance().putTask(uuid, rdt);
-                Client.getChannel().writeAndFlush(rreqbuilder.build());
-                JSONArray ja = (JSONArray) rdt.get();
-                //JSONArray ja = JSONArray.parseArray(attributes);
-                Iterator<Object> it = ja.iterator();
-                while (it.hasNext()) {
-                    JSONObject ob = (JSONObject) it.next();
-                    //打印出遍历出的jsonObject
-                    result.put(ob.get("key").toString(), ob.get("value"));
+        if (jsonArray.size() > 0) {
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String id = jsonObject.get("id").toString();
+            JSONObject rreq = new JSONObject();
+            rreq.put("deviceId", id);
+            // String attributes = httpLogin.findAttributes(id);
+            //解析字段返回
+            logger.info("***********************************************/api/v1/deviceaccess/data/alllatestdata/deviceId******************************************");
+            ProtocolReqMsgProto.ProtocolReqMsg.Builder rreqbuilder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
+            String ruuid = RPCUUID.getUUID();
+            rreqbuilder.setPath("/api/v1/deviceaccess/data/alllatestdata/deviceId");
+            rreqbuilder.addChain("device-access");
+            rreqbuilder.setVersion(1);
+            rreqbuilder.setUuid(uuid);
+            rreqbuilder.setBody(ByteString.copyFrom(JSONObject.toJSONBytes(rreq)));
+            ClientTask rtc = new ClientTask() {
+                @Override
+                public Object call() throws Exception {
+                    logger.info("------------------------------------get result-------------------------------------------------");
+                    Object obj = JSONArray.parseArray(this.getResp().getBody().toByteArray().toString());
+                    logger.info("get result = {}", obj);
+                    return obj;
                 }
-
-            } else {
-                throw new Exception("data is null");
+            };
+            ClientFutureTask rdt = new ClientFutureTask(tc);
+            ClientTaskMap.getInstance().putTask(uuid, rdt);
+            Client.getChannel().writeAndFlush(rreqbuilder.build());
+            JSONArray ja = (JSONArray) rdt.get();
+            //JSONArray ja = JSONArray.parseArray(attributes);
+            Iterator<Object> it = ja.iterator();
+            while (it.hasNext()) {
+                JSONObject ob = (JSONObject) it.next();
+                //打印出遍历出的jsonObject
+                result.put(ob.get("key").toString(), ob.get("value"));
             }
 
-            return result.toJSONString();
-        } catch (Exception e) {
-            throw new Exception("findAllDevice error!");
+        } else {
+            throw new Exception("data is null");
         }
+
+        return result.toJSONString();
+//        } catch (Exception e) {
+//            throw new Exception("findAllDevice error!");
+//        }
     }
 
     @RequestMapping(value = "/saveDevice", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
