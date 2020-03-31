@@ -57,7 +57,7 @@ public class DeviceController {
         ClientTask tc = new ClientTask() {
             @Override
             public Object call() throws Exception {
-                return JSONArray.parseArray(this.getResp().getBody().toString(),JSONArray.class);
+                return JSONArray.parse(this.getResp().getBody().toByteArray());
             }
         };
         ClientFutureTask dt = new ClientFutureTask(tc);
