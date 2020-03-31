@@ -8,8 +8,10 @@ import cn.bupt.edu.client.datadispatch.ClientTaskMap;
 import cn.edu.bupt.demo.channel.Client;
 import cn.edu.bupt.demo.protobuf.DeviceReqProto;
 import cn.edu.bupt.demo.protobuf.DeviceRespProto;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.protobuf.ByteString;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
@@ -31,23 +33,62 @@ public class DeviceController {
     HttpLogin httpLogin = new HttpLogin();
 
 
-    @RequestMapping(value = "/allDevice", method = RequestMethod.GET)
+    @RequestMapping(value = "/allDevice/{tenantId}", method = RequestMethod.GET)
     @ResponseBody
-    public String findAllDevice() throws Exception {
+    public String findAllDevice(@PathVariable("tenantId") String tenantId) throws Exception {
 
         JSONObject result = new JSONObject();
 
         try {
-            httpLogin.httplogin();
+            //httpLogin.httplogin();
 
-            String device = httpLogin.findDevice();
-            JSONArray jsonArray = JSONArray.parseArray(device);
+            JSONObject req = new JSONObject();
+            req.put("tenantId",tenantId);
+            req.put("limit",100);
+            ProtocolReqMsgProto.ProtocolReqMsg.Builder reqbuilder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
+            String uuid = RPCUUID.getUUID();
+            reqbuilder.setPath("/api/v1/deviceaccess/tenant/devices/tenantId");
+            reqbuilder.addChain("device-access");
+            reqbuilder.setVersion(1);
+            reqbuilder.setUuid(uuid);
+            reqbuilder.setBody(ByteString.copyFrom(JSONObject.toJSONBytes(req,new SerializerFeature[0])));
+            ClientTask tc = new ClientTask() {
+                @Override
+                public Object call() throws Exception {
+                    return JSONArray.parseArray(this.getResp().getBody().toByteArray().toString());
+                }
+            };
+            ClientFutureTask dt = new ClientFutureTask(tc);
+            ClientTaskMap.getInstance().putTask(uuid, dt);
+            Client.getChannel().writeAndFlush(reqbuilder.build());
+            JSONArray jsonArray = (JSONArray)dt.get();
+//            String device = httpLogin.findDevice();
+//            JSONArray jsonArray = JSONArray.parseArray(device);
             if (jsonArray.size() > 0) {
                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                 String id = jsonObject.get("id").toString();
-                String attributes = httpLogin.findAttributes(id);
+                JSONObject rreq = new JSONObject();
+                rreq.put("deviceId",id);
+               // String attributes = httpLogin.findAttributes(id);
                 //解析字段返回
-                JSONArray ja = JSONArray.parseArray(attributes);
+                ProtocolReqMsgProto.ProtocolReqMsg.Builder rreqbuilder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
+                String ruuid = RPCUUID.getUUID();
+                rreqbuilder.setPath("/api/v1/deviceaccess/data/alllatestdata/deviceId");
+                rreqbuilder.addChain("device-access");
+                rreqbuilder.setVersion(1);
+                rreqbuilder.setUuid(uuid);
+                rreqbuilder.setBody(ByteString.copyFrom(JSONObject.toJSONBytes(rreq,new SerializerFeature[0])));
+                ClientTask rtc = new ClientTask() {
+                    @Override
+                    public Object call() throws Exception {
+                        return JSONArray.parseArray(this.getResp().getBody().toByteArray().toString());
+                    }
+                };
+                ClientFutureTask rdt = new ClientFutureTask(tc);
+                ClientTaskMap.getInstance().putTask(uuid, rdt);
+                Client.getChannel().writeAndFlush(rreqbuilder.build());
+                JSONArray ja = (JSONArray) rdt.get();
+                //JSONArray ja = JSONArray.parseArray(attributes);
                 Iterator<Object> it = ja.iterator();
                 while (it.hasNext()) {
                     JSONObject ob = (JSONObject) it.next();
