@@ -5,6 +5,7 @@ import cn.bupt.edu.base.task.client.ClientFutureTask;
 import cn.bupt.edu.base.task.client.ClientTask;
 import cn.bupt.edu.base.util.RPCUUID;
 import cn.bupt.edu.client.datadispatch.ClientTaskMap;
+import cn.bupt.edu.client.handler.DecodeHandler;
 import cn.edu.bupt.demo.channel.Client;
 import cn.edu.bupt.demo.protobuf.DeviceReqProto;
 import cn.edu.bupt.demo.protobuf.DeviceRespProto;
@@ -14,6 +15,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.protobuf.ByteString;
 import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
@@ -29,6 +32,7 @@ import java.util.concurrent.ExecutionException;
 @CrossOrigin
 @Api(description = "获取设备数据")
 public class DeviceController {
+    private final static Logger logger = LoggerFactory.getLogger(DeviceController.class);
 
     HttpLogin httpLogin = new HttpLogin();
 
@@ -41,7 +45,7 @@ public class DeviceController {
 
         try {
             //httpLogin.httplogin();
-
+            logger.info("***********************************************/api/v1/deviceaccess/tenant/devices/tenantId******************************************");
             JSONObject req = new JSONObject();
             req.put("tenantId",tenantId);
             req.put("limit",100);
@@ -71,6 +75,7 @@ public class DeviceController {
                 rreq.put("deviceId",id);
                // String attributes = httpLogin.findAttributes(id);
                 //解析字段返回
+                logger.info("***********************************************/api/v1/deviceaccess/data/alllatestdata/deviceId******************************************");
                 ProtocolReqMsgProto.ProtocolReqMsg.Builder rreqbuilder = ProtocolReqMsgProto.ProtocolReqMsg.newBuilder();
                 String ruuid = RPCUUID.getUUID();
                 rreqbuilder.setPath("/api/v1/deviceaccess/data/alllatestdata/deviceId");
