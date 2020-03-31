@@ -86,7 +86,7 @@ public class DeviceController {
                 }
             };
             ClientFutureTask rdt = new ClientFutureTask(rtc);
-            ClientTaskMap.getInstance().putTask(uuid, rdt);
+            ClientTaskMap.getInstance().putTask(ruuid, rdt);
             Client.getChannel().writeAndFlush(rreqbuilder.build());
             JSONArray ja = (JSONArray) rdt.get();
             logger.info("keys = {}",ja);
