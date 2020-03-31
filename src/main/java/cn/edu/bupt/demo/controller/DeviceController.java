@@ -63,7 +63,9 @@ public class DeviceController {
         ClientFutureTask dt = new ClientFutureTask(tc);
         ClientTaskMap.getInstance().putTask(uuid, dt);
         Client.getChannel().writeAndFlush(reqbuilder.build());
-        JSONArray jsonArray = (JSONArray) dt.get();
+        Object obj = dt.get();
+        logger.info("get object = {}",obj);
+        JSONArray jsonArray = (JSONArray) obj;
 //            String device = httpLogin.findDevice();
 //            JSONArray jsonArray = JSONArray.parseArray(device);
         if (jsonArray.size() > 0) {
